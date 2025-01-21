@@ -3,71 +3,71 @@
 	icon_state = "basemisc" //for those achievements that still need an actual icon, later.
 
 /datum/award/achievement/misc/meteor_examine
-	name = "Your Life Before Your Eyes"
-	desc = "Take a close look at hurtling space debris"
+	name = "Sua Vida Diante dos Seus Olhos"
+	desc = "Dê uma boa olhada nos destroços espaciais em alta velocidade."
 	database_id = MEDAL_METEOR
 	icon_state = "meteors"
 
 /datum/award/achievement/misc/pulse
 	name = "Jackpot"
-	desc = "Win a pulse rifle from an arcade machine"
+	desc = "Ganhe um rifle de pulso em uma máquina de arcade."
 	database_id = MEDAL_PULSE
 	icon_state = "jackpot"
 
 /datum/award/achievement/misc/time_waste
-	name = "Time waster"
-	desc = "Speak no evil, hear no evil, see just errors"
+	name = "Perdedor de tempo"
+	desc = "Não fale o mal, não ouça o mal, veja apenas erros."
 	database_id = MEDAL_TIMEWASTE
 	icon_state = "timewaste"
 
 /datum/award/achievement/misc/round_and_full
-	name = "Round and Full"
-	desc = "Well at least you aren't down the river, I hear they eat people there."
+	name = "Redondo e Cheio"
+	desc = "Bem, pelo menos você não está rio abaixo, ouvi dizer que eles comem gente por lá."
 	database_id = MEDAL_CLOWNCARKING
 	icon_state = "clownking"
 
 /datum/award/achievement/misc/the_best_driver
-	name = "The Best Driver"
-	desc = "100 honks later"
+	name = "Melhor Motorista"
+	desc = "100 honks depois"
 	database_id = MEDAL_THANKSALOT
 	icon_state = "clownthanks"
 
 /datum/award/achievement/misc/getting_an_upgrade
-	name = "Getting an upgrade"
-	desc = "Make your first unique material item!"
+	name = "Recebendo um Upgrade"
+	desc = "Crie seu primeiro item de material único!"
 	database_id = MEDAL_MATERIALCRAFT
 	icon_state = "upgrade"
 
 /datum/award/achievement/misc/rocket_holdup
-	name = "Disk, Please!"
-	desc = "Is the man currently pointing a loaded rocket launcher at your head point blank really dumb enough to pull the trigger? Do you really want to find out?"
+	name = "Disco, por favor!"
+	desc = "O homem que está apontando um lança-foguetes carregado para a sua cabeça à queima-roupa é realmente burro o suficiente para puxar o gatilho? Você realmente quer descobrir?"
 	database_id = MEDAL_DISKPLEASE
 	icon_state = "rocket_holdup"
 
 /datum/award/achievement/misc/gamer
-	name = "My Watchlist Status is Not Important"
-	desc = "You may be under the impression that violent video games are a harmless pastime, but the security and medical personnel swarming your location with batons and knockout gas look like they disagree."
+	name = "Meu Status na Lista de Observação Não É Importante"
+	desc = "Você pode estar sob a impressão de que videogames violentos são um passatempo inofensivo, mas o pessoal de segurança e médica que está invadindo seu local com bastões e gás para nocaute parece discordar."
 	database_id = MEDAL_GAMER
 	icon_state = "live_sec_reaction"
 
 /datum/award/achievement/misc/vendor_squish
-	name = "I Was a Teenage Anarchist"
-	desc = "You were doing a great job sticking it to the system until that vending machine decided to fight back."
+	name = "Eu Fui um Anarquista Adolescente"
+	desc = "Você estava fazendo um ótimo trabalho desafiando o sistema até aquela máquina de venda automática decidir lutar de volta."
 	database_id = MEDAL_VENDORSQUISH
 
 /datum/award/achievement/misc/swirlie
 	name = "A Bowl-d New World"
-	desc = "There's a lot of grisly ways to kick it on the Spinward Periphery, but drowning to death in a toilet probably wasn't what you had in mind. Probably."
+	desc = "Há muitas maneiras macabras de acabar na Periferia Spinward, mas se afogar em um banheiro provavelmente não era o que você tinha em mente. Provavelmente."
 	database_id = MEDAL_SWIRLIE
 
 /datum/award/achievement/misc/selfouch
-	name = "How Do I Switch Hands???"
-	desc = "If you saw someone casually club themselves upside the head with a toolbox anywhere in the galaxy but here, you'd probably be pretty concerned for them."
+	name = "Como eu troco de mãos???"
+	desc = "Se você visse alguém se bater casualmente na cabeça com uma caixa de ferramentas em qualquer lugar da galáxia, exceto aqui, provavelmente ficaria bem preocupado com a pessoa."
 	database_id = MEDAL_SELFOUCH
 
 /datum/award/achievement/misc/cleanboss
-	name = "One Lean, Mean, Cleaning Machine"
-	desc = "How does it feel to know that your workplace values a mop bucket on wheels more than you?" // i can do better than this give me time
+	name = "Uma Máquina de Limpeza Magra e Imbatível"
+	desc = "Como se sente saber que seu local de trabalho valoriza um balde de mop com rodas mais do que você?" // i can do better than this give me time
 	database_id = MEDAL_CLEANBOSS
 	icon_state = "cleanboss"
 
@@ -79,19 +79,19 @@
 
 /datum/award/achievement/misc/speed_round
 	name = "Long shift"
-	desc = "Well, that didn't take long."
+	desc = "Bem, isso não demorou muito."
 	database_id = MEDAL_LONGSHIFT
 	icon_state = "longshift"
 
 /datum/award/achievement/misc/lookoutsir
-	name = "Look Out, Sir!"
-	desc = "Either awarded for making the ultimate sacrifice for your comrades, or a really dumb attempt at grenade jumping."
+	name = "Cuidado, Senhor!"
+	desc = "Ou premiado por fazer o sacrifício final pelos seus camaradas, ou uma tentativa realmente estúpida de pular com granada."
 	database_id = MEDAL_LOOKOUTSIR
 	icon_state = "martyr" // purple heart on an explosive danger warning sign (well, sort of)
 
 /datum/award/achievement/misc/gottem
 	name = "HA, GOTTEM"
-	desc = "Made you look!"
+	desc = "Fiz você olhar!"
 	database_id = MEDAL_GOTTEM
 	icon_state = "gottem"
 
