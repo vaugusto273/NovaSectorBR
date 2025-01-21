@@ -1012,8 +1012,8 @@ Tempo de processamento adicional para desbloquear mais habilidades."
 //OBJECT-BASED
 
 /atom/movable/screen/alert/buckled
-	name = "Buckled"
-	desc = "You've been buckled to something. Click the alert to unbuckle unless you're handcuffed."
+	name = "Preso"
+	desc = "Você foi preso a algo. Clique no alerta para desabotoar, a menos que esteja algemado."
 	icon_state = ALERT_BUCKLED
 	clickable_glow = TRUE
 
@@ -1021,13 +1021,13 @@ Tempo de processamento adicional para desbloquear mais habilidades."
 	clickable_glow = TRUE
 
 /atom/movable/screen/alert/restrained/handcuffed
-	name = "Handcuffed"
-	desc = "You're handcuffed and can't act. If anyone drags you, you won't be able to move. Click the alert to free yourself."
+	name = "Algemado"
+	desc = "Você está algemado e não pode agir. Se alguém te arrastar, você não conseguirá se mover. Clique no alerta para se libertar."
 	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/legcuffed
-	name = "Legcuffed"
-	desc = "You're legcuffed, which slows you down considerably. Click the alert to free yourself."
+	name = "Pernas algemadas"
+	desc = "Você está algemado nas pernas, o que te desacelera consideravelmente. Clique no alerta para se libertar."
 	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/Click()
@@ -1058,12 +1058,12 @@ Tempo de processamento adicional para desbloquear mais habilidades."
 		return living_owner.resist_buckle()
 
 /atom/movable/screen/alert/shoes/untied
-	name = "Untied Shoes"
+	name = "Sapatos Desamarrados"
 	desc = "Seus sapatos estão desamarrados! Clique no alerta ou nos sapatos para amarrá-los."
 	icon_state = ALERT_SHOES_KNOT
 
 /atom/movable/screen/alert/shoes/knotted
-	name = "Knotted Shoes"
+	name = "Sapatos Amarrados"
 	desc = "Alguém amarrou seus cadarços! Clique no alerta ou nos sapatos para desfazer o nó."
 	icon_state = ALERT_SHOES_KNOT
 	clickable_glow = TRUE
