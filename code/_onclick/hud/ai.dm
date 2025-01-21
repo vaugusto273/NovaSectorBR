@@ -17,7 +17,7 @@
 	AI.view_core()
 
 /atom/movable/screen/ai/camera_list
-	name = "Show Camera List"
+	name = "Mostrar Lista de cameras"
 	icon_state = "camera"
 
 /atom/movable/screen/ai/camera_list/Click()
@@ -27,7 +27,7 @@
 	AI.show_camera_list()
 
 /atom/movable/screen/ai/camera_track
-	name = "Track With Camera"
+	name = "Seguir com camera"
 	icon_state = "track"
 
 /atom/movable/screen/ai/camera_track/Click()
@@ -38,7 +38,7 @@
 	AI.ai_camera_track()
 
 /atom/movable/screen/ai/camera_light
-	name = "Toggle Camera Light"
+	name = "Alternar luz camera"
 	icon_state = "camera_light"
 
 /atom/movable/screen/ai/camera_light/Click()
@@ -59,7 +59,7 @@
 	robot.modularInterface?.interact(robot)
 
 /atom/movable/screen/ai/crew_monitor
-	name = "Crew Monitoring Console"
+	name = "Console de monitoramento da equipe"
 	icon_state = "crew_monitor"
 
 /atom/movable/screen/ai/crew_monitor/Click()
@@ -69,7 +69,7 @@
 	GLOB.crewmonitor.show(AI,AI)
 
 /atom/movable/screen/ai/crew_manifest
-	name = "Crew Manifest"
+	name = "Manifesto da tripulacao"
 	icon_state = "manifest"
 
 /atom/movable/screen/ai/crew_manifest/Click()
@@ -79,7 +79,7 @@
 	AI.ai_roster()
 
 /atom/movable/screen/ai/alerts
-	name = "Show Alerts"
+	name = "Mostrar Alertas"
 	icon_state = "alerts"
 
 /atom/movable/screen/ai/alerts/Click()
@@ -89,7 +89,7 @@
 	AI.alert_control.ui_interact(AI)
 
 /atom/movable/screen/ai/announcement
-	name = "Make Vox Announcement"
+	name = "Fazer anuncio em VOX"
 	icon_state = "announcement"
 
 /atom/movable/screen/ai/announcement/Click()
@@ -99,7 +99,7 @@
 	AI.announcement()
 
 /atom/movable/screen/ai/call_shuttle
-	name = "Call Emergency Shuttle"
+	name = "Chamar nave de emergencia"
 	icon_state = "call_shuttle"
 
 /atom/movable/screen/ai/call_shuttle/Click()
@@ -109,7 +109,7 @@
 	AI.ai_call_shuttle()
 
 /atom/movable/screen/ai/state_laws
-	name = "State Laws"
+	name = "Dizer Leis"
 	icon_state = "state_laws"
 
 /atom/movable/screen/ai/state_laws/Click()
@@ -119,7 +119,7 @@
 	AI.checklaws()
 
 /atom/movable/screen/ai/image_take
-	name = "Take Image"
+	name = "Capturar imagem"
 	icon_state = "take_picture"
 
 /atom/movable/screen/ai/image_take/Click()
@@ -133,7 +133,7 @@
 		R.aicamera.toggle_camera_mode(usr)
 
 /atom/movable/screen/ai/image_view
-	name = "View Images"
+	name = "Ver imagem"
 	icon_state = "view_images"
 
 /atom/movable/screen/ai/image_view/Click()
@@ -144,7 +144,7 @@
 		AI.aicamera.viewpictures(usr)
 
 /atom/movable/screen/ai/sensors
-	name = "Sensor Augmentation"
+	name = "Aumento do sensor"
 	icon_state = "ai_sensor"
 
 /atom/movable/screen/ai/sensors/Click()
@@ -154,7 +154,7 @@
 	S.toggle_sensors()
 
 /atom/movable/screen/ai/multicam
-	name = "Multicamera Mode"
+	name = "Modo multi camera"
 	icon_state = "multicam"
 
 /atom/movable/screen/ai/multicam/Click()
@@ -164,7 +164,7 @@
 	AI.toggle_multicam()
 
 /atom/movable/screen/ai/add_multicam
-	name = "New Camera"
+	name = "Nova Camera"
 	icon_state = "new_cam"
 
 /atom/movable/screen/ai/add_multicam/Click()
@@ -198,7 +198,7 @@
 	maptext = MAPTEXT_TINY_UNICODE("<div align='center' valign='middle' style='position:relative; top:0px; left:0px'>[text]</div>")
 
 /atom/movable/screen/ai/go_up
-	name = "go up"
+	name = "Ir acima"
 	icon_state = "up"
 	screen_loc = ui_ai_godownup
 
@@ -208,7 +208,7 @@
 
 /atom/movable/screen/ai/go_up/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_LMB] = "Go up a floor"
+	context[SCREENTIP_CONTEXT_LMB] = "Suba um andar"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /atom/movable/screen/ai/go_up/Click(location,control,params)
@@ -219,12 +219,12 @@
 	ai.up()
 
 /atom/movable/screen/ai/go_up/down
-	name = "go down"
+	name = "Ir abaixo"
 	icon_state = "down"
 
 /atom/movable/screen/ai/go_up/down/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_LMB] = "Go down a floor"
+	context[SCREENTIP_CONTEXT_LMB] = "Desca um andar"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /atom/movable/screen/ai/go_up/down/Click(location,control,params)
