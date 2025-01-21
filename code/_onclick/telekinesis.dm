@@ -91,7 +91,7 @@
 	* Deletes itself if it is ever not in your hand, or if you should have no access to TK.
 */
 /obj/item/tk_grab
-	name = "Telekinetic Grab"
+	name = "Agarro telequinético "
 	desc = "Magic"
 	icon = 'icons/effects/magic.dmi'//Needs sprites
 	icon_state = "2"
@@ -206,7 +206,7 @@
 	focus.throw_at(target, focus.tk_throw_range, 1,user)
 	var/turf/start_turf = get_turf(focus)
 	var/turf/end_turf = get_turf(target)
-	user.log_message("has thrown [focus] from [AREACOORD(start_turf)] towards [AREACOORD(end_turf)] using Telekinesis.", LOG_ATTACK)
+	user.log_message("jogou [focus] de [AREACOORD(start_turf)] em direção a [AREACOORD(end_turf)] Usando telecinesia.", LOG_ATTACK)
 	user.changeNext_move(CLICK_CD_MELEE)
 	update_appearance()
 
@@ -214,7 +214,7 @@
 /proc/tkMaxRangeCheck(mob/user, atom/target)
 	var/d = get_dist(user, target)
 	if(d > TK_MAXRANGE)
-		user.balloon_alert(user, "can't TK, too far!")
+		user.balloon_alert(user, "Não dá para usar telecinese, está muito longe!")
 		return
 	return TRUE
 
@@ -255,7 +255,7 @@
 	. += focus_overlay
 
 /obj/item/tk_grab/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is using [user.p_their()] telekinesis to choke [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] está usando [user.p_their()] Telekinesis para estrangular [user.p_them()] Parece que [user.p_theyre()] tentando cometer suicídio!"))
 	return OXYLOSS
 
 #undef TK_MAXRANGE

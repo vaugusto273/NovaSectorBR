@@ -198,7 +198,7 @@
 
 ///Prefs menu
 /atom/movable/screen/lobby/button/character_setup
-	name = "View Character Setup"
+	name = "Configuração do personagem"
 	screen_loc = "TOP:-70,CENTER:-54"
 	icon = 'icons/hud/lobby/character_setup.dmi'
 	icon_state = "character_setup"
@@ -216,7 +216,7 @@
 
 ///Button that appears before the game has started
 /atom/movable/screen/lobby/button/ready
-	name = "Toggle Readiness"
+	name = "Alterar a prontidão"
 	screen_loc = "TOP:-8,CENTER:-65"
 	icon = 'icons/hud/lobby/ready.dmi'
 	icon_state = "not_ready"
@@ -264,7 +264,7 @@
 
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
-	name = "Join Game"
+	name = "Entrar no jogo "
 	screen_loc = "TOP:-13,CENTER:-58"
 	icon = 'icons/hud/lobby/join.dmi'
 	icon_state = "" //Default to not visible
@@ -289,7 +289,7 @@
 		return
 
 	if(!SSticker?.IsRoundInProgress())
-		to_chat(hud.mymob, span_boldwarning("The round is either not ready, or has already finished..."))
+		to_chat(hud.mymob, span_boldwarning("A rodada não está pronta ou já terminou..."))
 		return
 
 	//Determines Relevent Population Cap
@@ -308,18 +308,18 @@
 
 		var/queue_position = SSticker.queued_players.Find(new_player)
 		if(queue_position == 1)
-			to_chat(new_player, span_notice("You are next in line to join the game. You will be notified when a slot opens up."))
+			to_chat(new_player, span_notice("Você é o próximo na fila para participar do jogo. Você será notificado quando um slot se abrir."))
 		else if(queue_position)
-			to_chat(new_player, span_notice("There are [queue_position-1] players in front of you in the queue to join the game."))
+			to_chat(new_player, span_notice("Há [queue_position-1] jogadores na sua frente na fila para se juntar ao jogo."))
 		else
 			SSticker.queued_players += new_player
-			to_chat(new_player, span_notice("You have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len]."))
+			to_chat(new_player, span_notice("Você foi adicionado à fila para participar do jogo. Sua posição na fila é [SSticker.queued_players.len]."))
 		return
 
 	if(!LAZYACCESS(params2list(params), CTRL_CLICK))
 		GLOB.latejoin_menu.ui_interact(new_player)
 	else
-		to_chat(new_player, span_warning("Opening emergency fallback late join menu! If THIS doesn't show, ahelp immediately!"))
+		to_chat(new_player, span_warning("Abrindo o Fallback de emergência tardio do menu!Se isso não aparecer, ahelp imediatamente!"))
 		GLOB.latejoin_menu.fallback_ui(new_player)
 
 
@@ -336,7 +336,7 @@
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(show_join_button))
 
 /atom/movable/screen/lobby/button/observe
-	name = "Observe"
+	name = "Observar"
 	screen_loc = "TOP:-40,CENTER:-54"
 	icon = 'icons/hud/lobby/observe.dmi'
 	icon_state = "observe_disabled"
@@ -370,7 +370,7 @@
 	icon = 'icons/hud/lobby/bottom_buttons.dmi'
 
 /atom/movable/screen/lobby/button/bottom/settings
-	name = "View Game Preferences"
+	name = "Preferencias de jogo"
 	icon_state = "settings"
 	base_icon_state = "settings"
 	screen_loc = "TOP:-122,CENTER:+29"
@@ -386,7 +386,7 @@
 	preferences.ui_interact(usr)
 
 /atom/movable/screen/lobby/button/bottom/changelog_button
-	name = "View Changelog"
+	name = "Changelog"
 	icon_state = "changelog"
 	base_icon_state = "changelog"
 	screen_loc ="TOP:-122,CENTER:+57"
@@ -396,7 +396,7 @@
 	usr.client?.changelog()
 
 /atom/movable/screen/lobby/button/bottom/crew_manifest
-	name = "View Crew Manifest"
+	name = "Lista Tripulação"
 	icon_state = "crew_manifest"
 	base_icon_state = "crew_manifest"
 	screen_loc = "TOP:-122,CENTER:+2"
@@ -409,7 +409,7 @@
 	new_player.ViewManifest()
 
 /atom/movable/screen/lobby/button/bottom/poll
-	name = "View Available Polls"
+	name = "Exibir pesquisas disponíveis"
 	icon_state = "poll"
 	base_icon_state = "poll"
 	screen_loc = "TOP:-122,CENTER:-26"
