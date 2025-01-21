@@ -88,7 +88,7 @@
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "uniform"
+	inv_box.name = "uniforme"
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_ICLOTHING
 	inv_box.icon_state = "uniform"
@@ -97,7 +97,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "suit"
+	inv_box.name = "traje"
 	inv_box.icon = ui_style
 	inv_box.slot_id = ITEM_SLOT_OCLOTHING
 	inv_box.icon_state = "suit"
@@ -128,7 +128,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "mask"
+	inv_box.name = "mascara"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
 	inv_box.icon_full = "template"
@@ -137,7 +137,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "neck"
+	inv_box.name = "pescoço"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "neck"
 	inv_box.icon_full = "template"
@@ -146,7 +146,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "back"
+	inv_box.name = "costas"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "back"
 	inv_box.icon_full = "template_small"
@@ -155,7 +155,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "left pocket"
+	inv_box.name = "bolso esquerdo"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template_small"
@@ -164,7 +164,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "right pocket"
+	inv_box.name = "bolso direito"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template_small"
@@ -173,7 +173,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "suit storage"
+	inv_box.name = "inventario do traje"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
 	inv_box.icon_full = "template"
@@ -192,7 +192,7 @@
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "gloves"
+	inv_box.name = "luvas"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
 	inv_box.icon_full = "template"
@@ -201,7 +201,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "eyes"
+	inv_box.name = "olhos"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "glasses"
 	inv_box.icon_full = "template"
@@ -210,7 +210,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "ears"
+	inv_box.name = "orelhas"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
 	inv_box.icon_full = "template"
@@ -219,7 +219,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "head"
+	inv_box.name = "cabeça"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "head"
 	inv_box.icon_full = "template"
@@ -228,7 +228,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "shoes"
+	inv_box.name = "calçados"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
 	inv_box.icon_full = "template"
@@ -237,7 +237,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
-	inv_box.name = "belt"
+	inv_box.name = "cinto"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "belt"
 	inv_box.icon_full = "template_small"
@@ -441,8 +441,8 @@
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
-	set name = "Toggle hotkey buttons"
-	set desc = "This disables or enables the user interface buttons which can be used with hotkeys."
+	set name = "Alternar os botões de tecla de atalho"
+	set desc = "Isso desativa ou ativa os botões de interface do usuário que podem ser usados ​​com teclas de atalho."
 
 	if(hud_used.hotkey_ui_hidden)
 		client.screen += hud_used.hotkeybuttons

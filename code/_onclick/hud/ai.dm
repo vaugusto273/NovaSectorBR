@@ -154,7 +154,7 @@
 	S.toggle_sensors()
 
 /atom/movable/screen/ai/multicam
-	name = "Modo multi camera"
+	name = "Multi camera"
 	icon_state = "multicam"
 
 /atom/movable/screen/ai/multicam/Click()
