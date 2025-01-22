@@ -1,13 +1,13 @@
 // Override of Blood Deficiency quirk for robotic/synthetic species.
 // Does not appear in TGUI or the character preferences window.
 /datum/quirk/blooddeficiency/synth
-	name = "Hydraulic Leak"
-	desc = "Your body's hydraulic fluids are leaking through their seals."
-	medical_record_text = "Patient requires regular treatment for hydraulic fluid loss."
-	icon = FA_ICON_GLASS_WATER_DROPLET
-	mail_goodies = list(/obj/item/reagent_containers/blood/oil)
-	// min_blood = BLOOD_VOLUME_BAD - 25; // TODO: Uncomment after TG PR #70563
-	hidden_quirk = TRUE
+    name = "Vazamento Hidráulico"
+    desc = "Os fluidos hidráulicos do seu corpo estão vazando através de suas vedações."
+    medical_record_text = "O paciente requer tratamento regular para perda de fluido hidráulico."
+    icon = FA_ICON_GLASS_WATER_DROPLET
+    mail_goodies = list(/obj/item/reagent_containers/blood/oil)
+    // min_blood = BLOOD_VOLUME_BAD - 25; // TODO: Descomentar após TG PR #70563
+    hidden_quirk = TRUE
 
 // If blooddeficiency is added to a synth, this detours to the blooddeficiency/synth quirk.
 /datum/quirk/blooddeficiency/add_to_holder(mob/living/new_holder, quirk_transfer, client/client_source)

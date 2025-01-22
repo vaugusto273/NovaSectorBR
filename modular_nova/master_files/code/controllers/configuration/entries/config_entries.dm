@@ -1,5 +1,5 @@
 /datum/config_entry/string/blackoutpolicy
-	config_entry_value = "You remember nothing after you've blacked out and you do not remember who or what events killed you, however, you can have faint recollection of what led up to it."
+	config_entry_value = "Você não se lembra de nada depois de desmaiar e não se lembra de quem ou que eventos o mataram, no entanto, você pode ter uma lembrança fraca do que levou a ele."
 
 /datum/config_entry/flag/russian_text_formation
 
