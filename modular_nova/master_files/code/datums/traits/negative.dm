@@ -1,96 +1,96 @@
 // NOVA NEGATIVE TRAITS
 
 /datum/quirk/alexithymia
-	name = "Alexithymia"
-	desc = "You cannot accurately assess your feelings."
-	value = -4
-	mob_trait = TRAIT_MOOD_NOEXAMINE
-	medical_record_text = "Patient is incapable of communicating their emotions."
-	icon = FA_ICON_QUESTION_CIRCLE
+    name = "Alexitimia"
+    desc = "Você não consegue avaliar com precisão seus sentimentos."
+    value = -4
+    mob_trait = TRAIT_MOOD_NOEXAMINE
+    medical_record_text = "O paciente é incapaz de comunicar suas emoções."
+    icon = FA_ICON_QUESTION_CIRCLE
 
 /datum/quirk/fragile
-	name = "Fragility"
-	desc = "You feel incredibly fragile. Burns and bruises hurt you more than the average person!"
-	value = -6
-	medical_record_text = "Patient's body has adapted to low gravity. Sadly low-gravity environments are not conducive to strong bone development."
-	icon = FA_ICON_TIRED
+    name = "Fragilidade"
+    desc = "Você se sente incrivelmente frágil. Queimaduras e contusões doem mais do que na média das pessoas!"
+    value = -6
+    medical_record_text = "O corpo do paciente se adaptou à baixa gravidade. Infelizmente, ambientes de baixa gravidade não são propícios ao desenvolvimento de ossos fortes."
+    icon = FA_ICON_TIRED
 
 /datum/quirk_constant_data/fragile
-	associated_typepath = /datum/quirk/fragile
-	customization_options = list(
-		/datum/preference/numeric/fragile_customization/brute,
-		/datum/preference/numeric/fragile_customization/burn,
-	)
+    associated_typepath = /datum/quirk/fragile
+    customization_options = list(
+        /datum/preference/numeric/fragile_customization/brute,
+        /datum/preference/numeric/fragile_customization/burn,
+    )
 
 /datum/preference/numeric/fragile_customization
-	abstract_type = /datum/preference/numeric/fragile_customization
-	category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
-	savefile_identifier = PREFERENCE_CHARACTER
+    abstract_type = /datum/preference/numeric/fragile_customization
+    category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
+    savefile_identifier = PREFERENCE_CHARACTER
 
-	minimum = 1.25
-	maximum = 5 // 5x damage, arbitrary
+    minimum = 1.25
+    maximum = 5 // 5x dano, arbitrário
 
-	step = 0.01
+    step = 0.01
 
 /datum/preference/numeric/fragile_customization/apply_to_human(mob/living/carbon/human/target, value, datum/preferences/preferences)
-	return FALSE
+    return FALSE
 
 /datum/preference/numeric/fragile_customization/create_default_value()
-	return 1.25
+    return 1.25
 
 /datum/preference/numeric/fragile_customization/brute
-	savefile_key = "fragile_brute"
+    savefile_key = "fragile_brute"
 
 /datum/preference/numeric/fragile_customization/burn
-	savefile_key = "fragile_burn"
+    savefile_key = "fragile_burn"
 
 /datum/quirk/fragile/post_add()
-	. = ..()
+    . = ..()
 
-	var/mob/living/carbon/human/user = quirk_holder
-	var/datum/preferences/prefs = user.client.prefs
-	var/brutemod = prefs.read_preference(/datum/preference/numeric/fragile_customization/brute)
-	var/burnmod = prefs.read_preference(/datum/preference/numeric/fragile_customization/burn)
+    var/mob/living/carbon/human/user = quirk_holder
+    var/datum/preferences/prefs = user.client.prefs
+    var/brutemod = prefs.read_preference(/datum/preference/numeric/fragile_customization/brute)
+    var/burnmod = prefs.read_preference(/datum/preference/numeric/fragile_customization/burn)
 
-	user.physiology.brute_mod *= brutemod
-	user.physiology.burn_mod *= burnmod
+    user.physiology.brute_mod *= brutemod
+    user.physiology.burn_mod *= burnmod
 
 /datum/quirk/fragile/remove()
-	. = ..()
+    . = ..()
 
-	var/mob/living/carbon/human/user = quirk_holder
-	var/datum/preferences/prefs = user.client.prefs
-	var/brutemod = prefs.read_preference(/datum/preference/numeric/fragile_customization/brute)
-	var/burnmod = prefs.read_preference(/datum/preference/numeric/fragile_customization/burn)
-	// will cause issues if the user changes this valud before removal, but when the shit are quirks removed aside from qdel
-	user.physiology.brute_mod /= brutemod
-	user.physiology.burn_mod /= burnmod
+    var/mob/living/carbon/human/user = quirk_holder
+    var/datum/preferences/prefs = user.client.prefs
+    var/brutemod = prefs.read_preference(/datum/preference/numeric/fragile_customization/brute)
+    var/burnmod = prefs.read_preference(/datum/preference/numeric/fragile_customization/burn)
+    // causará problemas se o usuário mudar esse valor antes da remoção, mas quando as peculiaridades são removidas além de qdel
+    user.physiology.brute_mod /= brutemod
+    user.physiology.burn_mod /= burnmod
 
 /datum/quirk/monophobia
-	name = "Monophobia"
-	desc = "You will become increasingly stressed when not in company of others, triggering panic reactions ranging from sickness to heart attacks."
-	value = -6
-	gain_text = span_danger("You feel really lonely...")
-	lose_text = span_notice("You feel like you could be safe on your own.")
-	medical_record_text = "Patient feels sick and distressed when not around other people, leading to potentially lethal levels of stress."
-	icon = FA_ICON_PEOPLE_ARROWS_LEFT_RIGHT
+    name = "Monofobia"
+    desc = "Você ficará cada vez mais estressado quando não estiver na companhia de outros, desencadeando reações de pânico que variam de doença a ataques cardíacos."
+    value = -6
+    gain_text = span_danger("Você se sente muito sozinho...")
+    lose_text = span_notice("Você sente que poderia estar seguro sozinho.")
+    medical_record_text = "O paciente se sente doente e angustiado quando não está perto de outras pessoas, levando a níveis potencialmente letais de estresse."
+    icon = FA_ICON_PEOPLE_ARROWS_LEFT_RIGHT
 
 /datum/quirk/monophobia/post_add()
-	. = ..()
-	var/mob/living/carbon/human/user = quirk_holder
-	user.gain_trauma(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
+    . = ..()
+    var/mob/living/carbon/human/user = quirk_holder
+    user.gain_trauma(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
 
 /datum/quirk/monophobia/remove()
-	. = ..()
-	var/mob/living/carbon/human/user = quirk_holder
-	user?.cure_trauma_type(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
+    . = ..()
+    var/mob/living/carbon/human/user = quirk_holder
+    user?.cure_trauma_type(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
 
 /datum/quirk/no_guns
-	name = "No Guns"
-	desc = "For whatever reason, you are unable to use guns. The reasoning may vary, but is up to you to decide."
-	gain_text = span_notice("You feel like you won't be able to use guns anymore...")
-	lose_text = span_notice("You suddenly feel like you can use guns again!")
-	medical_record_text = "Patient is unable to use firearms. Reasoning unknown."
-	value = -6
-	mob_trait = TRAIT_NOGUNS
-	icon = FA_ICON_GUN
+    name = "Sem Armas"
+    desc = "Por qualquer motivo, você é incapaz de usar armas de fogo. A razão pode variar, mas cabe a você decidir."
+    gain_text = span_notice("Você sente que não será mais capaz de usar armas de fogo...")
+    lose_text = span_notice("Você de repente sente que pode usar armas de fogo novamente!")
+    medical_record_text = "O paciente é incapaz de usar armas de fogo. Razão desconhecida."
+    value = -6
+    mob_trait = TRAIT_NOGUNS
+    icon = FA_ICON_GUN
