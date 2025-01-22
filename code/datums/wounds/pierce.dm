@@ -4,7 +4,7 @@
 /datum/wound/pierce
 
 /datum/wound/pierce/bleed
-	name = "Piercing Wound"
+	name = "Ferida perfurante"
 	sound_effect = 'sound/items/weapons/slice.ogg'
 	processes = TRUE
 	treatable_by = list(/obj/item/stack/medical/suture)
@@ -44,23 +44,23 @@
 			victim.bleed(blood_bled, TRUE)
 		if(7 to 13)
 			victim.visible_message(
-				span_smalldanger("Blood droplets fly from the hole in [victim]'s [limb.plaintext_zone]."),
-				span_danger("You cough up a bit of blood from the blow to your [limb.plaintext_zone]."),
+				span_smalldanger("Gotículas de sangue voam do buraco na [limb.plaintext_zone] de [victim] ."),
+				span_danger("Você tosse um pouco de sangue devido ao golpe em seu [limb.plaintext_zone]."),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 			)
 			victim.bleed(blood_bled, TRUE)
 		if(14 to 19)
 			victim.visible_message(
-				span_smalldanger("A small stream of blood spurts from the hole in [victim]'s [limb.plaintext_zone]!"),
-				span_danger("You spit out a string of blood from the blow to your [limb.plaintext_zone]!"),
+				span_smalldanger("Um pequeno jato de sangue jorra do buraco na [limb.plaintext_zone] de [victim] !"),
+				span_danger("Você cospe uma quantidade de sangue devido ao golpe em seu [limb.plaintext_zone]!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 			)
 			victim.create_splatter(victim.dir)
 			victim.bleed(blood_bled)
 		if(20 to INFINITY)
 			victim.visible_message(
-				span_danger("A spray of blood streams from the gash in [victim]'s [limb.plaintext_zone]!"),
-				span_bolddanger("You choke up on a spray of blood from the blow to your [limb.plaintext_zone]!"),
+				span_danger("Um jato de sangue jorra do corte na [limb.plaintext_zone] de [victim] !"),
+				span_bolddanger("Você se engasga com uma quantidade de sangue devido ao golpe em seu [limb.plaintext_zone]!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 			)
 			victim.bleed(blood_bled)
@@ -90,7 +90,7 @@
 			if(QDELETED(src))
 				return
 			if(SPT_PROB(2.5, seconds_per_tick))
-				to_chat(victim, span_notice("You feel the [LOWER_TEXT(name)] in your [limb.plaintext_zone] firming up from the cold!"))
+				to_chat(victim, span_notice("Você sente o [LOWER_TEXT(name)] em seu [limb.plaintext_zone] firmando-se do frio!"))
 
 		if(HAS_TRAIT(victim, TRAIT_BLOODY_MESS))
 			adjust_blood_flow(0.25 * seconds_per_tick) // old heparin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
@@ -111,7 +111,7 @@
 	if(blood_flow > WOUND_MAX_BLOODFLOW)
 		blood_flow = WOUND_MAX_BLOODFLOW
 	if(blood_flow <= 0 && !QDELETED(src))
-		to_chat(victim, span_green("The holes on your [limb.plaintext_zone] have [!limb.can_bleed() ? "healed up" : "stopped bleeding"]!"))
+		to_chat(victim, span_green("Os buracos em seu [limb.plaintext_zone] foram [!limb.can_bleed() ? "cicatrizados" : "parados de sangrar"]!"))
 		qdel(src)
 
 /datum/wound/pierce/bleed/check_grab_treatments(obj/item/I, mob/user)
@@ -142,9 +142,9 @@
 
 	if(HAS_TRAIT(src, TRAIT_WOUND_SCANNED))
 		treatment_delay *= 0.5
-		user.visible_message(span_danger("[user] begins expertly cauterizing [victim]'s [limb.plaintext_zone] with [I]..."), span_warning("You begin cauterizing [user == victim ? "your" : "[victim]'s"] [limb.plaintext_zone] with [I], keeping the holo-image indications in mind..."))
+		user.visible_message(span_danger("[user] começa a cauterizar habilmente o [limb.plaintext_zone] de [victim] usando [I]..."), span_warning("Você começa a cauterizar o [limb.plaintext_zone] de [victim]  usando [I], mantendo a imagem holografica na mente..."))
 	else
-		user.visible_message(span_danger("[user] begins cauterizing [victim]'s [limb.plaintext_zone] with [I]..."), span_warning("You begin cauterizing [user == victim ? "your" : "[victim]'s"] [limb.plaintext_zone] with [I]..."))
+		user.visible_message(span_danger("[user] começa a cauterizar o [limb.plaintext_zone] de [victim]  usando [I]..."), span_warning("Você começa a cauterizar [user == victim ? "your" : "[victim]'s"] [limb.plaintext_zone] usando [I]..."))
 
 	playsound(user, 'sound/items/handling/surgery/cautery1.ogg', 75, TRUE)
 
@@ -153,8 +153,8 @@
 
 	playsound(user, 'sound/items/handling/surgery/cautery2.ogg', 75, TRUE)
 
-	var/bleeding_wording = (!limb.can_bleed() ? "holes" : "bleeding")
-	user.visible_message(span_green("[user] cauterizes some of the [bleeding_wording] on [victim]."), span_green("You cauterize some of the [bleeding_wording] on [victim]."))
+	var/bleeding_wording = (!limb.can_bleed() ? "buracos" : "sangramentos")
+	user.visible_message(span_green("[user] cauteriza alguns dos [bleeding_wording] em [victim]."), span_green("Você cauterzia alguns dos [bleeding_wording] em [victim]."))
 	victim.apply_damage(2 + severity, BURN, limb, wound_bonus = CANT_WOUND)
 	if(prob(30))
 		victim.emote("scream")
@@ -174,17 +174,17 @@
 	wound_series = WOUND_SERIES_FLESH_PUNCTURE_BLEED
 
 /datum/wound/pierce/get_limb_examine_description()
-	return span_warning("The flesh on this limb appears badly perforated.")
+	return span_warning("A carne deste membro parece muito perfurada.")
 
 /datum/wound/pierce/bleed/moderate
-	name = "Minor Skin Breakage"
-	desc = "Patient's skin has been broken open, causing severe bruising and minor internal bleeding in affected area."
-	treat_text = "Apply bandaging or suturing to the wound, make use of blood clotting agents, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with food and a rest period."
-	treat_text_short = "Apply bandaging or suturing."
-	examine_desc = "has a small, torn hole, gently bleeding"
-	occur_text = "spurts out a thin stream of blood"
+	name = "Rompimento Menor da Pele"
+	desc = "A pele do paciente foi rompida, causando hematomas severos e sangramento interno menor na área afetada."
+	treat_text = "Aplique bandagens ou suturas na ferida, use agentes de coagulação sanguínea, \
+        cauterização, ou em circunstâncias extremas, exposição ao frio extremo ou vácuo. \
+        Siga com alimentação e um período de descanso."
+	treat_text_short = "Aplique bandagens ou suturas."
+	examine_desc = "tem um pequeno buraco rasgado, sangrando levemente"
+	occur_text = "jorra um fino jato de sangue"
 	sound_effect = 'sound/effects/wounds/pierce1.ogg'
 	severity = WOUND_SEVERITY_MODERATE
 	initial_flow = 1.5
@@ -196,13 +196,13 @@
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
 	scar_keyword = "piercemoderate"
 
-	simple_treat_text = "<b>Bandaging</b> the wound will reduce blood loss, help the wound close by itself quicker, and speed up the blood recovery period. The wound itself can be slowly <b>sutured</b> shut."
-	homemade_treat_text = "<b>Tea</b> stimulates the body's natural healing systems, slightly fastening clotting. The wound itself can be rinsed off on a sink or shower as well. Other remedies are unnecessary."
+	simple_treat_text = "<b>Enfaixar</b> a ferida reduzirá a perda de sangue, ajudará a ferida a fechar mais rapidamente e acelerará o período de recuperação do sangue. A própria ferida pode ser lentamente <b>suturada</b>."
+	homemade_treat_text = "<b>Chá</b> estimula os sistemas naturais de cura do corpo, acelerando ligeiramente a coagulação. A própria ferida pode ser enxaguada em uma pia ou chuveiro também. Outros remédios são desnecessários."
 
 /datum/wound/pierce/bleed/moderate/update_descriptions()
 	if(!limb.can_bleed())
-		examine_desc = "has a small, torn hole"
-		occur_text = "splits a small hole open"
+		examine_desc = "tem um buraco pequeno e rasgado"
+		occur_text = "abre um pequeno buraco"
 
 /datum/wound_pregen_data/flesh_pierce/breakage
 	abstract = FALSE
@@ -217,18 +217,18 @@
 	return weight
 
 /datum/wound/pierce/bleed/moderate/projectile
-	name = "Minor Skin Penetration"
-	desc = "Patient's skin has been pierced through, causing severe bruising and minor internal bleeding in affected area."
-	treat_text = "Apply bandaging or suturing to the wound, make use of blood clotting agents, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with food and a rest period."
-	examine_desc = "has a small, circular hole, gently bleeding"
+	name = "Penetração Menor da Pele"
+	desc = "A pele do paciente foi perfurada, causando hematomas severos e sangramento interno menor na área afetada."
+	treat_text = "Aplique bandagens ou suturas na ferida, use agentes de coagulação sanguínea, \
+        cauterização, ou em circunstâncias extremas, exposição ao frio extremo ou vácuo. \
+        Siga com alimentação e um período de descanso."
+	examine_desc = "tem um pequeno buraco circular, sangrando levemente"
 	clot_rate = 0
 
 /datum/wound/pierce/bleed/moderate/projectile/update_descriptions()
 	if(!limb.can_bleed())
-		examine_desc = "has a small, circular hole"
-		occur_text = "splits a small hole open"
+		examine_desc = "tem um pequeno, buraco circular"
+		occur_text = "abre um pequeno buraco"
 
 /datum/wound_pregen_data/flesh_pierce/breakage/projectile
 	wound_path_to_generate = /datum/wound/pierce/bleed/moderate/projectile
@@ -239,14 +239,14 @@
 	return weight
 
 /datum/wound/pierce/bleed/severe
-	name = "Open Stab Puncture"
-	desc = "Patient's internal tissue is penetrated, causing sizeable internal bleeding and reduced limb stability."
-	treat_text = "Swiftly apply bandaging or suturing to the wound, make use of blood clotting agents or saline-glucose, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with iron supplements and a rest period."
-	treat_text_short = "Apply bandaging, suturing, clotting agents, or cauterization."
-	examine_desc = "is pierced clear through, with bits of tissue obscuring the open hole"
-	occur_text = "looses a violent spray of blood, revealing a pierced wound"
+	name = "Perfuração por Facada Aberta"
+	desc = "O tecido interno do paciente foi penetrado, causando sangramento interno considerável e estabilidade reduzida do membro."
+	treat_text = "Aplique rapidamente bandagens ou suturas na ferida, use agentes de coagulação sanguínea ou solução salina-glicose, \
+        cauterização, ou em circunstâncias extremas, exposição ao frio extremo ou vácuo. \
+        Siga com suplementos de ferro e um período de descanso."
+	treat_text_short = "Aplique bandagens, suturas, agentes de coagulação ou cauterização."
+	examine_desc = "está perfurado de lado a lado, com pedaços de tecido obscurecendo o buraco aberto"
+	occur_text = "libera um jato violento de sangue, revelando uma ferida perfurada"
 	sound_effect = 'sound/effects/wounds/pierce2.ogg'
 	severity = WOUND_SEVERITY_SEVERE
 	initial_flow = 2.25
@@ -258,12 +258,12 @@
 	status_effect_type = /datum/status_effect/wound/pierce/severe
 	scar_keyword = "piercesevere"
 
-	simple_treat_text = "<b>Bandaging</b> the wound is essential, and will reduce blood loss. Afterwards, the wound can be <b>sutured</b> shut, preferably while the patient is resting and/or grasping their wound."
-	homemade_treat_text = "Bed sheets can be ripped up to make <b>makeshift gauze</b>. <b>Flour, table salt, or salt mixed with water</b> can be applied directly to stem the flow, though unmixed salt will irritate the skin and worsen natural healing. Resting and grabbing your wound will also reduce bleeding."
+	simple_treat_text = "<b>Enfaixar</b> a ferida é essencial e reduzirá a perda de sangue. Depois, a ferida pode ser <b>suturada</b>, preferencialmente enquanto o paciente estiver descansando e/ou segurando sua ferida."
+	homemade_treat_text = "Lençóis podem ser rasgados para fazer <b>gaze improvisada</b>. <b>Farinha, sal de mesa ou sal misturado com água</b> pode ser aplicado diretamente para estancar o fluxo, embora o sal não misturado irrite a pele e piore a cicatrização natural. Descansar e segurar a ferida também reduzirá o sangramento."
 
 /datum/wound/pierce/bleed/severe/update_descriptions()
 	if(!limb.can_bleed())
-		occur_text = "tears a hole open"
+		occur_text = "rasga um buraco"
 
 /datum/wound_pregen_data/flesh_pierce/open_puncture
 	abstract = FALSE
@@ -278,8 +278,8 @@
 	return weight
 
 /datum/wound/pierce/bleed/severe/projectile
-	name = "Open Bullet Puncture"
-	examine_desc = "is pierced clear through, with bits of tissue obscuring the cleanly torn hole"
+	name = "Perfuração Aberta por Bala"
+	examine_desc = "está perfurado de lado a lado, com pedaços de tecido obscurecendo o buraco aberto"
 	clot_rate = 0
 
 /datum/wound_pregen_data/flesh_pierce/open_puncture/projectile
@@ -291,9 +291,9 @@
 	return weight
 
 /datum/wound/pierce/bleed/severe/eye
-	name = "Eyeball Puncture"
-	desc = "Patient's eye has sustained extreme damage, causing severe bleeding from the ocular cavity."
-	occur_text = "looses a violent spray of blood, revealing a crushed eyeball"
+	name = "Punctura de Olho"
+	desc = "O olho do paciente sofreu danos extremos, causando um sangramento severo da cavidade ocular."
+	occur_text = "perde um jato violento de sangue, revelando um olho esmagado"
 	var/right_side = FALSE
 
 /datum/wound/pierce/bleed/severe/eye/apply_wound(obj/item/bodypart/limb, silent, datum/wound/old_wound, smited, attack_direction, wound_source, replacing, right_side)
@@ -302,7 +302,7 @@
 		return FALSE
 	. = ..()
 	src.right_side = right_side
-	examine_desc = "has its [right_side ? "right" : "left"] eye pierced clean through, blood spewing from the cavity"
+	examine_desc = "tem seu olho [right_side ? "direito" : "esquerdo"] perfurado perfeitamente, sangue jorra pela cavidade"
 	RegisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY, PROC_REF(wound_overlay))
 	limb.update_part_wound_overlay()
 
@@ -334,14 +334,14 @@
 	return ..()
 
 /datum/wound/pierce/bleed/critical
-	name = "Ruptured Cavity"
-	desc = "Patient's internal tissue and circulatory system is shredded, causing significant internal bleeding and damage to internal organs."
-	treat_text = "Immediately apply bandaging or suturing to the wound, make use of blood clotting agents or saline-glucose, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with supervised resanguination."
-	treat_text_short = "Apply bandaging, suturing, clotting agents, or cauterization."
-	examine_desc = "is ripped clear through, barely held together by exposed bone"
-	occur_text = "blasts apart, sending chunks of viscera flying in all directions"
+	name = "Cavidade Rompida"
+	desc =  "Os tecidos internos e o sistema circulatório do paciente estão dilacerados, causando sangramento interno significativo e danos aos órgãos internos."
+	treat_text = "Aplique imediatamente bandagens ou suturas na ferida, use agentes hemostáticos ou solução salina-glicose, \
+	cauterização, ou em circunstâncias extremas, exposição ao frio extremo ou vácuo. \
+	Siga com uma resanguinação supervisionada."
+	treat_text_short = "Aplique bandagens, suturas, agentes hemostáticos ou cauterização."
+	examine_desc = "está rasgado, mal segurado pelos ossos expostos"
+	occur_text = "explode, enviando pedaços de vísceras voando em todas as direções"
 	sound_effect = 'sound/effects/wounds/pierce3.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
 	initial_flow = 3
@@ -353,8 +353,8 @@
 	scar_keyword = "piercecritical"
 	wound_flags = (ACCEPTS_GAUZE | MANGLES_EXTERIOR | CAN_BE_GRASPED)
 
-	simple_treat_text = "<b>Bandaging</b> the wound is of utmost importance, as is seeking direct medical attention - <b>Death</b> will ensue if treatment is delayed whatsoever, with lack of <b>oxygen</b> killing the patient, thus <b>Food, Iron, and saline solution</b> is always recommended after treatment. This wound will not naturally seal itself."
-	homemade_treat_text = "Bed sheets can be ripped up to make <b>makeshift gauze</b>. <b>Flour, salt, and saltwater</b> topically applied will help. Dropping to the ground and grabbing your wound will reduce blood flow."
+	simple_treat_text = "<b>Bandagem</b> da ferida é de extrema importância, assim como procurar atendimento médico imediato - <b>Morte</b> ocorrerá se o tratamento for atrasado de qualquer forma, com a falta de <b>oxigênio</b> matando o paciente, portanto, <b>Alimentos, Ferro e solução salina</b> são sempre recomendados após o tratamento. Esta ferida não se fechará naturalmente."
+	homemade_treat_text = "Lençóis podem ser rasgados para fazer <b>gaze improvisada</b>. <b>Farinha, sal e água salgada</b> aplicados topicamente ajudarão. Cair no chão e segurar sua ferida reduzirá o fluxo sanguíneo."
 
 /datum/wound_pregen_data/flesh_pierce/cavity
 	abstract = FALSE
