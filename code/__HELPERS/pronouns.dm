@@ -149,7 +149,7 @@
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL || temp_gender == NEUTER)
-		return "são"
+		return "estão"
 	return "está"
 
 /client/p_were(temp_gender)

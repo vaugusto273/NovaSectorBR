@@ -116,20 +116,20 @@
 		var/list/damage_desc = get_majority_bodypart_damage_desc()
 		if(temp)
 			if(temp < 25)
-				. += span_danger("[t_He] [t_has] dano leve [damage_desc[BRUTE]].")
+				. += span_danger("[t_He] [t_has] dano leve de [damage_desc[BRUTE]].")
 			else if(temp < 50)
-				. += span_danger("[t_He] [t_has] <b>dano moderado</b> [damage_desc[BRUTE]]!")
+				. += span_danger("[t_He] [t_has] <b>dano moderado de </b> [damage_desc[BRUTE]]!")
 			else
-				. += span_bolddanger("[t_He] [t_has] dano severo [damage_desc[BRUTE]]!")
+				. += span_bolddanger("[t_He] [t_has] dano severo de [damage_desc[BRUTE]]!")
 
 		temp = getFireLoss()
 		if(temp)
 			if(temp < 25)
-				. += span_danger("[t_He] [t_has] dano level [damage_desc[BURN]].")
+				. += span_danger("[t_He] [t_has] dano level de [damage_desc[BURN]].")
 			else if (temp < 50)
-				. += span_danger("[t_He] [t_has] <b>dano moderado</b> [damage_desc[BURN]]!")
+				. += span_danger("[t_He] [t_has] <b>dano moderado de </b> [damage_desc[BURN]]!")
 			else
-				. += span_bolddanger("[t_He] [t_has] adno severo [damage_desc[BURN]]!")
+				. += span_bolddanger("[t_He] [t_has] dano severo de [damage_desc[BURN]]!")
 
 	if(pulledby?.grab_state)
 		. += span_warning("[t_He] [t_is] restrito pela pegada de [pulledby].")
@@ -427,7 +427,7 @@
 	var/obscured = check_obscured_slots()
 	var/t_He = p_They()
 	var/t_His = p_Their()
-	var/t_his = p_their()
+	//var/t_his = p_their()
 	var/t_has = p_have()
 	var/t_is = p_are()
 	//head
@@ -477,7 +477,7 @@
 	var/obscured = check_obscured_slots()
 	var/t_He = p_They()
 	var/t_His = p_Their()
-	var/t_his = p_their()
+	//var/t_his = p_their()
 	var/t_has = p_have()
 	var/t_is = p_are()
 
