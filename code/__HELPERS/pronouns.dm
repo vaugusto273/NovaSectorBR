@@ -99,72 +99,72 @@
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "she"
+			return "ela"
 		if(MALE)
-			return "he"
+			return "ele"
 		else
-			return "they"
+			return "they" // tenho menor ideia de como traduzir isso
 
 /client/p_their(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "her"
+			return "dela"
 		if(MALE)
-			return "his"
+			return "dele"
 		else
-			return "their"
+			return "their" // menor ideia de como traduzir isso ²
 
 /client/p_theirs(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "hers"
+			return "dela"
 		if(MALE)
-			return "his"
+			return "dele"
 		else
-			return "theirs"
+			return "theirs" // menor ideia de como traduzir isso ³
 
 /client/p_them(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "her"
+			return "dela"
 		if(MALE)
-			return "him"
+			return "dele"
 		else
-			return "them"
+			return "them" // menor ideia de como traduzir isso ²+²
 
 /client/p_have(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL || temp_gender == NEUTER)
-		return "have"
-	return "has"
+		return "tem"
+	return "tem"
 
 /client/p_are(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL || temp_gender == NEUTER)
-		return "are"
-	return "is"
+		return "são"
+	return "está"
 
 /client/p_were(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL || temp_gender == NEUTER)
-		return "were"
-	return "was"
+		return "fazer"
+	return "faz"
 
 /client/p_do(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL || temp_gender == NEUTER)
-		return "do"
-	return "does"
+		return "fazer"
+	return "faz"
 
 /client/p_s(temp_gender)
 	if(!temp_gender)
@@ -184,80 +184,80 @@
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "she"
+			return "ela"
 		if(MALE)
-			return "he"
+			return "ele"
 		if(PLURAL)
-			return "they"
+			return "they" // nao sei como traduzir isso
 		else
-			return "it"
+			return "isto"
 
 /mob/p_their(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "her"
+			return "dela"
 		if(MALE)
-			return "his"
+			return "dele"
 		if(PLURAL)
-			return "their"
+			return "their" // menor ideia de como traduzir isso
 		else
-			return "its"
+			return "isso"
 
 /mob/p_theirs(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "hers"
+			return "dela"
 		if(MALE)
-			return "his"
+			return "dele"
 		if(PLURAL)
 			return "theirs"
 		else
-			return "its"
+			return "isso"
 
 /mob/p_them(capitalized, temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	switch(temp_gender)
 		if(FEMALE)
-			return "her"
+			return "dela"
 		if(MALE)
-			return "him"
+			return "dele"
 		if(PLURAL)
 			return "them"
 		else
-			return "it"
+			return "isso"
 
 /mob/p_have(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL)
-		return "have"
-	return "has"
+		return "tem"
+	return "tem"
 
 /mob/p_are(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL)
-		return "are"
-	return "is"
+		return "são"
+	return "está"
 
 /mob/p_were(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL)
-		return "were"
-	return "was"
+		return "eram"
+	return "era"
 
 /mob/p_do(temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
 	if(temp_gender == PLURAL)
-		return "do"
-	return "does"
+		return "fazer"
+	return "faz"
 
 /mob/p_s(temp_gender)
 	if(!temp_gender)

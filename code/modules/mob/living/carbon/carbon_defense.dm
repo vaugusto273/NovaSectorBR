@@ -94,8 +94,8 @@
 	// Sanity in case one is null for some reason
 	var/picked_index = rand(max(length(weapon.attack_verb_simple), length(weapon.attack_verb_continuous)))
 
-	var/message_verb_continuous = "attacks"
-	var/message_verb_simple = "attack"
+	var/message_verb_continuous = "ataca"
+	var/message_verb_simple = "ataca"
 	var/message_hit_area = get_hit_area_message(hit_area)
 	// Sanity in case one is... longer than the other?
 	if (picked_index && length(weapon.attack_verb_continuous) >= picked_index)
@@ -119,22 +119,22 @@
 
 		var/dismemberable = ((hit_bodypart.dismemberable_by_wound()) || hit_bodypart.dismemberable_by_total_damage())
 		if (dismemberable)
-			extra_wound_details = ", threatening to sever it entirely"
+			extra_wound_details = ", ameaçando cortá-lo completamente"
 		else if((has_interior && (has_exterior && exterior_ready_to_dismember) && weapon.get_sharpness()))
 			var/bone_text = hit_bodypart.get_internal_description()
-			extra_wound_details = ", [weapon.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through to the [bone_text]"
+			extra_wound_details = ", [weapon.get_sharpness() == SHARP_EDGED ? "cortando" : "perfurando"] até o [bone_text]"
 		else if(has_exterior && ((has_interior && interior_ready_to_dismember) && weapon.get_sharpness()))
 			var/tissue_text = hit_bodypart.get_external_description()
-			extra_wound_details = ", [weapon.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] at the remaining [tissue_text]"
+			extra_wound_details = ", [weapon.get_sharpness() == SHARP_EDGED ? "cortando" : "perfurando"] no resto [tissue_text]"
 
-	var/attack_message_spectator = "[src] [message_verb_continuous][message_hit_area] with [weapon][extra_wound_details]!"
-	var/attack_message_victim = "You're [message_verb_continuous][message_hit_area] with [weapon][extra_wound_details]!"
-	var/attack_message_attacker = "You [message_verb_simple] [src][message_hit_area] with [weapon][extra_wound_details]!"
+	var/attack_message_spectator = "[src] [message_verb_continuous][message_hit_area] com [weapon][extra_wound_details]!"
+	var/attack_message_victim = "Você [message_verb_continuous][message_hit_area] com [weapon][extra_wound_details]!"
+	var/attack_message_attacker = "Você [message_verb_simple] [src][message_hit_area] com [weapon][extra_wound_details]!"
 	if(user in viewers(src, null))
-		attack_message_spectator = "[user] [message_verb_continuous] [src][message_hit_area] with [weapon][extra_wound_details]!"
-		attack_message_victim = "[user] [message_verb_continuous] you[message_hit_area] with [weapon][extra_wound_details]!"
+		attack_message_spectator = "[user] [message_verb_continuous] [src][message_hit_area] com [weapon][extra_wound_details]!"
+		attack_message_victim = "[user] [message_verb_continuous] Você[message_hit_area] com [weapon][extra_wound_details]!"
 	if(user == src)
-		attack_message_victim = "You [message_verb_simple] yourself[message_hit_area] with [weapon][extra_wound_details]!"
+		attack_message_victim = "Você [message_verb_simple] você mesmo [message_hit_area] com [weapon][extra_wound_details]!"
 	visible_message(span_danger("[attack_message_spectator]"),\
 		span_userdanger("[attack_message_victim]"), null, COMBAT_MESSAGE_RANGE, user)
 	if(user != src)
@@ -239,7 +239,7 @@
 	if (stat == DEAD)
 		return
 	else
-		show_message(span_userdanger("The blob attacks!"))
+		show_message(span_userdanger("O blob ataca!"))
 		adjustBruteLoss(10)
 
 ///Adds to the parent by also adding functionality to propagate shocks through pulling and doing some fluff effects.
@@ -292,7 +292,7 @@
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/helper, force_friendly)
 	var/nosound = FALSE //NOVA EDIT ADDITION - EMOTES
 	if(on_fire)
-		to_chat(helper, span_warning("You can't put [p_them()] out with just your bare hands!"))
+		to_chat(helper, span_warning("Você não pode colocar [p_them()] fora com apenas as suas próprias mãos!"))
 		return
 
 	if(SEND_SIGNAL(src, COMSIG_CARBON_PRE_MISC_HELP, helper) & COMPONENT_BLOCK_MISC_HELP)
@@ -304,17 +304,17 @@
 
 	if(body_position == LYING_DOWN)
 		if(buckled)
-			to_chat(helper, span_warning("You need to unbuckle [src] first to do that!"))
+			to_chat(helper, span_warning("Você precisa se desprender [src] primeiro antes de fazer aquilo!"))
 			return
-		helper.visible_message(span_notice("[helper] shakes [src] trying to get [p_them()] up!"), \
-						null, span_hear("You hear the rustling of clothes."), DEFAULT_MESSAGE_RANGE, list(helper, src))
-		to_chat(helper, span_notice("You shake [src] trying to pick [p_them()] up!"))
-		to_chat(src, span_notice("[helper] shakes you to get you up!"))
+		helper.visible_message(span_notice("[helper] mexe [src] tentando levantar [p_them()] !"), \
+						null, span_hear("Você ouve o som de roupas se movendo."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+		to_chat(helper, span_notice("Você balança [src] tentando levantar [p_them()]!"))
+		to_chat(src, span_notice("[helper] te balança para levantar!"))
 	//NOVA EDIT ADDITION BEGIN - EMOTES -- SENSITIVE SNOUT TRAIT ADDITION
 	else if(helper.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 		nosound = TRUE
 		if(HAS_TRAIT(src, TRAIT_QUICKREFLEXES) && (src.stat != UNCONSCIOUS) && !INCAPACITATED_IGNORING(src, INCAPABLE_RESTRAINTS))
-			visible_message(span_warning("[helper] tries to boop [src] on the nose, but [p_they()] move[p_s()] out of the way."))
+			visible_message(span_warning("[helper] tenta fazer boop [src] no nariz, mas [p_they()] se retira[p_s()] da frente."))
 			return
 		else
 			playsound(src, 'modular_nova/modules/emotes/sound/emotes/Nose_boop.ogg', 50, 0)
@@ -327,19 +327,19 @@
 	else if(check_zone(helper.zone_selected) == BODY_ZONE_HEAD && get_bodypart(BODY_ZONE_HEAD)) //Headpats!
 		//NOVA EDIT ADDITION BEGIN - OVERSIZED & DISALLOWED HEADPATS
 		if(HAS_TRAIT(src, TRAIT_OVERSIZED) && !HAS_TRAIT(helper, TRAIT_OVERSIZED))
-			visible_message(span_warning("[helper] tries to pat [src] on the head, but can't reach!"))
+			visible_message(span_warning("[helper] tenta dar tapinhas [src] na cabeça, mas não consegue alcançar!"))
 			return
 		else if(HAS_TRAIT(src, TRAIT_QUICKREFLEXES) && (src.stat != UNCONSCIOUS) && !INCAPACITATED_IGNORING(src, INCAPABLE_RESTRAINTS))
-			visible_message(span_warning("[helper] tries to pat [src] on the head, but [p_they()] move[p_s()] out of the way."))
+			visible_message(span_warning("[helper] tenta dar tapinhas [src] na cabeça, but [p_they()] move[p_s()] out of the way."))
 			return
 		//NOVA EDIT ADDITION END
-		helper.visible_message(span_notice("[helper] gives [src] a pat on the head to make [p_them()] feel better!"), \
+		helper.visible_message(span_notice("[helper] gives [src] a pat na cabeça para fazer [p_them()] se sentir melhor!"), \
 					null, span_hear("You hear a soft patter."), DEFAULT_MESSAGE_RANGE, list(helper, src))
-		to_chat(helper, span_notice("You give [src] a pat on the head to make [p_them()] feel better!"))
-		to_chat(src, span_notice("[helper] gives you a pat on the head to make you feel better! "))
+		to_chat(helper, span_notice("You give [src] a pat na cabeça para fazer [p_them()] se sentir melhor!"))
+		to_chat(src, span_notice("[helper] gives you a pat na cabeça para fazer você se sentir melhor! "))
 
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH))
-			to_chat(helper, span_warning("[src] looks visibly upset as you pat [p_them()] on the head."))
+			to_chat(helper, span_warning("[src] parece visivelmente chateado enquanto você dá tapinhas na cabeça de [p_them()]."))
 		//NOVA EDIT ADDITION BEGIN - EMOTES
 		if(HAS_TRAIT(src, TRAIT_EXCITABLE))
 			var/obj/item/organ/tail/src_tail = get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
@@ -348,21 +348,21 @@
 		//NOVA EDIT ADDITION END
 
 	else if ((helper.zone_selected == BODY_ZONE_PRECISE_GROIN) && !isnull(src.get_organ_by_type(/obj/item/organ/tail)))
-		helper.visible_message(span_notice("[helper] pulls on [src]'s tail!"), \
-					null, span_hear("You hear a soft patter."), DEFAULT_MESSAGE_RANGE, list(helper, src))
-		to_chat(helper, span_notice("You pull on [src]'s tail!"))
-		to_chat(src, span_notice("[helper] pulls on your tail!"))
+		helper.visible_message(span_notice("[helper] puxa a cauda de [src] !"), \
+					null, span_hear("Você ouve um suave estalo."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+		to_chat(helper, span_notice("Você puxa a calda de [src]"))
+		to_chat(src, span_notice("[helper] puxa a sua calda!"))
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH)) //How dare they!
-			to_chat(helper, span_warning("[src] makes a grumbling noise as you pull on [p_their()] tail."))
+			to_chat(helper, span_warning("[src] faz um barulho de resmungo enquanto você puxa a cauda de [p_their()]."))
 		else
 			add_mood_event("tailpulled", /datum/mood_event/tailpulled)
 
 	else if ((helper.zone_selected == BODY_ZONE_PRECISE_GROIN) && (istype(head, /obj/item/clothing/head/costume/kitty) || istype(head, /obj/item/clothing/head/collectable/kitty)))
 		var/obj/item/clothing/head/faketail = head
-		helper.visible_message(span_danger("[helper] pulls on [src]'s tail... and it rips off!"), \
-					null, span_hear("You hear a ripping sound."), DEFAULT_MESSAGE_RANGE, list(helper, src))
-		to_chat(helper, span_danger("You pull on [src]'s tail... and it rips off!"))
-		to_chat(src, span_userdanger("[helper] pulls on your tail... and it rips off!"))
+		helper.visible_message(span_danger("[helper] puxa a cauda de [src] ...e ela se solta!"), \
+					null, span_hear("Você escuta um barulho de rasgo."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+		to_chat(helper, span_danger("Você puxa a calda de [src] ... e ela se solta!"))
+		to_chat(src, span_userdanger("[helper] pulls on your tail... e ela se solta!"))
 		playsound(loc, 'sound/effects/cloth_rip.ogg', 75, TRUE)
 		dropItemToGround(faketail)
 		helper.put_in_hands(faketail)
@@ -385,7 +385,7 @@
 			to_chat(helper, span_notice("You hug [src] to make [p_them()] feel better!"))
 			to_chat(src, span_notice("[helper] hugs you to make you feel better!"))
 
-		// Warm them up with hugs
+		// Warm them up com hugs
 		share_bodytemperature(helper)
 
 		// No moodlets for people who hate touches
@@ -457,7 +457,7 @@
 				embeds = TRUE
 				// this way, we only visibly try to examine ourselves if we have something embedded, otherwise we'll still hug ourselves :)
 				visible_message(span_notice("[src] examines [p_them()]self."), \
-					span_notice("You check yourself for shrapnel."), visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE)
+					span_notice("Você se verifica em busca de estilhaços."), visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE)
 			var/harmless = weapon.get_embed().is_harmless()
 			var/stuck_wordage = harmless ? "stuck to" : "embedded in"
 			var/embed_text = "\t <a href='byond://?src=[REF(src)];embedded_object=[REF(weapon)];embedded_limb=[REF(limb)]'> There is [icon2html(weapon, src)] \a [weapon] [stuck_wordage] your [limb.plaintext_zone]!</a>"
@@ -481,16 +481,16 @@
 
 		switch(damage)
 			if(1)
-				to_chat(src, span_warning("Your eyes sting a little."))
+				to_chat(src, span_warning("Seus olhos ardem um pouco."))
 				if(prob(40))
 					eyes.apply_organ_damage(1)
 
 			if(2)
-				to_chat(src, span_warning("Your eyes burn."))
+				to_chat(src, span_warning("Seus olhos queimam."))
 				eyes.apply_organ_damage(rand(2, 4))
 
 			if(3 to INFINITY)
-				to_chat(src, span_warning("Your eyes itch and burn severely!"))
+				to_chat(src, span_warning("Seus olhos coçam e queimam severamente!"))
 				eyes.apply_organ_damage(rand(12, 16))
 
 		if(eyes.damage > 10)
@@ -499,19 +499,19 @@
 
 			if(eyes.damage > eyes.low_threshold)
 				if(!is_nearsighted_from(EYE_DAMAGE) && prob(eyes.damage - eyes.low_threshold))
-					to_chat(src, span_warning("Your eyes start to burn badly!"))
+					to_chat(src, span_warning("Seus olhos começam a queimar intensamente!"))
 					eyes.apply_organ_damage(eyes.low_threshold)
 
 				else if(!is_blind() && prob(eyes.damage - eyes.high_threshold))
-					to_chat(src, span_warning("You can't see anything!"))
+					to_chat(src, span_warning("Você não consegue enxergar nada!"))
 					eyes.apply_organ_damage(eyes.maxHealth)
 
 			else
-				to_chat(src, span_warning("Your eyes are really starting to hurt. This can't be good for you!"))
+				to_chat(src, span_warning("Seus olhos estão realmente começando a doer. Isso não pode ser bom para você!"))
 		return TRUE
 
 	else if(damage == 0 && prob(20)) // just enough protection
-		to_chat(src, span_notice("Something bright flashes in the corner of your vision!"))
+		to_chat(src, span_notice("Algo claro pisca no canto de sua visão!"))
 
 
 /mob/living/carbon/soundbang_act(intensity = 1, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15)
@@ -532,14 +532,14 @@
 			ears.adjustEarDamage(ear_damage,deaf)
 
 			if(ears.damage >= 15)
-				to_chat(src, span_warning("Your ears start to ring badly!"))
+				to_chat(src, span_warning("Seus ouvidos começam a zumbir intensamente!"))
 				if(prob(ears.damage - 5))
-					to_chat(src, span_userdanger("You can't hear anything!"))
+					to_chat(src, span_userdanger("Você não consegue escutar nada!"))
 					// Makes you deaf, enough that you need a proper source of healing, it won't self heal
 					// you need earmuffs, inacusiate, or replacement
 					ears.set_organ_damage(ears.maxHealth)
 			else if(ears.damage >= 5)
-				to_chat(src, span_warning("Your ears start to ring!"))
+				to_chat(src, span_warning("Seus ouvidos começam a zumbir!"))
 			SEND_SOUND(src, sound('sound/items/weapons/flash_ring.ogg',0,1,0,250))
 		return effect_amount //how soundbanged we are
 
@@ -611,19 +611,19 @@
 		return
 	var/starting_hand_index = active_hand_index
 	if(starting_hand_index == grasped_part.held_index)
-		to_chat(src, span_danger("You can't grasp your [grasped_part.name] with itself!"))
+		to_chat(src, span_danger("Você não pode agarrar seu [grasped_part.name] com ele mesmo!"))
 		return
 
 	var/bleed_rate = grasped_part.get_modified_bleed_rate()
-	var/bleeding_text = (bleed_rate ? ", trying to stop the bleeding" : "")
-	to_chat(src, span_warning("You try grasping at your [grasped_part.name][bleeding_text]..."))
+	var/bleeding_text = (bleed_rate ? ", tentando parar o sangramento" : "")
+	to_chat(src, span_warning("você tenta agarrar o seu [grasped_part.name][bleeding_text]..."))
 	if(!do_after(src, 0.75 SECONDS))
-		to_chat(src, span_danger("You fail to grasp your [grasped_part.name]."))
+		to_chat(src, span_danger("Você falha em tentar agarrar o seu [grasped_part.name]."))
 		return
 
 	var/obj/item/hand_item/self_grasp/grasp = new
 	if(starting_hand_index != active_hand_index || !put_in_active_hand(grasp))
-		to_chat(src, span_danger("You fail to grasp your [grasped_part.name]."))
+		to_chat(src, span_danger("Você falha em tentar agarrar o seu [grasped_part.name]."))
 		QDEL_NULL(grasp)
 		return
 	grasp.grasp_limb(grasped_part)
@@ -641,8 +641,8 @@
 
 /// an abstract item representing you holding your own limb to staunch the bleeding, see [/mob/living/carbon/proc/grabbedby] will probably need to find somewhere else to put this.
 /obj/item/hand_item/self_grasp
-	name = "self-grasp"
-	desc = "Sometimes all you can do is slow the bleeding."
+	name = "autoagarrar"
+	desc = "Às vezes, tudo o que você pode fazer é diminuir o sangramento."
 	icon_state = "latexballoon"
 	inhand_icon_state = "nothing"
 	slowdown = 0.5
@@ -654,7 +654,7 @@
 
 /obj/item/hand_item/self_grasp/Destroy()
 	if(user)
-		to_chat(user, span_warning("You stop holding onto your[grasped_part ? " [grasped_part.name]" : "self"]."))
+		to_chat(user, span_warning("Você para de segurar o seu [grasped_part ? " [grasped_part.name]" : "self"]."))
 		UnregisterSignal(user, COMSIG_QDELETING)
 	if(grasped_part)
 		UnregisterSignal(grasped_part, list(COMSIG_CARBON_REMOVE_LIMB, COMSIG_QDELETING))
@@ -684,8 +684,8 @@
 	RegisterSignals(grasped_part, list(COMSIG_CARBON_REMOVE_LIMB, COMSIG_QDELETING), PROC_REF(qdel_void))
 
 	var/bleed_rate = grasped_part.get_modified_bleed_rate()
-	var/bleeding_text = (bleed_rate ? ", trying to stop the bleeding" : "")
-	user.visible_message(span_danger("[user] grasps at [user.p_their()] [grasped_part.name][bleeding_text]."), span_notice("You grab hold of your [grasped_part.name] tightly."), vision_distance=COMBAT_MESSAGE_RANGE)
+	var/bleeding_text = (bleed_rate ? ", tenta parar o sangramento" : "")
+	user.visible_message(span_danger("[user] agarra o [user.p_their()] [grasped_part.name][bleeding_text]."), span_notice("Você agarra o seu [grasped_part.name] firmemente."), vision_distance=COMBAT_MESSAGE_RANGE)
 	playsound(get_turf(src), 'sound/items/weapons/thudswoosh.ogg', 50, TRUE, -1)
 	return TRUE
 
@@ -698,7 +698,7 @@
 		return FALSE
 
 	if (run_armor_check(attack_flag = BIO, silent = TRUE) >= 100)
-		to_chat(src, span_warning("Your armor shields you from [scramble_source]!"))
+		to_chat(src, span_warning("Sua armadura lhe proteje de [scramble_source]!"))
 		return FALSE
 
 	if (!length(GLOB.bioscrambler_valid_organs) || !length(GLOB.bioscrambler_valid_parts))
@@ -722,10 +722,10 @@
 			qdel(picked_user_part)
 
 	if (!changed_something)
-		to_chat(src, span_notice("Your augmented body protects you from [scramble_source]!"))
+		to_chat(src, span_notice("Seu corpo augmentado lhe proteje de [scramble_source]!"))
 		return FALSE
 	update_body(TRUE)
-	balloon_alert(src, "something has changed about you")
+	balloon_alert(src, "Algo mudou em você")
 	return TRUE
 
 /// Fill in the lists of things we can bioscramble into people
