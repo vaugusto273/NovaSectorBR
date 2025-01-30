@@ -167,116 +167,125 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	savefile = new /datum/json_savefile(load_and_save ? path : null)
 
 /datum/preferences/proc/load_preferences()
-	if(!savefile)
-		stack_trace("Attempted to load the preferences of [parent] without a savefile; did you forget to call load_savefile?")
-		load_savefile()
-		if(!savefile)
-			stack_trace("Failed to load the savefile for [parent] after manually calling load_savefile; something is very wrong.")
-			return FALSE
+    if(!savefile)
+        stack_trace("Attempted to load the preferences of [parent] without a savefile; did you forget to call load_savefile?")
+        load_savefile()
+        if(!savefile)
+            stack_trace("Failed to load the savefile for [parent] after manually calling load_savefile; something is very wrong.")
+            return FALSE
 
-	var/needs_update = save_data_needs_update(savefile.get_entry())
-	if(load_and_save && (needs_update == -2)) //fatal, can't load any data
-		var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
-		if (fexists(bacpath))
-			fdel(bacpath) //only keep 1 version of backup
-		fcopy(savefile.path, bacpath) //byond helpfully lets you use a savefile for the first arg.
-		return FALSE
+    var/needs_update = save_data_needs_update(savefile.get_entry())
+    if(load_and_save && (needs_update == -2)) //fatal, can't load any data
+        var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
+        if (fexists(bacpath))
+            fdel(bacpath) //only keep 1 version of backup
+        fcopy(savefile.path, bacpath) //byond helpfully lets you use a savefile for the first arg.
+        return FALSE
 
-	apply_all_client_preferences()
+    apply_all_client_preferences()
 
-	//general preferences
-	lastchangelog = savefile.get_entry("lastchangelog")
-	be_special = savefile.get_entry("be_special")
-	default_slot = savefile.get_entry("default_slot")
-	chat_toggles = savefile.get_entry("chat_toggles")
-	toggles = savefile.get_entry("toggles")
-	ignoring = savefile.get_entry("ignoring")
+    //general preferences
+    lastchangelog = savefile.get_entry("lastchangelog")
+    be_special = savefile.get_entry("be_special")
+    default_slot = savefile.get_entry("default_slot")
+    chat_toggles = savefile.get_entry("chat_toggles")
+    toggles = savefile.get_entry("toggles")
+    ignoring = savefile.get_entry("ignoring")
 
-	// OOC commendations
-	hearted_until = savefile.get_entry("hearted_until")
-	if(hearted_until > world.realtime)
-		hearted = TRUE
-	//favorite outfits
-	favorite_outfits = savefile.get_entry("favorite_outfits")
+    // Load language preference directly (Simplified)
+    var/language_value = savefile.get_entry("language")
+    if (language_value)
+        parent.language = language_value
+    else
+        parent.language = LANGUAGE_ENGLISH // Default language
+    // OOC commendations
+    hearted_until = savefile.get_entry("hearted_until")
+    if(hearted_until > world.realtime)
+        hearted = TRUE
+    //favorite outfits
+    favorite_outfits = savefile.get_entry("favorite_outfits")
 
-	var/list/parsed_favs = list()
-	for(var/typetext in favorite_outfits)
-		var/datum/outfit/path = text2path(typetext)
-		if(ispath(path)) //whatever typepath fails this check probably doesn't exist anymore
-			parsed_favs += path
-	favorite_outfits = unique_list(parsed_favs)
+    var/list/parsed_favs = list()
+    for(var/typetext in favorite_outfits)
+        var/datum/outfit/path = text2path(typetext)
+        if(ispath(path)) //whatever typepath fails this check probably doesn't exist anymore
+            parsed_favs += path
+    favorite_outfits = unique_list(parsed_favs)
 
-	// Custom hotkeys
-	key_bindings = savefile.get_entry("key_bindings")
+    // Custom hotkeys
+    key_bindings = savefile.get_entry("key_bindings")
 
-	//try to fix any outdated data if necessary
-	if(needs_update >= 0)
-		var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
-		if (fexists(bacpath))
-			fdel(bacpath) //only keep 1 version of backup
-		fcopy(savefile.path, bacpath) //byond helpfully lets you use a savefile for the first arg.
-		update_preferences(needs_update, savefile) //needs_update = savefile_version if we need an update (positive integer)
+    //try to fix any outdated data if necessary
+    if(needs_update >= 0)
+        var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
+        if (fexists(bacpath))
+            fdel(bacpath) //only keep 1 version of backup
+        fcopy(savefile.path, bacpath) //byond helpfully lets you use a savefile for the first arg.
+        update_preferences(needs_update, savefile) //needs_update = savefile_version if we need an update (positive integer)
 
-	check_keybindings() // this apparently fails every time and overwrites any unloaded prefs with the default values, so don't load anything after this line or it won't actually save
-	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
+    check_keybindings() // this apparently fails every time and overwrites any unloaded prefs with the default values, so don't load anything after this line or it won't actually save
+    key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
-	//Sanitize
-	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
-	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
-	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT-1, initial(toggles))
-	be_special = sanitize_be_special(SANITIZE_LIST(be_special))
-	key_bindings = sanitize_keybindings(key_bindings)
-	favorite_outfits = SANITIZE_LIST(favorite_outfits)
+    //Sanitize
+    lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
+    default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
+    toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT-1, initial(toggles))
+    be_special = sanitize_be_special(SANITIZE_LIST(be_special))
+    key_bindings = sanitize_keybindings(key_bindings)
+    favorite_outfits = SANITIZE_LIST(favorite_outfits)
 
-	if(needs_update >= 0) //save the updated version
-		var/old_default_slot = default_slot
-		var/old_max_save_slots = max_save_slots
+    if(needs_update >= 0) //save the updated version
+        var/old_default_slot = default_slot
+        var/old_max_save_slots = max_save_slots
 
-		for (var/slot in savefile.get_entry()) //but first, update all current character slots.
-			if (copytext(slot, 1, 10) != "character")
-				continue
-			var/slotnum = text2num(copytext(slot, 10))
-			if (!slotnum)
-				continue
-			max_save_slots = max(max_save_slots, slotnum) //so we can still update byond member slots after they lose memeber status
-			default_slot = slotnum
-			if (load_character())
-				save_character()
-		default_slot = old_default_slot
-		max_save_slots = old_max_save_slots
-		save_preferences()
+        for (var/slot in savefile.get_entry()) //but first, update all current character slots.
+            if (copytext(slot, 1, 10) != "character")
+                continue
+            var/slotnum = text2num(copytext(slot, 10))
+            if (!slotnum)
+                continue
+            max_save_slots = max(max_save_slots, slotnum) //so we can still update byond member slots after they lose memeber status
+            default_slot = slotnum
+            if (load_character())
+                save_character()
+        default_slot = old_default_slot
+        max_save_slots = old_max_save_slots
+        save_preferences()
 
-	return TRUE
+    return TRUE
 
 /datum/preferences/proc/save_preferences()
-	if(!savefile)
-		CRASH("Attempted to save the preferences of [parent] without a savefile. This should have been handled by load_preferences()")
-	savefile.set_entry("version", SAVEFILE_VERSION_MAX) //updates (or failing that the sanity checks) will ensure data is not invalid at load. Assume up-to-date
+    if(!savefile)
+        CRASH("Attempted to save the preferences of [parent] without a savefile. This should have been handled by load_preferences()")
+    savefile.set_entry("version", SAVEFILE_VERSION_MAX) //updates (or failing that the sanity checks) will ensure data is not invalid at load. Assume up-to-date
 
-	for (var/preference_type in GLOB.preference_entries)
-		var/datum/preference/preference = GLOB.preference_entries[preference_type]
-		if (preference.savefile_identifier != PREFERENCE_PLAYER)
-			continue
+    for (var/preference_type in GLOB.preference_entries)
+        var/datum/preference/preference = GLOB.preference_entries[preference_type]
+        if (preference.savefile_identifier != PREFERENCE_PLAYER)
+            continue
 
-		if (!(preference.type in recently_updated_keys))
-			continue
+        if (!(preference.type in recently_updated_keys))
+            continue
 
-		recently_updated_keys -= preference.type
+        recently_updated_keys -= preference.type
 
-		if (preference_type in value_cache)
-			write_preference(preference, preference.serialize(value_cache[preference_type]))
+        if (preference_type in value_cache)
+            write_preference(preference, preference.serialize(value_cache[preference_type]))
 
-	savefile.set_entry("lastchangelog", lastchangelog)
-	savefile.set_entry("be_special", be_special)
-	savefile.set_entry("default_slot", default_slot)
-	savefile.set_entry("toggles", toggles)
-	savefile.set_entry("chat_toggles", chat_toggles)
-	savefile.set_entry("ignoring", ignoring)
-	savefile.set_entry("key_bindings", key_bindings)
-	savefile.set_entry("hearted_until", (hearted_until > world.realtime ? hearted_until : null))
-	savefile.set_entry("favorite_outfits", favorite_outfits)
-	savefile.save()
-	return TRUE
+    savefile.set_entry("lastchangelog", lastchangelog)
+    savefile.set_entry("be_special", be_special)
+    savefile.set_entry("default_slot", default_slot)
+    savefile.set_entry("toggles", toggles)
+    savefile.set_entry("chat_toggles", chat_toggles)
+    savefile.set_entry("ignoring", ignoring)
+    savefile.set_entry("key_bindings", key_bindings)
+    savefile.set_entry("hearted_until", (hearted_until > world.realtime ? hearted_until : null))
+    savefile.set_entry("favorite_outfits", favorite_outfits)
+    savefile.save()
+    // Save language preference directly (Simplified)
+    savefile.set_entry("language", parent.language)  // "language" is the key in the savefile
+
+    return TRUE
 
 /datum/preferences/proc/load_character(slot)
 	SHOULD_NOT_SLEEP(TRUE)

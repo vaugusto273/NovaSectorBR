@@ -125,6 +125,7 @@
 #include "code\__DEFINES\keybinding.dm"
 #include "code\__DEFINES\lag_switch.dm"
 #include "code\__DEFINES\language.dm"
+#include "code\__DEFINES\languages_preference.dm"
 #include "code\__DEFINES\layers.dm"
 #include "code\__DEFINES\lazy_templates.dm"
 #include "code\__DEFINES\library.dm"
