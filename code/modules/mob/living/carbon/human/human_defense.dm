@@ -560,9 +560,9 @@
 		return
 	var/list/combined_msg = list()
 
-	visible_message(span_notice("[src] examines [p_them()]self."))
+	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? "[src] examines [p_them()]self." : client.language == LANGUAGE_PORTUGUESE ? "[src] se examina." : "Error?")))
 
-	combined_msg += span_notice("<b>Você se verifica em busca de ferimentos.</b>")
+	combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "<b>You check yourself for injuries.</b>" : client.language == LANGUAGE_PORTUGUESE ? "<b>Você se verifica em busca de ferimentos.</b>" : "Error?"))
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
