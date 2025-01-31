@@ -17,17 +17,17 @@
 		if(penetrated_text)
 			to_chat(src, span_userdanger("[penetrated_text]"))
 		else
-			to_chat(src, span_userdanger("Your armor was penetrated!"))
+			to_chat(src, span_userdanger((client.language == LANGUAGE_ENGLISH ? "Your armor was penetrated!" : client.language == LANGUAGE_PORTUGUESE ? "Sua armadura foi penetrada!" : "Error: code/modules/mob/living/living_defense.dm line: 20 ")))
 	else if(our_armor >= 100)
 		if(absorb_text)
 			to_chat(src, span_notice("[absorb_text]"))
 		else
-			to_chat(src, span_notice("Your armor absorbs the blow!"))
+			to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your armor absorbs the blow!" : client.language == LANGUAGE_PORTUGUESE ? "Sua armadura absorve a porrada!" : "Error: code/modules/mob/living/living_defense.dm line: 25 ")))
 	else
 		if(soften_text)
 			to_chat(src, span_warning("[soften_text]"))
 		else
-			to_chat(src, span_warning("Your armor softens the blow!"))
+			to_chat(src, span_warning((client.language == LANGUAGE_ENGLISH ? ("Your armor softens the blow!") : client.language == LANGUAGE_PORTUGUESE ? "Sua armadura amortece o impacto!" : "Error: code/modules/mob/living/living_defense.dm line: 30 ")))
 	return our_armor
 
 /mob/living/proc/getarmor(def_zone, type)
@@ -110,12 +110,12 @@
 
 	switch (proj.suppressed)
 		if (SUPPRESSED_QUIET)
-			to_chat(src, span_userdanger("You're shot by \a [proj][organ_hit_text]!"))
+			to_chat(src, span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're shot by \a [proj][organ_hit_text]!") : client.language == LANGUAGE_PORTUGUESE ? "Você é atingido por [proj][organ_hit_text]!" : "Error: code/modules/mob/living/living_defense.dm line: 113 ")))
 		if (SUPPRESSED_NONE)
-			visible_message(span_danger("[src] is hit by \a [proj][organ_hit_text]!"), \
-					span_userdanger("You're hit by \a [proj][organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
+			visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[src] is hit by \a [proj][organ_hit_text]!") : client.language == LANGUAGE_PORTUGUESE ? "[src] é atingido por [proj][organ_hit_text]!" : "Error: code/modules/mob/living/living_defense.dm line: 115 ")), \
+					span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're hit by \a [proj][organ_hit_text]!") : client.language == LANGUAGE_PORTUGUESE ? "Você é atingido por [proj][organ_hit_text]!" : "Error: code/modules/mob/living/living_defense.dm line: 116 ")), null, COMBAT_MESSAGE_RANGE)
 			if(is_blind())
-				to_chat(src, span_userdanger("You feel something hit you[organ_hit_text]!"))
+				to_chat(src, span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You feel something hit you[organ_hit_text]!") : client.language == LANGUAGE_PORTUGUESE ? "Você sente algo te atingir[organ_hit_text]!" : "Error: code/modules/mob/living/living_defense.dm line: 118 ")))
 
 	if(proj.is_hostile_projectile())
 		apply_projectile_effects(proj, def_zone, blocked)
@@ -217,8 +217,8 @@
 		else
 			playsound(loc, 'sound/items/weapons/genhit.ogg', 50, TRUE, -1) //Item sounds are handled in the item itself
 			if(!isvendor(AM) && !iscarbon(AM)) //Vendors have special interactions, while carbon mobs already generate visible messages!
-				visible_message(span_danger("[src] is hit by [AM]!"), \
-							span_userdanger("You're hit by [AM]!"))
+				visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[src] is hit by [AM]!") : client.language == LANGUAGE_PORTUGUESE ? "[src] é acertado por [AM]!" : "Error: code/modules/mob/living/living_defense.dm line: 220 ")), \
+							span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're hit by [AM]!") : client.language == LANGUAGE_PORTUGUESE ? "Você é acertado por [AM]!" : "Error: code/modules/mob/living/living_defense.dm line: 221 ")))
 		log_combat(AM, src, "hit ")
 		return ..()
 
@@ -247,11 +247,11 @@
 		log_combat(thrown_item, src, "hit ")
 	if(nosell_hit)
 		return ..()
-	visible_message(span_danger("[src] is hit by [thrown_item]!"), \
-					span_userdanger("You're hit by [thrown_item]!"))
+	visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[src] is hit by [thrown_item]!") : client.language == LANGUAGE_PORTUGUESE ? "[src] é acertado por [thrown_item]!" : "Error: code/modules/mob/living/living_defense.dm line: 250 ")), \
+					span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're hit by [thrown_item]!") : client.language == LANGUAGE_PORTUGUESE ? "Você é acertado por [thrown_item]!" : "Error: code/modules/mob/living/living_defense.dm line: 251 ")))
 	if(!thrown_item.throwforce)
 		return
-	var/armor = run_armor_check(zone, MELEE, "Your armor has protected your [parse_zone_with_bodypart(zone)].", "Your armor has softened hit to your [parse_zone_with_bodypart(zone)].", thrown_item.armour_penetration, "", FALSE, thrown_item.weak_against_armour)
+	var/armor = run_armor_check(zone, MELEE, (client.language == LANGUAGE_ENGLISH ? "Your armor has protected your [parse_zone_with_bodypart(zone)]" : client.language == LANGUAGE_PORTUGUESE ? "Sua armadura protegeu seu [parse_zone_with_bodypart(zone)]" : "Error: code/modules/mob/living/living_defense.dm line: 254 "), (client.language == LANGUAGE_ENGLISH ? "Your armor has softened hit to your [parse_zone_with_bodypart(zone)]" : client.language == LANGUAGE_PORTUGUESE ? "Sua armadura amorteceu o impacto em seu [parse_zone_with_bodypart(zone)]" : "Error: code/modules/mob/living/living_defense.dm line: 254 "), thrown_item.armour_penetration, "", FALSE, thrown_item.weak_against_armour)
 	apply_damage(thrown_item.throwforce, thrown_item.damtype, zone, armor, sharpness = thrown_item.get_sharpness(), wound_bonus = (nosell_hit * CANT_WOUND))
 	if(QDELETED(src)) //Damage can delete the mob.
 		return
@@ -275,8 +275,8 @@
 		return FALSE
 	INVOKE_ASYNC(item, TYPE_PROC_REF(/obj/item, attempt_pickup), src, TRUE)
 	if(get_active_held_item() == item) //if our attack_hand() picks up the item...
-		visible_message(span_warning("[src] catches [item]!"), \
-						span_userdanger("You catch [item] in mid-air!"))
+		visible_message(span_warning((client.language == LANGUAGE_ENGLISH ? ("[src] catches [item]!") : client.language == LANGUAGE_PORTUGUESE ? "[src] pega [item]!" : "Error: code/modules/mob/living/living_defense.dm line: 278 ")), \
+						span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You catch [item] in mid-air!") : client.language == LANGUAGE_PORTUGUESE ? "Você pega [item] no ar!" : "Error: code/modules/mob/living/living_defense.dm line: 279 ")))
 		return TRUE
 
 ///Checks the requites for catching a throw item.
@@ -300,7 +300,7 @@
 		return FALSE
 	if(SEND_SIGNAL(src, COMSIG_LIVING_GRAB, target) & (COMPONENT_CANCEL_ATTACK_CHAIN|COMPONENT_SKIP_ATTACK))
 		return FALSE
-	if(target.check_block(src, 0, "[src]'s grab", UNARMED_ATTACK))
+	if(target.check_block(src, 0, ((client.language == LANGUAGE_ENGLISH ? ("[src]'s grab") : client.language == LANGUAGE_PORTUGUESE ? "Agarro de [src]" : "Error: code/modules/mob/living/living_defense.dm line: 303 ")), UNARMED_ATTACK))
 		return FALSE
 	target.grabbedby(src)
 	return TRUE
@@ -317,11 +317,11 @@
 		return
 
 	if(!(status_flags & CANPUSH) || HAS_TRAIT(src, TRAIT_PUSHIMMUNE))
-		to_chat(user, span_warning("[src] can't be grabbed more aggressively!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("[src] can't be grabbed more aggressively!") : client.language == LANGUAGE_PORTUGUESE ? "[src] não pode ser agarrado mais agressivamente!" : "Error: code/modules/mob/living/living_defense.dm line: 320 ")))
 		return FALSE
 
 	if(user.grab_state >= GRAB_AGGRESSIVE && HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to risk hurting [src]!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to risk hurting [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer arriscar machucar [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 324 ")))
 		return FALSE
 
 	grippedby(user)
@@ -342,9 +342,9 @@
 	if(user.grab_state) //only the first upgrade is instantaneous
 		var/old_grab_state = user.grab_state
 		var/grab_upgrade_time = instant ? 0 : 30
-		visible_message(span_danger("[user] starts to tighten [user.p_their()] grip on [src]!"), \
-						span_userdanger("[user] starts to tighten [user.p_their()] grip on you!"), span_hear("You hear aggressive shuffling!"), null, user)
-		to_chat(user, span_danger("You start to tighten your grip on [src]!"))
+		visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[user] starts to tighten [user.p_their()] grip on [src]!") : client.language == LANGUAGE_PORTUGUESE ? "[user] começa a apertar [user.p_their()] pegada em [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 345 ")), \
+						span_userdanger((client.language == LANGUAGE_ENGLISH ? ("[user] starts to tighten [user.p_their()] grip on you!") : client.language == LANGUAGE_PORTUGUESE ? "[user] começa a apertar ainda mais forte em você!" : "Error: code/modules/mob/living/living_defense.dm line: 346 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um barulho de agitação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 346 ")), null, user)
+		to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You start to tighten your grip on [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você começa a apertar seu agarro em [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 347 ")))
 		switch(user.grab_state)
 			if(GRAB_AGGRESSIVE)
 				log_combat(user, src, "attempted to neck grab", addition="neck grab")
@@ -359,28 +359,28 @@
 		if(GRAB_AGGRESSIVE)
 			var/add_log = ""
 			if(HAS_TRAIT(user, TRAIT_PACIFISM))
-				visible_message(span_danger("[user] firmly grips [src]!"),
-								span_danger("[user] firmly grips you!"), span_hear("You hear aggressive shuffling!"), null, user)
-				to_chat(user, span_danger("You firmly grip [src]!"))
+				visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[user] firmly grips [src]!") : client.language == LANGUAGE_PORTUGUESE ? "[user] agarra firmemente [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 362 ")),
+								span_danger((client.language == LANGUAGE_ENGLISH ? ("[user] firmly grips you!") : client.language == LANGUAGE_PORTUGUESE ? "[user] agarra você firmemente!" : "Error: code/modules/mob/living/living_defense.dm line: 363 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma movimentação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 363 ")), null, user)
+				to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You firmly grip [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você agarra firmemente [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 364 ")))
 				add_log = " (pacifist)"
 			else
-				visible_message(span_danger("[user] grabs [src] aggressively!"), \
-								span_userdanger("[user] grabs you aggressively!"), span_hear("You hear aggressive shuffling!"), null, user)
+				visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[user] grabs [src] aggressively!") : client.language == LANGUAGE_PORTUGUESE ? "[user] agarra [src] agressivamente!" : "Error: code/modules/mob/living/living_defense.dm line: 367 ")), \
+								span_userdanger("[user] grabs you aggressively!"), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma movimentação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 368 ")), null, user)
 				to_chat(user, span_danger("You grab [src] aggressively!"))
 			stop_pulling()
 			log_combat(user, src, "grabbed", addition="aggressive grab[add_log]")
 		if(GRAB_NECK)
 			log_combat(user, src, "grabbed", addition="neck grab")
 			visible_message(span_danger("[user] grabs [src] by the neck!"),\
-							span_userdanger("[user] grabs you by the neck!"), span_hear("You hear aggressive shuffling!"), null, user)
-			to_chat(user, span_danger("You grab [src] by the neck!"))
+							span_userdanger("[user] grabs you by the neck!"), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma movimentação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 375 ")), null, user)
+			to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You grab [src] by the neck!") : client.language == LANGUAGE_PORTUGUESE ? "Você agarra [src] pelo pescoço!" : "Error: code/modules/mob/living/living_defense.dm line: 376 ")))
 			if(!buckled && !density)
 				Move(user.loc)
 		if(GRAB_KILL)
 			log_combat(user, src, "strangled", addition="kill grab")
 			visible_message(span_danger("[user] is strangling [src]!"), \
-							span_userdanger("[user] is strangling you!"), span_hear("You hear aggressive shuffling!"), null, user)
-			to_chat(user, span_danger("You're strangling [src]!"))
+							span_userdanger("[user] is strangling you!"), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma movimentação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 382 ")), null, user)
+			to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You're strangling [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você está estrangulando [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 383 ")))
 			if(!buckled && !density)
 				Move(user.loc)
 	user.set_pull_offsets(src, grab_state)
@@ -395,15 +395,15 @@
 		if(user != src)
 			visible_message(
 				span_notice("[user] [user.friendly_verb_continuous] [src]!"),
-				span_notice("[user] [user.friendly_verb_continuous] you!"),
+				span_notice((client.language == LANGUAGE_ENGLISH ? ("[user] [user.friendly_verb_continuous] [src]!") : client.language == LANGUAGE_PORTUGUESE ? "[user] [user.friendly_verb_continuous] você!" : "Error: code/modules/mob/living/living_defense.dm line: 398 ")),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 				ignored_mobs = user,
 			)
-			to_chat(user, span_notice("You [user.friendly_verb_simple] [src]!"))
+			to_chat(user, span_notice((client.language == LANGUAGE_ENGLISH ? ("You [user.friendly_verb_simple] [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você [user.friendly_verb_simple] [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 402 ")))
 		return FALSE
 
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to hurt anyone!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to hurt anyone!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer machucar ninguém!" : "Error: code/modules/mob/living/living_defense.dm line: 406 ")))
 		return FALSE
 
 	var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
@@ -416,7 +416,7 @@
 	user.do_attack_animation(src)
 	visible_message(
 		span_danger("[user] [user.attack_verb_continuous] [src]!"),
-		span_userdanger("[user] [user.attack_verb_continuous] you!"),
+		span_userdanger((client.language == LANGUAGE_ENGLISH ? ("[user] [user.attack_verb_continuous] you!") : client.language == LANGUAGE_PORTUGUESE ?"[user] [user.attack_verb_continuous] você!" : "Error: code/modules/mob/living/living_defense.dm line: 419 ")),
 		null,
 		COMBAT_MESSAGE_RANGE,
 		user,
@@ -428,7 +428,7 @@
 
 	var/armor_block = run_armor_check(user.zone_selected, MELEE, armour_penetration = user.armour_penetration)
 
-	to_chat(user, span_danger("You [user.attack_verb_simple] [src]!"))
+	to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You [user.attack_verb_simple] [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você [user.attack_verb_simple] [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 431 ")))
 	log_combat(user, src, "attacked")
 	var/damage_done = apply_damage(
 		damage = damage,
@@ -464,13 +464,13 @@
 	if (!user.combat_mode)
 		return FALSE
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to hurt anyone!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to hurt anyone!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer machucar ninguém!" : "Error: code/modules/mob/living/living_defense.dm line: 467 ")))
 		return FALSE
 
 	if(!user.get_bodypart(BODY_ZONE_HEAD))
 		return FALSE
 	if(user.is_mouth_covered(ITEM_SLOT_MASK))
-		to_chat(user, span_warning("You can't bite with your mouth covered!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You can't bite with your mouth covered!") : client.language == LANGUAGE_PORTUGUESE ? "Você não pode morder com a sua boca coberta" : "Error: code/modules/mob/living/living_defense.dm line: 473 ")))
 		return FALSE
 
 	if(check_block(user, 1, "[user]'s bite", UNARMED_ATTACK, 0, BRUTE))
@@ -480,21 +480,21 @@
 	if (HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER) || prob(75))
 		log_combat(user, src, "attacked")
 		playsound(loc, 'sound/items/weapons/bite.ogg', 50, TRUE, -1)
-		visible_message(span_danger("[user.name] bites [src]!"), \
-						span_userdanger("[user.name] bites you!"), span_hear("You hear a chomp!"), COMBAT_MESSAGE_RANGE, user)
-		to_chat(user, span_danger("You bite [src]!"))
+		visible_message(span_danger(client.language == LANGUAGE_ENGLISH ? "[user.name] bites [src]]!" : client.language == LANGUAGE_PORTUGUESE ? "[user.name] morde [src]]!" : client.language == LANGUAGE_ENGLISH ? "[user.name] bites [src]]!" : "Error: code/modules/mob/living/living_defense.dm line: 483 "), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear a chomp!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma mordida!" : "Error: code/modules/mob/living/living_defense.dm line: 483 ")), COMBAT_MESSAGE_RANGE, user, \
+						span_userdanger(client.language == LANGUAGE_ENGLISH ? "[user.name] bites you!" : client.language == LANGUAGE_PORTUGUESE ? "[user.name] morde você!" : client.language == LANGUAGE_ENGLISH ? "[user.name] bites you!" : "Error: code/modules/mob/living/living_defense.dm line: 484 "), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear a chomp!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma mordida!" : "Error: code/modules/mob/living/living_defense.dm line: 484 ")), COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_danger((client.language == LANGUAGE_ENGLISH ? ("You bite [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você morde [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 485 ")))
 		return TRUE
 	else
-		visible_message(span_danger("[user.name]'s bite misses [src]!"), \
-						span_danger("You avoid [user.name]'s bite!"), span_hear("You hear the sound of jaws snapping shut!"), COMBAT_MESSAGE_RANGE, user)
-		to_chat(user, span_warning("Your bite misses [src]!"))
+		visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[user.name]'s bite misses [src]!") : client.language == LANGUAGE_PORTUGUESE ? "A mordida de [user.name] erra [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 488 ")), \
+						span_danger((client.language == LANGUAGE_ENGLISH ? ("You avoid [user.name]'s bite!") : client.language == LANGUAGE_PORTUGUESE ? "Você desvia a mordida de [user.name]!" : "Error: code/modules/mob/living/living_defense.dm line: 489 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear the sound of jaws snapping shut!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um estalo de mandíbulas!" : "Error: code/modules/mob/living/living_defense.dm line: 489 ")), COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("Your bite misses [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Sua mordida erra [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 490 ")))
 
 	return FALSE
 
 /mob/living/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)
 	if(L.combat_mode)
 		if(HAS_TRAIT(L, TRAIT_PACIFISM))
-			to_chat(L, span_warning("You don't want to hurt anyone!"))
+			to_chat(L, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to hurt anyone!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer machucar ninguém!" : "Error: code/modules/mob/living/living_defense.dm line: 497 ")))
 			return FALSE
 
 		if(check_block(L, 1, "[L]'s bite", UNARMED_ATTACK, 0, BRUTE))
@@ -503,20 +503,20 @@
 		L.do_attack_animation(src)
 		if(prob(90))
 			log_combat(L, src, "attacked")
-			visible_message(span_danger("[L.name] bites [src]!"), \
-							span_userdanger("[L.name] bites you!"), span_hear("You hear a chomp!"), COMBAT_MESSAGE_RANGE, L)
-			to_chat(L, span_danger("You bite [src]!"))
+			visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[L.name] bites [src]!") : client.language == LANGUAGE_PORTUGUESE ? "[L.name] morde [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 506 ")), \
+							span_userdanger((client.language == LANGUAGE_ENGLISH ? ("[L.name] bites you!") : client.language == LANGUAGE_PORTUGUESE ? "[L.name] morde você!" : "Error: code/modules/mob/living/living_defense.dm line: 507 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear a chomp!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma mordida!" : "Error: code/modules/mob/living/living_defense.dm line: 507 ")), COMBAT_MESSAGE_RANGE, L)
+			to_chat(L, span_danger((client.language == LANGUAGE_ENGLISH ? ("You bite [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você morde [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 508 ")))
 			playsound(loc, 'sound/items/weapons/bite.ogg', 50, TRUE, -1)
 			return TRUE
 		else
-			visible_message(span_danger("[L.name]'s bite misses [src]!"), \
-							span_danger("You avoid [L.name]'s bite!"), span_hear("You hear the sound of jaws snapping shut!"), COMBAT_MESSAGE_RANGE, L)
-			to_chat(L, span_warning("Your bite misses [src]!"))
+			visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[L.name]'s bite misses [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Mordida de [L.name] erra [src]" : "Error: code/modules/mob/living/living_defense.dm line: 512 ")), \
+							span_danger((client.language == LANGUAGE_ENGLISH ? ("You avoid [L.name]'s bite!") : client.language == LANGUAGE_PORTUGUESE ? "Você desvia a mordida de [L.name]!" : "Error: code/modules/mob/living/living_defense.dm line: 513 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear the sound of jaws snapping shut!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um estalo de mandíbulas!" : "Error: code/modules/mob/living/living_defense.dm line: 513 ")), COMBAT_MESSAGE_RANGE, L)
+			to_chat(L, span_warning((client.language == LANGUAGE_ENGLISH ? ("Your bite misses [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Sua mordida erra [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 514 ")))
 			return FALSE
 
-	visible_message(span_notice("[L.name] rubs its head against [src]."), \
-					span_notice("[L.name] rubs its head against you."), null, null, L)
-	to_chat(L, span_notice("You rub your head against [src]."))
+	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? ("[L.name] rubs its head against [src].") : client.language == LANGUAGE_PORTUGUESE ? "[L.name] esfrega sua cabeça em [src]." : "Error: code/modules/mob/living/living_defense.dm line: 517 ")), \
+					span_notice((client.language == LANGUAGE_ENGLISH ? ("[L.name] rubs its head against you.") : client.language == LANGUAGE_PORTUGUESE ? "[L.name] esfrega sua cabeça em você." : "Error: code/modules/mob/living/living_defense.dm line: 518 ")), null, null, L)
+	to_chat(L, span_notice((client.language == LANGUAGE_ENGLISH ? ("You rub your head against [src].") : client.language == LANGUAGE_PORTUGUESE ? "Você esfrega sua cabeça em [src]." : "Error: code/modules/mob/living/living_defense.dm line: 519 ")))
 	return FALSE
 
 /mob/living/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
@@ -529,22 +529,22 @@
 
 	if(user.combat_mode)
 		if(HAS_TRAIT(user, TRAIT_PACIFISM))
-			to_chat(user, span_warning("You don't want to hurt anyone!"))
+			to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to hurt anyone!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer machucar ninguém!" : "Error: code/modules/mob/living/living_defense.dm line: 532 ")))
 			return FALSE
 		if(check_block(user, user.melee_damage_upper, "[user]'s slash", UNARMED_ATTACK, 0, BRUTE))
 			return FALSE
 		user.do_attack_animation(src)
 		return TRUE
 
-	visible_message(span_notice("[user] caresses [src] with its scythe-like arm."), \
-					span_notice("[user] caresses you with its scythe-like arm."), null, null, user)
-	to_chat(user, span_notice("You caress [src] with your scythe-like arm."))
+	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? ("[user] caresses [src] with its scythe-like arm.") : client.language == LANGUAGE_PORTUGUESE ? "[user] acaricia [src] usando seus braços de foice." : "Error: code/modules/mob/living/living_defense.dm line: 539 ")), \
+					span_notice((client.language == LANGUAGE_ENGLISH ? ("[user] caresses you with its scythe-like arm.") : client.language == LANGUAGE_PORTUGUESE ? "[user] acaricia em você usando seus braços iguais a foice." : "Error: code/modules/mob/living/living_defense.dm line: 540 ")), null, null, user)
+	to_chat(user, span_notice((client.language == LANGUAGE_ENGLISH ? ("You caress [src] with your scythe-like arm.") : client.language == LANGUAGE_PORTUGUESE ? "Você acaricia [src] usando seus braços de foice." : "Error: code/modules/mob/living/living_defense.dm line: 541 ")))
 	return FALSE
 
 /mob/living/attack_hulk(mob/living/carbon/human/user)
 	..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to hurt [src]!"))
+		to_chat(user, span_warning((client.language == LANGUAGE_ENGLISH ? ("You don't want to hurt [src]!") : client.language == LANGUAGE_PORTUGUESE ? "Você não quer machucar [src]!" : "Error: code/modules/mob/living/living_defense.dm line: 548 ")))
 		return FALSE
 	return TRUE
 
@@ -574,9 +574,9 @@
 		adjustStaminaLoss(shock_damage)
 	if(!(flags & SHOCK_SUPPRESS_MESSAGE))
 		visible_message(
-			span_danger("[src] was shocked by \the [source]!"), \
-			span_userdanger("You feel a powerful shock coursing through your body!"), \
-			span_hear("You hear a heavy electrical crack.") \
+			span_danger((client.language == LANGUAGE_ENGLISH ? ("[src] was shocked by \the [source]!") : client.language == LANGUAGE_PORTUGUESE ? "[src] tomou um choque de [source]!" : "Error: code/modules/mob/living/living_defense.dm line: 577 ")), \
+			span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You feel a powerful shock coursing through your body!") : client.language == LANGUAGE_PORTUGUESE ? "Você sente uma poderosa corrente de choque percorrendo seu corpo!" : "Error: code/modules/mob/living/living_defense.dm line: 578 ")), \
+			span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear a heavy electrical crack.") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um estalo elétrico forte." : "Error: code/modules/mob/living/living_defense.dm line: 579 ")) \
 		)
 	return shock_damage
 
@@ -759,18 +759,18 @@
 		if((shove_flags & SHOVE_BLOCKED) && !(shove_flags & (SHOVE_KNOCKDOWN_BLOCKED|SHOVE_CAN_KICK_SIDE)))
 			target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
 			target.apply_status_effect(/datum/status_effect/next_shove_stuns)
-			target.visible_message(span_danger("[name] shoves [target.name], knocking [target.p_them()] down!"),
-				span_userdanger("You're knocked down from a shove by [name]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
-			to_chat(src, span_danger("You shove [target.name], knocking [target.p_them()] down!"))
+			target.visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[name] shoves [target.name], knocking [target.p_them()] down!") : client.language == LANGUAGE_PORTUGUESE ? "[name] empurra [target.name], derrubando [target.p_them()]!" : "Error: code/modules/mob/living/living_defense.dm line: 762 ")),
+				span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're knocked down from a shove by [name]!") : client.language == LANGUAGE_PORTUGUESE ? "Você cai por causa de um empurrão de [name]!" : "Error: code/modules/mob/living/living_defense.dm line: 763 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling followed by a loud thud!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um arrastar agressivo, então um baque forte!" : "Error: code/modules/mob/living/living_defense.dm line: 763 ")), COMBAT_MESSAGE_RANGE, src)
+			to_chat(src, span_danger((client.language == LANGUAGE_ENGLISH ? ("You shove [target.name], knocking [target.p_them()] down!") : client.language == LANGUAGE_PORTUGUESE ? "Você empurra [target.name], derrubando [target.p_them()]!" : "Error: code/modules/mob/living/living_defense.dm line: 764 ")))
 			log_combat(src, target, "shoved", "knocking them down[weapon ? " with [weapon]" : ""]")
 			return
 
 	if(shove_flags & SHOVE_CAN_KICK_SIDE) //KICK HIM IN THE NUTS
 		target.Paralyze(SHOVE_CHAIN_PARALYZE)
 		target.apply_status_effect(/datum/status_effect/no_side_kick)
-		target.visible_message(span_danger("[name] kicks [target.name] onto [target.p_their()] side!"),
-						span_userdanger("You're kicked onto your side by [name]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
-		to_chat(src, span_danger("You kick [target.name] onto [target.p_their()] side!"))
+		target.visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[name] kicks [target.name] onto [target.p_their()] side!") : client.language == LANGUAGE_PORTUGUESE ? "[name] chuta [target.name] de lado!" : "Error: code/modules/mob/living/living_defense.dm line: 771 ")),
+						span_userdanger((client.language == LANGUAGE_ENGLISH ? ("You're kicked onto your side by [name]!") : client.language == LANGUAGE_PORTUGUESE ? "Você é chutado de lado por [name]!" : "Error: code/modules/mob/living/living_defense.dm line: 772 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling followed by a loud thud!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um arrastar agressivo, então um baque forte!" : "Error: code/modules/mob/living/living_defense.dm line: 772 ")), COMBAT_MESSAGE_RANGE, src)
+		to_chat(src, span_danger((client.language == LANGUAGE_ENGLISH ? ("You kick [target.name] onto [target.p_their()] side!") : client.language == LANGUAGE_PORTUGUESE ? "Você chuta [target.name] de lado!" : "Error: code/modules/mob/living/living_defense.dm line: 773 ")))
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, SetKnockdown), 0), SHOVE_CHAIN_PARALYZE)
 		log_combat(src, target, "kicks", "onto their side (paralyzing)")
 		return
@@ -783,9 +783,9 @@
 	// If it's in our typecache, they're staggered and it exists, disarm. If they're knocked down, disarm too.
 	if(target_held_item && target.get_timed_status_effect_duration(/datum/status_effect/staggered) && is_type_in_typecache(target_held_item, GLOB.shove_disarming_types) || target_held_item && target.body_position == LYING_DOWN)
 		target.dropItemToGround(target_held_item)
-		append_message = "causing [target.p_them()] to drop [target_held_item]"
-		target.visible_message(span_danger("[target.name] drops \the [target_held_item]!"),
-			span_warning("You drop \the [target_held_item]!"), null, COMBAT_MESSAGE_RANGE)
+		append_message = ((client.language == LANGUAGE_ENGLISH ? ("causing [target.p_them()] to drop [target_held_item]") : client.language == LANGUAGE_PORTUGUESE ? "fazendo com que [target.p_them()] deixe cair [target_held_item]!" : "Error: code/modules/mob/living/living_defense.dm line: 30 "))
+		target.visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? ("[target.name] drops \the [target_held_item]!") : client.language == LANGUAGE_PORTUGUESE ? "[target.name] deixa cair o [target_held_item]!" : "Error: code/modules/mob/living/living_defense.dm line: 787 ")),
+			span_warning((client.language == LANGUAGE_ENGLISH ? ("You drop \the [target_held_item]!") : client.language == LANGUAGE_PORTUGUESE ? "Você deixa cair o [target_held_item]!" : "Error: code/modules/mob/living/living_defense.dm line: 788 ")), null, COMBAT_MESSAGE_RANGE)
 
 	if(shove_flags & SHOVE_CAN_STAGGER)
 		target.adjust_staggered_up_to(STAGGERED_SLOWDOWN_LENGTH, 10 SECONDS)
@@ -810,8 +810,8 @@
 ///Send the chat feedback message for shoving
 /mob/living/proc/get_shoving_message(mob/living/shover, obj/item/weapon, shove_flags)
 	visible_message(span_danger("[shover] shoves [name][weapon ? " with [weapon]" : ""]!"),
-		span_userdanger("You're shoved by [shover][weapon ? " with [weapon]" : ""]!"), span_hear("You hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, shover)
-	to_chat(shover, span_danger("You shove [name][weapon ? " with [weapon]" : ""]!"))
+		span_userdanger((client.language == LANGUAGE_ENGLISH ? ("[shover] shoves [name][weapon ? " with [weapon]" : ""]!") : client.language == LANGUAGE_PORTUGUESE ? "[shover] empurra [name][weapon ? " com [weapon]" : ""]!" : "Error: code/modules/mob/living/living_defense.dm line: 813 ")), span_hear((client.language == LANGUAGE_ENGLISH ? ("You hear aggressive shuffling!") : client.language == LANGUAGE_PORTUGUESE ? "Você ouve uma movimentação agressiva!" : "Error: code/modules/mob/living/living_defense.dm line: 813 ")), COMBAT_MESSAGE_RANGE, shover)
+	to_chat(shover, span_danger((client.language == LANGUAGE_ENGLISH ? ("You shove [name][weapon ? " with [weapon]" : ""]!") : client.language == LANGUAGE_PORTUGUESE ? "Você empurra [name][weapon ? " com [weapon]" : ""]!" : "Error: code/modules/mob/living/living_defense.dm line: 814 ")))
 
 /mob/living/proc/check_block(atom/hit_by, damage, attack_text = "the attack", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_CHECK_BLOCK, hit_by, damage, attack_text, attack_type, armour_penetration, damage_type) & SUCCESSFUL_BLOCK)
