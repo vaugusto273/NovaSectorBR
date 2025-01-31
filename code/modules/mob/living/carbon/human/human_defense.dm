@@ -51,8 +51,8 @@
 	if(bullet.reflectable)
 		if(check_reflect(def_zone)) // Checks if you've passed a reflection% check
 			visible_message(
-				span_danger("The [bullet.name] gets reflected by [src]!"),
-				span_userdanger("The [bullet.name] gets reflected by [src]!"),
+				span_danger(((client.language == LANGUAGE_ENGLISH ? "The [bullet.name] gets reflected by [src]!" : client.language == LANGUAGE_PORTUGUESE ? "A [bullet.name] é refletida por [src]!" : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 54"))),
+				span_userdanger(((client.language == LANGUAGE_ENGLISH ? "The [bullet.name] gets reflected by [src]" : client.language == LANGUAGE_PORTUGUESE ? "A [bullet.name] gets reflected by [src]" : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 55"))),
 			)
 			// Finds and plays the block_sound of item which reflected
 			for(var/obj/item/held_item in held_items)
@@ -64,7 +64,7 @@
 			bullet.reflect(src)
 			return BULLET_ACT_FORCE_PIERCE // complete projectile permutation
 
-	if(check_block(bullet, bullet.damage, "the [bullet.name]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
+	if(check_block(bullet, bullet.damage, (client.language == LANGUAGE_ENGLISH ? "the [bullet.name]" : client.language == LANGUAGE_PORTUGUESE ? "o [bullet.name]" : "Error:modules/mob/living/carbon/human/human_defense.dm:67"), PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
 		bullet.on_hit(src, 100, def_zone, piercing_hit)
 		return BULLET_ACT_HIT
 
@@ -83,7 +83,8 @@
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = "o ataque", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
+/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = (client.language == LANGUAGE_ENGLISH ? "the attack" : client.language == LANGUAGE_PORTUGUESE ? "o ataque" : "Error:modules/mob/living/carbon/human/human_defense.dm:86"), attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
+
 	. = ..()
 	if(. == SUCCESSFUL_BLOCK)
 		return SUCCESSFUL_BLOCK
@@ -113,14 +114,18 @@
 	. = ..()
 	if(!.)
 		return
-	var/hulk_verb = pick("smash","pummel")
+	var/hulk_verb = ((user.client.language == LANGUAGE_ENGLISH ? pick("smash","pummel") : user.client.language == LANGUAGE_PORTUGUESE ? pick("esmaga","esmurra") : "Error:modules/mob/living/carbon/human/human_defense.dm:116"))
 	if(check_block(user, 15, "the [hulk_verb]ing", attack_type = UNARMED_ATTACK))
 		return
 	var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
 	playsound(loc, active_arm.unarmed_attack_sound, 25, TRUE, -1)
-	visible_message(span_danger("[user] [hulk_verb]ed [src]!"), \
-					span_userdanger("[user] [hulk_verb]ed [src]!"), span_hear("Você ouve um som nauseante de carne batendo contra carne!"), null, user)
-	to_chat(user, span_danger("You [hulk_verb] [src]!"))
+	visible_message(
+		span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] [hulk_verb]ed [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] [hulk_verb] [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:121")),
+		span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] [hulk_verb]ed [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] [hulk_verb] [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:122")),
+		span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear a nauseating sound of flesh hitting flesh!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve um som nauseante de carne batendo contra carne!" : "Error:modules/mob/living/carbon/human/human_defense.dm:123")),
+		null, user
+	)
+	to_chat(user, span_danger(((user.client.language == LANGUAGE_ENGLISH ? "You [hulk_verb] [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você [hulk_verb] [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:127"))))
 	apply_damage(15, BRUTE, wound_bonus=10)
 
 /mob/living/carbon/human/attack_hand(mob/user, list/modifiers)
@@ -145,9 +150,10 @@
 	if(!HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED))
 		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 		apply_status_effect(/datum/status_effect/next_shove_stuns)
-	target.visible_message(span_danger("[shover] empurra [target.name] para dentro de [name]!"),
-		span_userdanger("Você é empurrado para dentro de [name] por [shover]!"), span_hear("Você ouve um barulho agressivo de arrastar seguido de um forte estrondo!"), COMBAT_MESSAGE_RANGE, src)
-	to_chat(src, span_danger("Você empurra [target.name] pra dentro de [name]!"))
+	target.visible_message(span_danger((client.language == LANGUAGE_ENGLISH ? "[shover] shoves [target.name] into [name]!" : client.language == LANGUAGE_PORTUGUESE ? "[shover] empurra [target.name] para dentro de [name]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:153")), \
+		span_userdanger((client.language == LANGUAGE_ENGLISH ? "You are shoved into [name] by [shover]!" : client.language == LANGUAGE_PORTUGUESE ? "Você é empurrado para dentro de [name] por [shover]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:154")), \
+		span_hear((client.language == LANGUAGE_ENGLISH ? "You hear an aggressive dragging sound followed by a loud thud!" : client.language == LANGUAGE_PORTUGUESE ? "Você ouve um barulho agressivo de arrastar seguido de um forte estrondo!" : "Error:modules/mob/living/carbon/human/human_defense.dm:155")), COMBAT_MESSAGE_RANGE, src)
+	to_chat(src, span_danger((client.language == LANGUAGE_ENGLISH ? "You shove [target.name] into [name]!" : client.language == LANGUAGE_PORTUGUESE ? "Você empurra [target.name] para dentro de [name]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:156")))
 	log_combat(shover, target, "shoved", addition = "into [name][weapon ? " with [weapon]" : ""]")
 	return COMSIG_LIVING_SHOVE_HANDLED
 
@@ -205,24 +211,24 @@
 		var/obj/item/I = get_active_held_item()
 		if(I && dropItemToGround(I))
 			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] desarma [src]!"), \
-							span_userdanger("[user] desarma você!"), span_hear("Você ouve um arrastar agressivo!"), null, user)
-			to_chat(user, span_danger("You disarm [src]!"))
+			visible_message(span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] disarms [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] desarma [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:212")), \
+							span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] disarms you!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] desarma você!" : "Error:modules/mob/living/carbon/human/human_defense.dm:213")), span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear an aggressive dragging sound!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve um arrastar agressivo!" : "Error:modules/mob/living/carbon/human/human_defense.dm:213")), null, user)
+			to_chat(user, span_danger((user.client.language == LANGUAGE_ENGLISH ? "You disarm [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você desarma [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:214")))
 		else if(!HAS_TRAIT(src, TRAIT_INCAPACITATED))
 			playsound(loc, 'sound/items/weapons/pierce.ogg', 25, TRUE, -1)
 			var/shovetarget = get_edge_target_turf(user, get_dir(user, get_step_away(src, user)))
 			adjustStaminaLoss(35)
 			throw_at(shovetarget, 4, 2, user, force = MOVE_FORCE_OVERPOWERING)
 			log_combat(user, src, "shoved")
-			visible_message(span_danger("[user] tackles [src] down!"), \
-							span_userdanger("[user] shoves you with great force!"), span_hear("Você ouve um arrastar agressivo followed by a loud thud!"), null, user)
-			to_chat(user, span_danger("You shove [src] with great force!"))
+			visible_message(span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] tackles [src] down!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] derruba [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:221")), \
+							span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] shoves you with great force!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] empurra você com grande força!" : "Error:modules/mob/living/carbon/human/human_defense.dm:222")), span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear an aggressive dragging sound followed by a loud thud!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve um arrastar agressivo seguido de um baque alto!" : "Error:modules/mob/living/carbon/human/human_defense.dm:222")), null, user)
+			to_chat(user, span_danger((user.client.language == LANGUAGE_ENGLISH ? "You shove [src] with great force!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você empurra [src] com grande força!" : "Error:modules/mob/living/carbon/human/human_defense.dm:223")))
 		else
 			Paralyze(5 SECONDS)
 			playsound(loc, 'sound/items/weapons/punch3.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] slams [src] into the floor!"), \
-							span_userdanger("[user] slams you into the ground!"), span_hear("You hear something slam loudly onto the floor!"), null, user)
-			to_chat(user, span_danger("You slam [src] into the floor beneath you!"))
+			visible_message(span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] slams [src] into the floor!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] bate [src] no chão!" : "Error:modules/mob/living/carbon/human/human_defense.dm:227")), \
+							span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] slams you into the ground!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] bate você no chão!" : "Error:modules/mob/living/carbon/human/human_defense.dm:231")), span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear something slam loudly onto the floor!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve algo bater fortemente no chão!" : "Error:modules/mob/living/carbon/human/human_defense.dm:228")), null, user)
+			to_chat(user, span_danger((user.client.language == LANGUAGE_ENGLISH ? "You slam [src] into the floor beneath you!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você bate [src] no chão abaixo de você!" : "Error:modules/mob/living/carbon/human/human_defense.dm:229")))
 			log_combat(user, src, "slammed into the ground")
 		return TRUE
 
@@ -232,17 +238,19 @@
 		var/damage = prob(90) ? rand(user.melee_damage_lower, user.melee_damage_upper) : 0
 		if(!damage)
 			playsound(loc, 'sound/items/weapons/slashmiss.ogg', 50, TRUE, -1)
-			visible_message(span_danger("[user] lunges at [src]!"), \
-							span_userdanger("[user] lunges at you!"), span_hear("You hear a swoosh!"), null, user)
-			to_chat(user, span_danger("You lunge at [src]!"))
+			visible_message(span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] lunges at [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] investe contra [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:239")), \
+							span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] lunges at you!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] investe contra você!" : "Error:modules/mob/living/carbon/human/human_defense.dm:240")), \
+							span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear a swoosh!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve um sibilo!" : "Error:modules/mob/living/carbon/human/human_defense.dm:241")), null, user)
+			to_chat(user, span_danger((user.client.language == LANGUAGE_ENGLISH ? "You lunge at [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você investe contra [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:242")))
 			return FALSE
 		var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(user.zone_selected))
 		var/armor_block = run_armor_check(affecting, MELEE,"","",10)
 
 		playsound(loc, 'sound/items/weapons/slice.ogg', 25, TRUE, -1)
-		visible_message(span_danger("[user] slashes at [src]!"), \
-						span_userdanger("[user] slashes at you!"), span_hear("You hear a sickening sound of a slice!"), null, user)
-		to_chat(user, span_danger("You slash at [src]!"))
+		visible_message(span_danger((user.client.language == LANGUAGE_ENGLISH ? "[user] slashes at [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] corta [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:248")), \
+						span_userdanger((user.client.language == LANGUAGE_ENGLISH ? "[user] slashes at you!" : user.client.language == LANGUAGE_PORTUGUESE ? "[user] corta você!" : "Error:modules/mob/living/carbon/human/human_defense.dm:249")), \
+						span_hear((user.client.language == LANGUAGE_ENGLISH ? "You hear a sickening sound of a slice!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você ouve um som nauseante de um corte!" : "Error:modules/mob/living/carbon/human/human_defense.dm:250")), null, user)
+		to_chat(user, span_danger((user.client.language == LANGUAGE_ENGLISH ? "You slash at [src]!" : user.client.language == LANGUAGE_PORTUGUESE ? "Você corta [src]!" : "Error:modules/mob/living/carbon/human/human_defense.dm:251")))
 		log_combat(user, src, "attacked")
 		if(!dismembering_strike(user, user.zone_selected)) //Dismemberment successful
 			return TRUE
@@ -353,7 +361,7 @@
 /mob/living/carbon/human/blob_act(obj/structure/blob/B)
 	if(stat == DEAD)
 		return
-	show_message(span_userdanger("O blob te ataca!"))
+	show_message(span_userdanger((client.language == LANGUAGE_ENGLISH ? "The blob attacks you!" : client.language == LANGUAGE_PORTUGUESE ? "O blob te ataca!" : "Error:modules/mob/living/carbon/human/human_defense.dm:362")))
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
 	apply_damage(5, BRUTE, affecting, run_armor_check(affecting, MELEE))
@@ -391,7 +399,7 @@
 		if(undergoing_cardiac_arrest() && can_heartattack() && (shock_damage * siemens_coeff >= 1) && prob(25))
 			var/obj/item/organ/heart/heart = get_organ_slot(ORGAN_SLOT_HEART)
 			if(heart.Restart() && stat == CONSCIOUS)
-				to_chat(src, span_notice("Você sente o seu coração batendo novamente!"))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "You feel your heart beating again!" : client.language == LANGUAGE_PORTUGUESE ? "Você sente o seu coração batendo novamente!" : "Error:modules/mob/living/carbon/human/human_defense.dm:400")))
 	if (!(flags & SHOCK_NO_HUMAN_ANIM))
 		electrocution_animation(4 SECONDS)
 
@@ -418,7 +426,7 @@
 				update_worn_neck()
 				update_worn_head()
 			else
-				to_chat(src, span_notice("Your [head_clothes.name] protects your head and face from the acid!"))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [head_clothes.name] protects your head and face from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [head_clothes.name] protege sua cabeça e rosto do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:427")))
 		else
 			. = get_bodypart(BODY_ZONE_HEAD)
 			if(.)
@@ -439,7 +447,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [chest_clothes.name] protects your body from the acid!"))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [chest_clothes.name] protects your body from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [chest_clothes.name] protege seu corpo do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:448")))
 		else
 			. = get_bodypart(BODY_ZONE_CHEST)
 			if(.)
@@ -471,7 +479,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [arm_clothes.name] protects your arms and hands from the acid!"))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [arm_clothes.name] protects your arms and hands from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [arm_clothes.name] protege seus braços e mãos do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:480")))
 		else
 			. = get_bodypart(BODY_ZONE_R_ARM)
 			if(.)
@@ -497,7 +505,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice("Your [leg_clothes.name] protects your legs and feet from the acid!"))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [leg_clothes.name] protects your legs and feet from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [leg_clothes.name] protege suas pernas e pés do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:506")))
 		else
 			. = get_bodypart(BODY_ZONE_R_LEG)
 			if(.)
@@ -560,9 +568,9 @@
 		return
 	var/list/combined_msg = list()
 
-	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? "[src] examines [p_them()]self." : client.language == LANGUAGE_PORTUGUESE ? "[src] se examina." : "Error?")))
+	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? "[src] examines [p_them()]self." : client.language == LANGUAGE_PORTUGUESE ? "[src] se examina." : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 563")))
 
-	combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "<b>You check yourself for injuries.</b>" : client.language == LANGUAGE_PORTUGUESE ? "<b>Você se verifica em busca de ferimentos.</b>" : "Error?"))
+	combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "<b>You check yourself for injuries.</b>" : client.language == LANGUAGE_PORTUGUESE ? "<b>Você se verifica em busca de ferimentos.</b>" : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 565"))
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
@@ -575,11 +583,11 @@
 
 		//NOVA EDIT ADDITION BEGIN - MEDICAL
 		if(body_part.current_gauze)
-			combined_msg += "\t [span_notice("O seu [body_part.name] está [body_part.current_gauze.get_gauze_usage_prefix()] com <a href='byond://?src=[REF(body_part.current_gauze)];remove=1'>[body_part.current_gauze.get_gauze_description()]</a>.")]"
+			combined_msg += "\t [span_notice((client.language == LANGUAGE_ENGLISH ? "Your [body_part.name] is [body_part.current_gauze.get_gauze_usage_prefix()] with <a href='byond://?src=[REF(body_part.current_gauze)];remove=1'>[body_part.current_gauze.get_gauze_description()]</a>." : client.language == LANGUAGE_PORTUGUESE ? "O seu [body_part.name] está [body_part.current_gauze.get_gauze_usage_prefix()] com <a href='byond://?src=[REF(body_part.current_gauze)];remove=1'>[body_part.current_gauze.get_gauze_description()]</a>." : "Error:modules/mob/living/carbon/human/human_defense.dm:583"))]"
 		//NOVA EDIT END
 
 	for(var/t in missing)
-		combined_msg += span_bolddanger("O seu [parse_zone(t)] está faltando!")
+		combined_msg += span_bolddanger((client.language == LANGUAGE_ENGLISH ? "Your [parse_zone(t)] is missing!" : client.language == LANGUAGE_PORTUGUESE ? "O seu [parse_zone(t)] está faltando!" : "Error:modules/mob/living/carbon/human/human_defense.dm:587"))
 
 	if(is_bleeding())
 		var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -588,53 +596,53 @@
 				bleeding_limbs += part
 
 		var/num_bleeds = LAZYLEN(bleeding_limbs)
-		var/bleed_text = "<span class='danger'>Você está sangrando de seu"
+		var/bleed_text = "<span class='danger'>" + (client.language == LANGUAGE_ENGLISH ? "You are bleeding from your" : client.language == LANGUAGE_PORTUGUESE ? "Você está sangrando de seu" : "Error:modules/mob/living/carbon/human/human_defense.dm:597")
 		switch(num_bleeds)
 			if(1 to 2)
-				bleed_text += " [bleeding_limbs[1].name][num_bleeds == 2 ? " and [bleeding_limbs[2].name]" : ""]"
+				bleed_text += " " + (client.language == LANGUAGE_ENGLISH ? "[bleeding_limbs[1].name][num_bleeds == 2 ? " and [bleeding_limbs[2].name]" : ""]" : client.language == LANGUAGE_PORTUGUESE ? "[bleeding_limbs[1].name][num_bleeds == 2 ? " e [bleeding_limbs[2].name]" : ""]" : "Error:modules/mob/living/carbon/human/human_defense.dm:600")
 			if(3 to INFINITY)
 				for(var/i in 1 to (num_bleeds - 1))
 					var/obj/item/bodypart/BP = bleeding_limbs[i]
 					bleed_text += " [BP.name],"
-				bleed_text += " and [bleeding_limbs[num_bleeds].name]"
+				bleed_text += (client.language == LANGUAGE_ENGLISH ? " and [bleeding_limbs[num_bleeds].name]" : client.language == LANGUAGE_PORTUGUESE ? " e [bleeding_limbs[num_bleeds].name]" : "Error:modules/mob/living/carbon/human/human_defense.dm:605")
 		bleed_text += "!</span>"
 		combined_msg += bleed_text
 
 	if(getStaminaLoss())
 		if(getStaminaLoss() > 30)
-			combined_msg += span_info("Você está completamente exausto.")
+			combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You are completely exhausted." : client.language == LANGUAGE_PORTUGUESE ? "Você está completamente exausto." : "Error:modules/mob/living/carbon/human/human_defense.dm:611"))
 		else
-			combined_msg += span_info("Você se sente cansado.")
+			combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You feel tired." : client.language == LANGUAGE_PORTUGUESE ? "Você se sente cansado." : "Error:modules/mob/living/carbon/human/human_defense.dm:613"))
 	if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
 		if(toxloss)
 			if(toxloss > 10)
-				combined_msg += span_danger("Você se sente doente.")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You feel sick." : client.language == LANGUAGE_PORTUGUESE ? "Você se sente doente." : "Error:modules/mob/living/carbon/human/human_defense.dm:616"))
 			else if(toxloss > 20)
-				combined_msg += span_danger("Você se sente enjoado.")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You feel nauseous." : client.language == LANGUAGE_PORTUGUESE ? "Você se sente enjoado." : "Error:modules/mob/living/carbon/human/human_defense.dm:618"))
 			else if(toxloss > 40)
-				combined_msg += span_danger("Você se sente muito mal!")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You feel very bad!" : client.language == LANGUAGE_PORTUGUESE ? "Você se sente muito mal!" : "Error:modules/mob/living/carbon/human/human_defense.dm:620"))
 		if(oxyloss)
 			if(oxyloss > 10)
-				combined_msg += span_danger("Você se sente tonto.")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You feel dizzy." : client.language == LANGUAGE_PORTUGUESE ? "Você se sente tonto." : "Error:modules/mob/living/carbon/human/human_defense.dm:622"))
 			else if(oxyloss > 20)
-				combined_msg += span_danger("Seu pensamento está turvo e distante.")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "Your thinking is cloudy and distant." : client.language == LANGUAGE_PORTUGUESE ? "Seu pensamento está turvo e distante." : "Error:modules/mob/living/carbon/human/human_defense.dm:624"))
 			else if(oxyloss > 30)
-				combined_msg += span_danger("Você está se engasgando!")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You are choking!" : client.language == LANGUAGE_PORTUGUESE ? "Você está se engasgando!" : "Error:modules/mob/living/carbon/human/human_defense.dm:626"))
 
 	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_FULL to INFINITY)
-				combined_msg += span_info("Você está completamente cheio!")
+				combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You are completely full!" : client.language == LANGUAGE_PORTUGUESE ? "Você está completamente cheio!" : "Error:modules/mob/living/carbon/human/human_defense.dm:633"))
 			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				combined_msg += span_info("Você está bem alimentado!")
+				combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You are well fed!" : client.language == LANGUAGE_PORTUGUESE ? "Você está bem alimentado!" : "Error:modules/mob/living/carbon/human/human_defense.dm:635"))
 			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				combined_msg += span_info("Você não está com fome.")
+				combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You are not hungry." : client.language == LANGUAGE_PORTUGUESE ? "Você não está com fome." : "Error:modules/mob/living/carbon/human/human_defense.dm:637"))
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				combined_msg += span_info("Voce poderia comer um pouco.")
+				combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You could eat a bit." : client.language == LANGUAGE_PORTUGUESE ? "Você poderia comer um pouco." : "Error:modules/mob/living/carbon/human/human_defense.dm:639"))
 			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				combined_msg += span_info("Você se sente com fome.")
+				combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? "You feel hungry." : client.language == LANGUAGE_PORTUGUESE ? "Você se sente com fome." : "Error:modules/mob/living/carbon/human/human_defense.dm:641"))
 			if(0 to NUTRITION_LEVEL_STARVING)
-				combined_msg += span_danger("Você está faminto!")
+				combined_msg += span_danger((client.language == LANGUAGE_ENGLISH ? "You are starving!" : client.language == LANGUAGE_PORTUGUESE ? "Você está faminto!" : "Error:modules/mob/living/carbon/human/human_defense.dm:643"))
 
 	//Compiles then shows the list of damaged organs and broken organs
 	var/list/broken = list()
@@ -665,7 +673,7 @@
 		//Put the items in that list into a string of text
 		for(var/B in broken)
 			broken_message += B
-		combined_msg += span_warning("O seu [broken_message] [broken_plural ? "estão" : "está"] funcional!")
+		combined_msg += span_warning(((client.language == LANGUAGE_ENGLISH ? ("Your [broken_message] [broken_plural ? "are" : "is"] functional!") : client.language == LANGUAGE_PORTUGUESE ? "O seu [broken_message] [broken_plural ? "estão" : "está"] funcional!" : "Error:modules/mob/living/carbon/human/human_defense.dm:674")))
 	if(damaged.len)
 		if(damaged.len > 1)
 			damaged.Insert(damaged.len, "e ")
@@ -676,10 +684,10 @@
 				damaged_plural = TRUE
 		for(var/D in damaged)
 			damaged_message += D
-		combined_msg += span_info("o seu [damaged_message] [damaged_plural ? "estão" : "está"] machucado.")
+		combined_msg += span_info((client.language == LANGUAGE_ENGLISH ? ("Your [damaged_message] [damaged_plural ? "are" : "is"] injured.") : client.language == LANGUAGE_PORTUGUESE ? "O seu [damaged_message] [damaged_plural ? "estão" : "está"] machucado." : "Error:modules/mob/living/carbon/human/human_defense.dm:685"))
 
 	if(quirks.len)
-		combined_msg += span_notice("Você tem essas peculiaridades: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
+		combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "You have these quirks: [get_quirk_string(FALSE, CAT_QUIRK_ALL)]." : client.language == LANGUAGE_PORTUGUESE ? "Você tem essas peculiaridades: [get_quirk_string(FALSE, CAT_QUIRK_ALL)]." : "Error:modules/mob/living/carbon/human/human_defense.dm:687"))
 
 	to_chat(src, boxed_message(combined_msg.Join("\n")))
 
