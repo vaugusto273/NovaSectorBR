@@ -82,3 +82,38 @@
 	if(html) message["html"] = html
 	if(avoid_highlighting) message["avoidHighlighting"] = avoid_highlighting
 	SSchat.queue(target, message)
+
+/proc/translate_text(text, source_lang = "en", target_lang = "pt")
+    // Cria um objeto de requisição HTTP
+    var/datum/http_request/req = new /datum/http_request
+
+    // Constrói o payload JSON com os parâmetros necessários.
+    // Certifique-se de que o texto não contenha aspas que possam quebrar o JSON.
+    var/payload = json_encode(list(
+    "q" = text,
+    "source" = source_lang,
+    "target" = target_lang,
+    "format" = "text"
+))
+    // Prepara a requisição com o método POST, endpoint adequado e cabeçalhos
+    req.prepare("POST", "http://localhost:5000/translate", payload, list("Content-Type" = "application/json"), null)
+    // Executa a requisição de forma bloqueante para aguardar a resposta
+    req.execute_blocking()
+
+    // Converte a resposta bruta em um objeto http_response
+    var/datum/http_response/resp = req.into_response()
+    if(resp.errored)
+        return "error"
+
+    // Decodifica o corpo da resposta, que é uma string JSON
+    var/list/json_data = json_decode(resp.body)
+    if(json_data && json_data["translatedText"])
+        return json_data["translatedText"]
+    else
+        return "error2"
+
+/proc/translate_and_chat(target, text, source_lang = "en", target_lang = "pt", type = text)
+    // Obtém o texto traduzido
+    var/translated_text = translate_text(text, source_lang, target_lang)
+    // Envia a mensagem via to_chat (o proc que você já utiliza)
+    to_chat(target, translated_text, type)

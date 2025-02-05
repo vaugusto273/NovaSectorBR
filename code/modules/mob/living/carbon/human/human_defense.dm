@@ -361,7 +361,7 @@
 /mob/living/carbon/human/blob_act(obj/structure/blob/B)
 	if(stat == DEAD)
 		return
-	show_message(span_userdanger((client.language == LANGUAGE_ENGLISH ? "The blob attacks you!" : client.language == LANGUAGE_PORTUGUESE ? "O blob te ataca!" : "Error:modules/mob/living/carbon/human/human_defense.dm:362")))
+	show_message(span_userdanger((client.language == LANGUAGE_ENGLISH ? "The blob attacks you!" : client.language == LANGUAGE_PORTUGUESE ? "O blob te ataca!" : "Error:modules/mob/living/carbon/human/human_defense.dm:364")))
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
 	apply_damage(5, BRUTE, affecting, run_armor_check(affecting, MELEE))
@@ -399,7 +399,7 @@
 		if(undergoing_cardiac_arrest() && can_heartattack() && (shock_damage * siemens_coeff >= 1) && prob(25))
 			var/obj/item/organ/heart/heart = get_organ_slot(ORGAN_SLOT_HEART)
 			if(heart.Restart() && stat == CONSCIOUS)
-				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "You feel your heart beating again!" : client.language == LANGUAGE_PORTUGUESE ? "Você sente o seu coração batendo novamente!" : "Error:modules/mob/living/carbon/human/human_defense.dm:400")))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "You feel your heart beating again!" : client.language == LANGUAGE_PORTUGUESE ? "Você sente o seu coração batendo novamente!" : "Error:modules/mob/living/carbon/human/human_defense.dm:402")))
 	if (!(flags & SHOCK_NO_HUMAN_ANIM))
 		electrocution_animation(4 SECONDS)
 
@@ -426,7 +426,7 @@
 				update_worn_neck()
 				update_worn_head()
 			else
-				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [head_clothes.name] protects your head and face from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [head_clothes.name] protege sua cabeça e rosto do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:427")))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [head_clothes.name] protects your head and face from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [head_clothes.name] protege sua cabeça e rosto do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:429")))
 		else
 			. = get_bodypart(BODY_ZONE_HEAD)
 			if(.)
@@ -447,7 +447,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [chest_clothes.name] protects your body from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [chest_clothes.name] protege seu corpo do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:448")))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [chest_clothes.name] protects your body from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [chest_clothes.name] protege seu corpo do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:450")))
 		else
 			. = get_bodypart(BODY_ZONE_CHEST)
 			if(.)
@@ -479,7 +479,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [arm_clothes.name] protects your arms and hands from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [arm_clothes.name] protege seus braços e mãos do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:480")))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [arm_clothes.name] protects your arms and hands from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [arm_clothes.name] protege seus braços e mãos do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:482")))
 		else
 			. = get_bodypart(BODY_ZONE_R_ARM)
 			if(.)
@@ -505,7 +505,7 @@
 				update_worn_undersuit()
 				update_worn_oversuit()
 			else
-				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [leg_clothes.name] protects your legs and feet from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [leg_clothes.name] protege suas pernas e pés do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:506")))
+				to_chat(src, span_notice((client.language == LANGUAGE_ENGLISH ? "Your [leg_clothes.name] protects your legs and feet from the acid!" : client.language == LANGUAGE_PORTUGUESE ? "Seu [leg_clothes.name] protege suas pernas e pés do ácido!" : "Error:modules/mob/living/carbon/human/human_defense.dm:508")))
 		else
 			. = get_bodypart(BODY_ZONE_R_LEG)
 			if(.)
@@ -570,7 +570,7 @@
 
 	visible_message(span_notice((client.language == LANGUAGE_ENGLISH ? "[src] examines [p_them()]self." : client.language == LANGUAGE_PORTUGUESE ? "[src] se examina." : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 563")))
 
-	combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "<b>You check yourself for injuries.</b>" : client.language == LANGUAGE_PORTUGUESE ? "<b>Você se verifica em busca de ferimentos.</b>" : "Error: code/modules/mob/living/carbon/human/human_defense.dm - 565"))
+	combined_msg += span_notice((client.language == LANGUAGE_ENGLISH ? "<b>You check yourself for injuries.</b>" : client.language == LANGUAGE_PORTUGUESE ? "<b>Você se verifica em busca de ferimentos.</b>" : "Error: code/modules/mob/living/carbon/human/human_defense.dm:573"))
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
