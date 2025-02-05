@@ -124,7 +124,7 @@
         return "error2: invalid response"
 
 
-/proc/translate_and_chat(target, text, source_lang = "en", target_lang = "pt", type = text)
+/proc/translate_and_chat(target, text, source_lang = "en", target_lang = "pt", type = null)
     // Obtém o texto traduzido
     var/translated_text = translate_text(text, source_lang, target_lang)
     // Envia a mensagem via to_chat (o proc que você já utiliza)
