@@ -84,33 +84,45 @@
 	SSchat.queue(target, message)
 
 /proc/translate_text(text, source_lang = "en", target_lang = "pt")
-    // Cria um objeto de requisição HTTP
-    var/datum/http_request/req = new /datum/http_request
+    // Monta o payload JSON
+    var/list/payload_list = list(
+        "q" = text,
+        "source" = source_lang,
+        "target" = target_lang,
+        "format" = "text"
+    )
+    var/payload = json_encode(payload_list)
 
-    // Constrói o payload JSON com os parâmetros necessários.
-    // Certifique-se de que o texto não contenha aspas que possam quebrar o JSON.
-    var/payload = json_encode(list(
-    "q" = text,
-    "source" = source_lang,
-    "target" = target_lang,
-    "format" = "text"
-))
-    // Prepara a requisição com o método POST, endpoint adequado e cabeçalhos
-    req.prepare("POST", "http://localhost:5000/translate", payload, list("Content-Type" = "application/json"), null)
-    // Executa a requisição de forma bloqueante para aguardar a resposta
-    req.execute_blocking()
+    // Cria os headers (note que usamos json_encode para que o valor seja uma string JSON)
+    var/list/headers_list = list("Content-Type" = "application/json")
+    var/headers = json_encode(headers_list)
 
-    // Converte a resposta bruta em um objeto http_response
-    var/datum/http_response/resp = req.into_response()
-    if(resp.errored)
-        return "error"
+    // Define as opções (null neste caso)
+    var/options = null
 
-    // Decodifica o corpo da resposta, que é uma string JSON
-    var/list/json_data = json_decode(resp.body)
-    if(json_data && json_data["translatedText"])
+    // Define o método e a URL (note que usamos o método em minúsculas, conforme o macro)
+    var/method = RUSTG_HTTP_METHOD_POST  // isso resolve para "post"
+    var/url = "http://localhost:5000/translate"
+
+    // Faz a requisição bloqueante usando a função rustg_http_request_blocking
+    var/raw_response = rustg_http_request_blocking(method, url, payload, headers, options)
+
+    // raw_response deve ser uma string JSON contendo, por exemplo:
+    // {"status_code": "200", "headers": { ... }, "body": "{\"translatedText\":\"olá\"}"}
+    var/response_list = json_decode(raw_response)
+    if (!response_list)
+        return "error: unable to decode response"
+
+    if(response_list["status_code"] != 200)
+        return "error: status code " + response_list["status_code"]
+
+    var/body = response_list["body"]
+    var/list/json_data = json_decode(body)
+    if (json_data && json_data["translatedText"])
         return json_data["translatedText"]
     else
-        return "error2"
+        return "error2: invalid response"
+
 
 /proc/translate_and_chat(target, text, source_lang = "en", target_lang = "pt", type = text)
     // Obtém o texto traduzido
