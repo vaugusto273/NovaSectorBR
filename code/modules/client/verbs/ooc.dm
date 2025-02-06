@@ -474,3 +474,57 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 	set desc = "View the current map vote tally counts."
 	set category = "Server"
 	to_chat(mob, SSmap_vote.tally_printout)
+
+
+/client/verb/translator()
+	set category = "OOC"
+	set name = "Translator"
+	set desc = "Opens a translation window to input and send text."
+
+	var/dat = {"
+		<html>
+			<head>
+				<title>Translation</title>
+			</head>
+			<body>
+				<form action="byond://">
+					<textarea name="text" rows="10" cols="50"></textarea><br>
+					<input type="submit" value="OK">
+				</form>
+			</body>
+		</html>
+	"}
+
+	usr << browse(dat, "window=translation;size=500x300")
+
+/client
+	var/last_translation_time = 0 // Timestamp of the last translation
+	var/translation_cooldown = 10 SECONDS // Cooldown duration (10 seconds)
+
+/client/Topic(href, href_list)
+	if(href_list["text"])
+		// Check if the cooldown has expired
+		if(world.time < last_translation_time + translation_cooldown)
+			to_chat(usr, "<span class='warning'>You must wait [round((last_translation_time + translation_cooldown - world.time) / 10)] seconds before using the translator again.</span>")
+			return
+
+		var/text = href_list["text"]
+		if(text)
+			// Update the last translation time
+			last_translation_time = world.time
+
+			// Determine source and target languages based on user preference
+			var/source_lang = "auto" // Source language is set to auto-detect
+			var/target_lang = "pt" // Target language is Portuguese
+
+			// Call the translation proc
+			var/translated_text = translate_text(text, source_lang, target_lang)
+
+			// Send the translated text to the user
+			if(translated_text == "error" || translated_text == "error2")
+				to_chat(usr, "<span class='warning'>Translation failed. Please try again.</span>")
+			else
+				to_chat(usr, "<span class='notice'>Translated Text: [translated_text]</span>")
+		return
+
+	..() // Call the parent Topic() to handle other cases
