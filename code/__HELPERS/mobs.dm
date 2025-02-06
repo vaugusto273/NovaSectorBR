@@ -660,27 +660,27 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 /proc/parse_zone(zone)
 	switch(zone)
 		if(BODY_ZONE_CHEST)
-			return "chest"
+			return "torso"
 		if(BODY_ZONE_HEAD)
-			return "head"
+			return "cabeça"
 		if(BODY_ZONE_PRECISE_R_HAND)
-			return "right hand"
+			return "mão direita"
 		if(BODY_ZONE_PRECISE_L_HAND)
-			return "left hand"
+			return "mão esquerda"
 		if(BODY_ZONE_L_ARM)
-			return "left arm"
+			return "braço esquerdo"
 		if(BODY_ZONE_R_ARM)
-			return "right arm"
+			return "braço direito"
 		if(BODY_ZONE_L_LEG)
-			return "left leg"
+			return "perna esquerda"
 		if(BODY_ZONE_R_LEG)
-			return "right leg"
+			return "perna direita"
 		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "left foot"
+			return "pé esquerda"
 		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "right foot"
+			return "pé direito"
 		if(BODY_ZONE_PRECISE_GROIN)
-			return "groin"
+			return "virilha"
 		else
 			return zone
 
@@ -708,45 +708,45 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 /proc/parse_slot_flags(slot_flags)
 	var/list/slot_strings = list()
 	if(slot_flags & ITEM_SLOT_BACK)
-		slot_strings += "back"
+		slot_strings += "costas"
 	if(slot_flags & ITEM_SLOT_MASK)
-		slot_strings += "mask"
+		slot_strings += "mascara"
 	if(slot_flags & ITEM_SLOT_NECK)
-		slot_strings += "neck"
+		slot_strings += "pescoço"
 	if(slot_flags & ITEM_SLOT_HANDCUFFED)
-		slot_strings += "handcuff"
+		slot_strings += "algemado"
 	if(slot_flags & ITEM_SLOT_LEGCUFFED)
-		slot_strings += "legcuff"
+		slot_strings += "perna algemada"
 	if(slot_flags & ITEM_SLOT_BELT)
-		slot_strings += "belt"
+		slot_strings += "cinto"
 	if(slot_flags & ITEM_SLOT_ID)
 		slot_strings += "id"
 	if(slot_flags & ITEM_SLOT_EARS)
-		slot_strings += "ear"
+		slot_strings += "orelha"
 	if(slot_flags & ITEM_SLOT_EYES)
-		slot_strings += "glasses"
+		slot_strings += "óculos"
 	if(slot_flags & ITEM_SLOT_GLOVES)
-		slot_strings += "glove"
+		slot_strings += "luvas"
 	if(slot_flags & ITEM_SLOT_HEAD)
-		slot_strings += "head"
+		slot_strings += "cabeça"
 	if(slot_flags & ITEM_SLOT_FEET)
-		slot_strings += "shoe"
+		slot_strings += "calçados"
 	if(slot_flags & ITEM_SLOT_OCLOTHING)
 		slot_strings += "oversuit"
 	if(slot_flags & ITEM_SLOT_ICLOTHING)
 		slot_strings += "undersuit"
 	if(slot_flags & ITEM_SLOT_SUITSTORE)
-		slot_strings += "suit storage"
+		slot_strings += "armazenamento de traje"
 	if(slot_flags & (ITEM_SLOT_LPOCKET|ITEM_SLOT_RPOCKET))
-		slot_strings += "pocket"
+		slot_strings += "bolsos"
 	if(slot_flags & ITEM_SLOT_HANDS)
-		slot_strings += "hand"
+		slot_strings += "mão"
 	if(slot_flags & ITEM_SLOT_DEX_STORAGE)
 		slot_strings += "dextrous storage"
 	if(slot_flags & ITEM_SLOT_BACKPACK)
-		slot_strings += "backpack"
+		slot_strings += "mochila"
 	if(slot_flags & ITEM_SLOT_BELTPACK)
-		slot_strings += "belt" // ?
+		slot_strings += "cinto" // ?
 	return slot_strings
 
 ///Returns the direction that the initiator and the target are facing

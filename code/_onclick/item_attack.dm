@@ -210,7 +210,7 @@
 		return FALSE
 
 	if(damtype != STAMINA && force && HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to harm other living beings!"))
+		to_chat(user, span_warning("Você não quer prejudicar outros seres vivos!"))
 		return FALSE
 
 	if(!force && !HAS_TRAIT(src, TRAIT_CUSTOM_TAP_SOUND))
@@ -277,8 +277,8 @@
 
 	var/damage = take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1, get_dir(src, user))
 	//only witnesses close by and the victim see a hit message.
-	user.visible_message(span_danger("[user] hits [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), \
-		span_danger("You hit [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), null, COMBAT_MESSAGE_RANGE)
+	user.visible_message(span_danger("[user] acerta [src] com [attacking_item][damage ? "." : ", sem deixar uma marca!"]"), \
+		span_danger("Você bateu [src] com [attacking_item][damage ? "." : ", sem deixar uma marca!"]"), null, COMBAT_MESSAGE_RANGE)
 	log_combat(user, src, "attacked", attacking_item)
 
 /area/attacked_by(obj/item/attacking_item, mob/living/user)
@@ -299,8 +299,8 @@
 	var/armor_block = min(run_armor_check(
 			def_zone = targeting,
 			attack_flag = MELEE,
-			absorb_text = span_notice("Your armor has protected your [targeting_human_readable]!"),
-			soften_text = span_warning("Your armor has softened a hit to your [targeting_human_readable]!"),
+			absorb_text = span_notice("Sua armadura protegeu o seu [targeting_human_readable]!"),
+			soften_text = span_warning("Sua armadura suavizou um golpe no seu [targeting_human_readable]!"),
 			armour_penetration = attacking_item.armour_penetration,
 			weak_against_armour = attacking_item.weak_against_armour,
 		), ARMOR_MAX_BLOCK)
@@ -385,8 +385,8 @@
 					adjustOrganLoss(ORGAN_SLOT_BRAIN, 20)
 					if(stat == CONSCIOUS)
 						visible_message(
-							span_danger("[src] is knocked senseless!"),
-							span_userdanger("You're knocked senseless!"),
+							span_danger("[src] está atordoado!"),
+							span_userdanger("Você está atordoado!"),
 						)
 						set_confusion_if_lower(20 SECONDS)
 						adjust_eye_blur(20 SECONDS)
@@ -413,8 +413,8 @@
 			if(stat == CONSCIOUS && !attacking_item.get_sharpness() && !HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED) && attacking_item.damtype == BRUTE)
 				if(prob(damage_done))
 					visible_message(
-						span_danger("[src] is knocked down!"),
-						span_userdanger("You're knocked down!"),
+						span_danger("[src] está no chão!"),
+						span_userdanger("Você está no chão!"),
 					)
 					apply_effect(6 SECONDS, EFFECT_KNOCKDOWN, armor_block)
 

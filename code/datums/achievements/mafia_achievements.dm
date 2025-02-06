@@ -4,111 +4,111 @@
 ///ALL THE ACHIEVEMENTS FOR WINNING A ROUND AS A ROLE///
 
 /datum/award/achievement/mafia/assistant
-	name = "Assistant Victory"
-	desc = "If you got killed instead of someone more important, you just flexed the true strength of your \"\"\"\"role\"\"\"\"."
+	name = "Vitoria do Assistente"
+	desc = "Se você foi morto em vez de alguém mais importante, você apenas demonstrou a verdadeira força do seu... \"\"\"\"role\"\"\"\"."
 	database_id = MAFIA_MEDAL_ASSISTANT
 	icon_state = "town"
 
 /datum/award/achievement/mafia/detective
-	name = "Detective Victory"
-	desc = "If you did this with a Medical Doctor in the game, i'm not really that impressed."
+	name = "Vitoria do Detetive"
+	desc = "Se você fez isso com um Médico no jogo, eu realmente não estou tão impressionado."
 	database_id = MAFIA_MEDAL_DETECTIVE
 	icon_state = "town"
 
 /datum/award/achievement/mafia/psychologist
-	name = "Psychologist Victory"
-	desc = "You learned how to not reveal someone random night one! Or... maybe you're just a lucky bastard."
+	name = "Vitória do Psicólogo"
+	desc = "Você aprendeu como não revelar alguém aleatório na primeira noite! Ou... talvez você seja só um sortudo desgraçado."
 	database_id = MAFIA_MEDAL_PSYCHOLOGIST
 	icon_state = "town"
 
 /datum/award/achievement/mafia/chaplain
-	name = "Chaplain Victory"
-	desc = "Useless... until the one night the thoughtfeeder confidently claims themselves as detective. Mafia's true bullshit detector."
+	name = "Vitória do Padre"
+	desc = "Inútil... até a noite em que o pensador se declara confiantemente como detetive. O verdadeiro detector de mentiras da máfia."
 	database_id = MAFIA_MEDAL_CHAPLAIN
 	icon_state = "town"
 
 /datum/award/achievement/mafia/md
-	name = "Medical Doctor Victory"
-	desc = "Congratulations on learning how to not talk!"
+	name = "Vitória do Médico"
+	desc = "Parabéns por aprender a não falar!"
 	database_id = MAFIA_MEDAL_MD
 	icon_state = "town"
 
 /datum/award/achievement/mafia/officer
-	name = "Security Officer Victory"
-	desc = "Don't worry, you can win this if you're dead! You... did use your ability to become dead, right?"
+	name = "Vitória do Oficial de Segurança"
+	desc = "Não se preocupe, você pode ganhar isso mesmo estando morto! Você... usou sua habilidade de ficar morto, certo?"
 	database_id = MAFIA_MEDAL_OFFICER
 	icon_state = "town"
 
 /datum/award/achievement/mafia/lawyer
-	name = "Lawyer Victory"
-	desc = "Oh don't mind me, i'm just the worst rol- Oops, I just instantly ended the game."
+	name = "Vitória do Advogado"
+	desc = "Ah, não se preocupe comigo, eu sou só o pior rol- Oops, acabei de terminar o jogo instantaneamente."
 	database_id = MAFIA_MEDAL_LAWYER
 	icon_state = "town"
 
 /datum/award/achievement/mafia/hop
-	name = "Head of Personnel Victory"
-	desc = "King of Assistants, waster of a single mafia's night, thrower of games."
+	name = "Vitória do Chefe de Pessoal"
+	desc = "Rei dos Assistentes, desperdiçador de uma única noite da máfia, destruidor de jogos."
 	database_id = MAFIA_MEDAL_HOP
 	icon_state = "town"
 
 /datum/award/achievement/mafia/warden
-	name = "Warden Victory"
-	desc = "Make changelings think you're detective, go on lockdown, actual detective investigates you and dies. Cha cha real smooth!"
+	name = "Vitória do Diretor de Prisão"
+	desc = "Faça os changelings acharem que você é o detetive, entre em lockdown, o verdadeiro detetive investiga você e morre. Cha cha, real smooth!"
 	database_id = MAFIA_MEDAL_WARDEN
 	icon_state = "town"
 
 /datum/award/achievement/mafia/hos
-	name = "Head of Security Victory"
-	desc = "Certified not shitcurity."
+	name = "Vitória do Chefe de Segurança"
+	desc = "Certificado de não ser uma segurança inútil."
 	database_id = MAFIA_MEDAL_HOS
 	icon_state = "town"
 
 /datum/award/achievement/mafia/changeling
-	name = "Changeling Victory"
-	desc = "I think the changelings are metacomming."
+	name = "Vitória do Changeling"
+	desc = "Eu acho que os changelings estão fazendo metacomming."
 	database_id = MAFIA_MEDAL_CHANGELING
 	icon_state = "mafia"
 
 /datum/award/achievement/mafia/thoughtfeeder
-	name = "Thoughtfeeder Victory"
-	desc = "Clown's best friend. And Obsessed. And fugitive? Whose side are you on?!"
+	name = "Vitoria do Thoughtfeeder"
+	desc = "Melhor amigo do palhaço. E obcecado. E fugitivo? De que lado você está?!"
 	database_id = MAFIA_MEDAL_THOUGHTFEEDER
 	icon_state = "mafia"
 
 /datum/award/achievement/mafia/traitor
-	name = "Traitor Victory"
-	desc = "Guys, we still have two more changelings to ki-!! TRAITOR VICTORY !!"
+	name = "Vitória do Traitor"
+	desc = "Pessoal, ainda temos dois changelings para matar-!! VITÓRIA DO TRAIDOR!!"
 	database_id = MAFIA_MEDAL_TRAITOR
 	icon_state = "neutral"
 
 /datum/award/achievement/mafia/nightmare
-	name = "Nightmare Victory"
-	desc = "DID YOUR LIGHT FLICKER?!"
+	name = "Vitória do Nightmare"
+	desc = "A SUA LUZ PISCOU??"
 	database_id = MAFIA_MEDAL_NIGHTMARE
 	icon_state = "neutral"
 
 /datum/award/achievement/mafia/fugitive
-	name = "Fugitive Victory"
-	desc = "I'm just the description on an achievement, but if you end up having to choose between town and changelings, go changelings."
+	name = "Vitória do Fugitive"
+	desc = "Eu sou apenas a descrição de uma conquista, mas se você acabar tendo que escolher entre a cidade e os changelings, escolha os changelings."
 	database_id = MAFIA_MEDAL_FUGITIVE
 	icon_state = "neutral"
 
 /datum/award/achievement/mafia/obsessed
-	name = "Obsessed Victory"
-	desc = "You got your target lynched, so instead of being spiteful and annoying, you're just smug and annoying."
+	name = "Vitória do Obsessed"
+	desc = "Você fez seu alvo ser enforcado, então, em vez de ser rancoroso e irritante, você é apenas arrogante e irritante."
 	database_id = MAFIA_MEDAL_OBSESSED
 	icon_state = "neutral"
 
 /datum/award/achievement/mafia/clown
-	name = "Clown Victory"
-	desc = "Did you know this works on traitors, despite their immunity? If you hit the jackpot and manage to kill one, they'll salt into the next dimension. Clown tips!"
+	name = "Vitória do Palhaço"
+	desc = "Você sabia que isso funciona em traidores, apesar da imunidade deles? Se você acertar o prêmio e conseguir matar um, ele vai salgar até a próxima dimensão. Dicas de palhaço!"
 	database_id = MAFIA_MEDAL_CLOWN
 	icon_state = "neutral"
 
 ///ALL THE ACHIEVEMENTS FOR MISC MAFIA ODDITIES///
 
 /datum/award/achievement/mafia/universally_hated
-	name = "Universally Hated"
-	desc = "Managed to get more than 12 votes when put up on trial, jesus christ."
+	name = "Universalmente Odiado"
+	desc = "Conseguiu mais de 12 votos quando foi colocado em julgamento, jesus Cristo."
 	database_id = MAFIA_MEDAL_HATED
 	icon_state = "hated"

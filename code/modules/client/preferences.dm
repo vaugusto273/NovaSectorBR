@@ -652,3 +652,24 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	donator_status = !!GLOB.donator_list[parent.ckey] // NOVA EDIT ADDITION - DONATOR CHECK
 	if(unlock_content || donator_status) // NOVA EDIT CHANGE - ORIGINAL: if(unlock_content)
 		max_save_slots = 50 //NOVA EDIT - ORIGINAL: max_save_slots = 8
+
+
+/datum/preference/choiced/languages_preference
+    category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+    savefile_identifier = PREFERENCE_PLAYER
+    savefile_key = "languages_preference"
+
+/datum/preference/choiced/languages_preference/init_possible_values()
+    return list(LANGUAGE_ENGLISH, LANGUAGE_PORTUGUESE)
+
+/datum/preference/choiced/languages_preference/compile_constant_data()
+    var/list/data = ..()
+    data["display_names"] = list( // Use "display_names" directly
+        LANGUAGE_ENGLISH = "English", // Use your defines
+        LANGUAGE_PORTUGUESE = "Português" // Use your defines
+    )
+    return data
+
+/datum/preference/choiced/languages_preference/apply_to_client(client/client, value)
+    if (client)
+        client.language = value

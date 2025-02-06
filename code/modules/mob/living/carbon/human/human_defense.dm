@@ -83,7 +83,7 @@
 			return TRUE
 	return FALSE
 
-/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = "the attack", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
+/mob/living/carbon/human/check_block(atom/hit_by, damage, attack_text = "o ataque", attack_type = MELEE_ATTACK, armour_penetration = 0, damage_type = BRUTE)
 	. = ..()
 	if(. == SUCCESSFUL_BLOCK)
 		return SUCCESSFUL_BLOCK
@@ -119,7 +119,7 @@
 	var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
 	playsound(loc, active_arm.unarmed_attack_sound, 25, TRUE, -1)
 	visible_message(span_danger("[user] [hulk_verb]ed [src]!"), \
-					span_userdanger("[user] [hulk_verb]ed [src]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), null, user)
+					span_userdanger("[user] [hulk_verb]ed [src]!"), span_hear("Você ouve um som nauseante de carne batendo contra carne!"), null, user)
 	to_chat(user, span_danger("You [hulk_verb] [src]!"))
 	apply_damage(15, BRUTE, wound_bonus=10)
 
@@ -145,9 +145,9 @@
 	if(!HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED))
 		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 		apply_status_effect(/datum/status_effect/next_shove_stuns)
-	target.visible_message(span_danger("[shover] shoves [target.name] into [name]!"),
-		span_userdanger("You're shoved into [name] by [shover]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
-	to_chat(src, span_danger("You shove [target.name] into [name]!"))
+	target.visible_message(span_danger("[shover] empurra [target.name] para dentro de [name]!"),
+		span_userdanger("Você é empurrado para dentro de [name] por [shover]!"), span_hear("Você ouve um barulho agressivo de arrastar seguido de um forte estrondo!"), COMBAT_MESSAGE_RANGE, src)
+	to_chat(src, span_danger("Você empurra [target.name] pra dentro de [name]!"))
 	log_combat(shover, target, "shoved", addition = "into [name][weapon ? " with [weapon]" : ""]")
 	return COMSIG_LIVING_SHOVE_HANDLED
 
@@ -159,9 +159,9 @@
 		var/obj/item/I = get_active_held_item()
 		if(I && !(I.item_flags & ABSTRACT) && dropItemToGround(I))
 			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] disarmed [src]!"), \
-							span_userdanger("[user] disarmed you!"), span_hear("You hear aggressive shuffling!"), null, user)
-			to_chat(user, span_danger("You disarm [src]!"))
+			visible_message(span_danger("[user] desarmou [src]!"), \
+							span_userdanger("[user] desarmou você!"), span_hear("Você ouve um arrastar agressivo!"), null, user)
+			to_chat(user, span_danger("Você desarma [src]!"))
 		else if(!user.client || prob(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
 			playsound(loc, 'sound/items/weapons/pierce.ogg', 25, TRUE, -1)
 			if (src.IsKnockdown() && !src.IsParalyzed())
@@ -174,7 +174,7 @@
 				Knockdown(30)
 				log_combat(user, src, "tackled")
 				visible_message(span_danger("[user] tackles [src] down!"), \
-								span_userdanger("[user] tackles you down!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
+								span_userdanger("[user] tackles you down!"), span_hear("Você ouve um arrastar agressivo seguido por um thud!"), null, user)
 				to_chat(user, span_danger("You tackle [src] down!"))
 		return TRUE
 
@@ -205,8 +205,8 @@
 		var/obj/item/I = get_active_held_item()
 		if(I && dropItemToGround(I))
 			playsound(loc, 'sound/items/weapons/slash.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[user] disarms [src]!"), \
-							span_userdanger("[user] disarms you!"), span_hear("You hear aggressive shuffling!"), null, user)
+			visible_message(span_danger("[user] desarma [src]!"), \
+							span_userdanger("[user] desarma você!"), span_hear("Você ouve um arrastar agressivo!"), null, user)
 			to_chat(user, span_danger("You disarm [src]!"))
 		else if(!HAS_TRAIT(src, TRAIT_INCAPACITATED))
 			playsound(loc, 'sound/items/weapons/pierce.ogg', 25, TRUE, -1)
@@ -215,7 +215,7 @@
 			throw_at(shovetarget, 4, 2, user, force = MOVE_FORCE_OVERPOWERING)
 			log_combat(user, src, "shoved")
 			visible_message(span_danger("[user] tackles [src] down!"), \
-							span_userdanger("[user] shoves you with great force!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
+							span_userdanger("[user] shoves you with great force!"), span_hear("Você ouve um arrastar agressivo followed by a loud thud!"), null, user)
 			to_chat(user, span_danger("You shove [src] with great force!"))
 		else
 			Paralyze(5 SECONDS)
@@ -353,7 +353,7 @@
 /mob/living/carbon/human/blob_act(obj/structure/blob/B)
 	if(stat == DEAD)
 		return
-	show_message(span_userdanger("The blob attacks you!"))
+	show_message(span_userdanger("O blob te ataca!"))
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
 	apply_damage(5, BRUTE, affecting, run_armor_check(affecting, MELEE))
@@ -391,7 +391,7 @@
 		if(undergoing_cardiac_arrest() && can_heartattack() && (shock_damage * siemens_coeff >= 1) && prob(25))
 			var/obj/item/organ/heart/heart = get_organ_slot(ORGAN_SLOT_HEART)
 			if(heart.Restart() && stat == CONSCIOUS)
-				to_chat(src, span_notice("You feel your heart beating again!"))
+				to_chat(src, span_notice("Você sente o seu coração batendo novamente!"))
 	if (!(flags & SHOCK_NO_HUMAN_ANIM))
 		electrocution_animation(4 SECONDS)
 
@@ -562,7 +562,7 @@
 
 	visible_message(span_notice("[src] examines [p_them()]self."))
 
-	combined_msg += span_notice("<b>You check yourself for injuries.</b>")
+	combined_msg += span_notice("<b>Você se verifica em busca de ferimentos.</b>")
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
@@ -575,11 +575,11 @@
 
 		//NOVA EDIT ADDITION BEGIN - MEDICAL
 		if(body_part.current_gauze)
-			combined_msg += "\t [span_notice("Your [body_part.name] is [body_part.current_gauze.get_gauze_usage_prefix()] with <a href='byond://?src=[REF(body_part.current_gauze)];remove=1'>[body_part.current_gauze.get_gauze_description()]</a>.")]"
+			combined_msg += "\t [span_notice("O seu [body_part.name] está [body_part.current_gauze.get_gauze_usage_prefix()] com <a href='byond://?src=[REF(body_part.current_gauze)];remove=1'>[body_part.current_gauze.get_gauze_description()]</a>.")]"
 		//NOVA EDIT END
 
 	for(var/t in missing)
-		combined_msg += span_bolddanger("Your [parse_zone(t)] is missing!")
+		combined_msg += span_bolddanger("O seu [parse_zone(t)] está faltando!")
 
 	if(is_bleeding())
 		var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -588,7 +588,7 @@
 				bleeding_limbs += part
 
 		var/num_bleeds = LAZYLEN(bleeding_limbs)
-		var/bleed_text = "<span class='danger'>You are bleeding from your"
+		var/bleed_text = "<span class='danger'>Você está sangrando de seu"
 		switch(num_bleeds)
 			if(1 to 2)
 				bleed_text += " [bleeding_limbs[1].name][num_bleeds == 2 ? " and [bleeding_limbs[2].name]" : ""]"
@@ -602,39 +602,39 @@
 
 	if(getStaminaLoss())
 		if(getStaminaLoss() > 30)
-			combined_msg += span_info("You're completely exhausted.")
+			combined_msg += span_info("Você está completamente exausto.")
 		else
-			combined_msg += span_info("You feel fatigued.")
+			combined_msg += span_info("Você se sente cansado.")
 	if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
 		if(toxloss)
 			if(toxloss > 10)
-				combined_msg += span_danger("You feel sick.")
+				combined_msg += span_danger("Você se sente doente.")
 			else if(toxloss > 20)
-				combined_msg += span_danger("You feel nauseated.")
+				combined_msg += span_danger("Você se sente enjoado.")
 			else if(toxloss > 40)
-				combined_msg += span_danger("You feel very unwell!")
+				combined_msg += span_danger("Você se sente muito mal!")
 		if(oxyloss)
 			if(oxyloss > 10)
-				combined_msg += span_danger("You feel lightheaded.")
+				combined_msg += span_danger("Você se sente tonto.")
 			else if(oxyloss > 20)
-				combined_msg += span_danger("Your thinking is clouded and distant.")
+				combined_msg += span_danger("Seu pensamento está turvo e distante.")
 			else if(oxyloss > 30)
-				combined_msg += span_danger("You're choking!")
+				combined_msg += span_danger("Você está se engasgando!")
 
 	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_FULL to INFINITY)
-				combined_msg += span_info("You're completely stuffed!")
+				combined_msg += span_info("Você está completamente cheio!")
 			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				combined_msg += span_info("You're well fed!")
+				combined_msg += span_info("Você está bem alimentado!")
 			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				combined_msg += span_info("You're not hungry.")
+				combined_msg += span_info("Você não está com fome.")
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				combined_msg += span_info("You could use a bite to eat.")
+				combined_msg += span_info("Voce poderia comer um pouco.")
 			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				combined_msg += span_info("You feel quite hungry.")
+				combined_msg += span_info("Você se sente com fome.")
 			if(0 to NUTRITION_LEVEL_STARVING)
-				combined_msg += span_danger("You're starving!")
+				combined_msg += span_danger("Você está faminto!")
 
 	//Compiles then shows the list of damaged organs and broken organs
 	var/list/broken = list()
@@ -656,7 +656,7 @@
 	//Checks to enforce proper grammar, inserts words as necessary into the list
 	if(broken.len)
 		if(broken.len > 1)
-			broken.Insert(broken.len, "and ")
+			broken.Insert(broken.len, "e ")
 			broken_plural = TRUE
 		else
 			var/holder = broken[1] //our one and only element
@@ -665,10 +665,10 @@
 		//Put the items in that list into a string of text
 		for(var/B in broken)
 			broken_message += B
-		combined_msg += span_warning("Your [broken_message] [broken_plural ? "are" : "is"] non-functional!")
+		combined_msg += span_warning("O seu [broken_message] [broken_plural ? "estão" : "está"] funcional!")
 	if(damaged.len)
 		if(damaged.len > 1)
-			damaged.Insert(damaged.len, "and ")
+			damaged.Insert(damaged.len, "e ")
 			damaged_plural = TRUE
 		else
 			var/holder = damaged[1]
@@ -676,10 +676,10 @@
 				damaged_plural = TRUE
 		for(var/D in damaged)
 			damaged_message += D
-		combined_msg += span_info("Your [damaged_message] [damaged_plural ? "are" : "is"] hurt.")
+		combined_msg += span_info("o seu [damaged_message] [damaged_plural ? "estão" : "está"] machucado.")
 
 	if(quirks.len)
-		combined_msg += span_notice("You have these quirks: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
+		combined_msg += span_notice("Você tem essas peculiaridades: [get_quirk_string(FALSE, CAT_QUIRK_ALL)].")
 
 	to_chat(src, boxed_message(combined_msg.Join("\n")))
 

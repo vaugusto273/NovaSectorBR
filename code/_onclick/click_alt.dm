@@ -37,7 +37,7 @@
 
 	/// No loot panel if it's on our person
 	if(isobj(target) && (target in get_all_gear()))
-		to_chat(src, span_warning("You can't search for this item, it's already in your inventory! Take it off first."))
+		to_chat(src, span_warning("Você não pode procurar este item, ele já está no seu inventário! Tire isso primeiro."))
 		return
 
 	client.loot_panel.open(get_turf(target))

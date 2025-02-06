@@ -72,7 +72,7 @@
 		linked_action.full_key = null
 		linked_action.update_button_status(src)
 		return
-	linked_action.full_key = tgui_input_keycombo(user, "Please bind a key for this action.")
+	linked_action.full_key = tgui_input_keycombo(user, "Por favor, pressione uma tecla para esta ação.")
 	linked_action.update_button_status(src)
 
 // Entered and Exited won't fire while you're dragging something, because you're still "holding" it
@@ -271,7 +271,7 @@
 	action.HideFrom(src)
 
 /atom/movable/screen/button_palette
-	desc = "<b>Drag</b> buttons to move them<br><b>Shift-click</b> any button to reset it<br><b>Alt-click any button</b> to begin binding it to a key<br><b>Alt-click this</b> to reset all buttons"
+	desc = "<b> arraste os botões </b> para movê-los <br> <b> clique segurando shift </b> qualquer botão para resetar <br> <b> Alt clique em qualquer botão </b> para defenir uma tecla <br> <b> clique isto </b> para redefinir todos os botões"
 	icon = 'icons/hud/64x16_actions.dmi'
 	icon_state = "screen_gen_palette"
 	screen_loc = ui_action_palette
@@ -300,9 +300,9 @@
 /atom/movable/screen/button_palette/update_name(updates)
 	. = ..()
 	if(expanded)
-		name = "Hide Buttons"
+		name = "Esconder Butões"
 	else
-		name = "Show Buttons"
+		name = "Mostrar butões"
 
 /atom/movable/screen/button_palette/proc/refresh_owner()
 	var/mob/viewer = our_hud.mymob
@@ -451,8 +451,8 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 	return ..()
 
 /atom/movable/screen/palette_scroll/down
-	name = "Scroll Down"
-	desc = "<b>Click</b> on this to scroll the actions above down"
+	name = "Role para baixo"
+	desc = "<b> Clique </b> para rolar as ações abaixo"
 	icon_state = "scroll_down"
 	scroll_direction = 1
 
@@ -464,8 +464,8 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 	return ..()
 
 /atom/movable/screen/palette_scroll/up
-	name = "Scroll Up"
-	desc = "<b>Click</b> on this to scroll the actions above up"
+	name = "Role para cima"
+	desc = "<b> Clique em </b> para rolar as ações acima"
 	icon_state = "scroll_up"
 	scroll_direction = -1
 
@@ -478,8 +478,8 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 
 /// Exists so you have a place to put your buttons when you move them around
 /atom/movable/screen/action_landing
-	name = "Button Space"
-	desc = "<b>Drag and drop</b> a button into this spot<br>to add it to the group"
+	name = "Barra de Espaço"
+	desc = "<b> arraste e solte </b> um botão neste local <br> para adicioná-lo ao grupo "
 	icon = 'icons/hud/screen_gen.dmi'
 	icon_state = "reserved"
 	// We want our whole 32x32 space to be clickable, so dropping's forgiving

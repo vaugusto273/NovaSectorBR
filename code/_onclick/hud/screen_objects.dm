@@ -120,7 +120,7 @@
 	return 1
 
 /atom/movable/screen/navigate
-	name = "navigate"
+	name = "navegar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "navigate"
 	screen_loc = ui_navigate_menu
@@ -139,7 +139,7 @@
 	screen_loc = ui_crafting
 
 /atom/movable/screen/area_creator
-	name = "create new area"
+	name = "Crie nova área"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "area_edit"
 	screen_loc = ui_building
@@ -155,7 +155,7 @@
 	create_area(usr)
 
 /atom/movable/screen/language_menu
-	name = "language menu"
+	name = "Menu do idioma"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "talk_wheel"
 	screen_loc = ui_language_menu
@@ -285,7 +285,7 @@
 	return TRUE
 
 /atom/movable/screen/close
-	name = "close"
+	name = "fechar"
 	plane = ABOVE_HUD_PLANE
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "storage_close"
@@ -303,7 +303,7 @@
 	return TRUE
 
 /atom/movable/screen/drop
-	name = "drop"
+	name = "dropar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_drop"
 	plane = HUD_PLANE
@@ -314,7 +314,7 @@
 		usr.dropItemToGround(usr.get_active_held_item())
 
 /atom/movable/screen/combattoggle
-	name = "toggle combat mode"
+	name = "alternar o modo de combate"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "combat_off"
 	screen_loc = ui_combat_toggle
@@ -361,7 +361,7 @@
 	screen_loc = ui_borg_intents
 
 /atom/movable/screen/floor_changer
-	name = "change floor"
+	name = "Mude o andar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "floor_change"
 	screen_loc = ui_above_intent
@@ -390,12 +390,12 @@
 	vertical = TRUE
 
 /atom/movable/screen/spacesuit
-	name = "Space suit cell status"
+	name = "Status de energia do traje espacial"
 	icon_state = "spacesuit_0"
 	screen_loc = ui_spacesuit
 
 /atom/movable/screen/mov_intent
-	name = "run/walk toggle"
+	name = "Correr/andar alternar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "running"
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -420,7 +420,7 @@
 	user.toggle_move_intent()
 
 /atom/movable/screen/pull
-	name = "stop pulling"
+	name = "Pare de puxar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "pull"
 	base_icon_state = "pull"
@@ -436,7 +436,7 @@
 	return ..()
 
 /atom/movable/screen/resist
-	name = "resist"
+	name = "resistir"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_resist"
 	base_icon_state = "act_resist"
@@ -450,7 +450,7 @@
 		L.resist()
 
 /atom/movable/screen/rest
-	name = "rest"
+	name = "descansar"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_rest"
 	base_icon_state = "act_rest"
@@ -470,7 +470,7 @@
 	return ..()
 
 /atom/movable/screen/storage
-	name = "storage"
+	name = "armazenamento"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "storage_cell"
 	plane = HUD_PLANE
@@ -529,7 +529,7 @@
 	icon_state = "storage_corner_bottomright"
 
 /atom/movable/screen/storage/rowjoin
-	name = "storage"
+	name = "armazenamento"
 	icon_state = "storage_rowjoin_left"
 	alpha = 0
 
@@ -537,7 +537,7 @@
 	icon_state = "storage_rowjoin_right"
 
 /atom/movable/screen/throw_catch
-	name = "throw/catch"
+	name = "jogue/pegue"
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "act_throw"
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -548,7 +548,7 @@
 		C.toggle_throw_mode()
 
 /atom/movable/screen/zone_sel
-	name = "damage zone"
+	name = "zona de dano"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -682,7 +682,7 @@
 /atom/movable/screen/damageoverlay
 	icon = 'icons/hud/screen_full.dmi'
 	icon_state = "oxydamageoverlay0"
-	name = "dmg"
+	name = "dano"
 	blend_mode = BLEND_MULTIPLY
 	screen_loc = "CENTER-7,CENTER-7"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -690,7 +690,7 @@
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/healths
-	name = "health"
+	name = "vida"
 	icon_state = "health0"
 	screen_loc = ui_health
 
@@ -703,31 +703,31 @@
 	screen_loc = ui_borg_health
 
 /atom/movable/screen/healths/blob
-	name = "blob health"
+	name = "vida blob"
 	icon_state = "block"
 	screen_loc = ui_internal
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healths/blob/overmind
-	name = "overmind health"
+	name = "vida overmind"
 	icon = 'icons/hud/blob.dmi'
 	icon_state = "corehealth"
 	screen_loc = ui_blobbernaut_overmind_health
 
 /atom/movable/screen/healths/guardian
-	name = "summoner health"
+	name = "vida summoner"
 	icon = 'icons/hud/guardian.dmi'
 	icon_state = "base"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healths/revenant
-	name = "essence"
+	name = "essência"
 	icon = 'icons/mob/actions/backgrounds.dmi'
 	icon_state = "bg_revenant"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/healthdoll
-	name = "health doll"
+	name = "boneca de vida"
 	screen_loc = ui_healthdoll
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
@@ -824,7 +824,7 @@
 	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
 
 /atom/movable/screen/mood
-	name = "mood"
+	name = "humor"
 	icon_state = "mood5"
 	screen_loc = ui_mood
 	mouse_over_pointer = MOUSE_HAND_POINTER
@@ -920,7 +920,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 	return ..()
 
 /atom/movable/screen/stamina
-	name = "stamina"
+	name = "estamina"
 	icon_state = "stamina0"
 	screen_loc = ui_stamina
 
@@ -931,7 +931,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/splash)
 #define HUNGER_STATE_STARVING -2
 
 /atom/movable/screen/hunger
-	name = "hunger"
+	name = "fome"
 	icon_state = "hungerbar"
 	base_icon_state = "hungerbar"
 	screen_loc = ui_hunger

@@ -23,8 +23,8 @@
 
 /// Enables or disables the leash, allowing or forbidding the PAI from leaving a specified range
 /datum/component/leash/proc/toggle_leash()
-	to_chat(owner, span_warning("Your virtual leash has been [enabled ? "activated" : "deactivated"]!"))
-	if(enabled)
-		disable_leash()
-	else
-		enable_leash()
+    to_chat(owner, span_warning("Sua coleira virtual foi [enabled ? "ativada" : "desativada"]!"))
+    if(enabled)
+        disable_leash()
+    else
+        enable_leash()

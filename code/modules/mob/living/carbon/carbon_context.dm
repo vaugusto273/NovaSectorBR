@@ -11,24 +11,24 @@
 	var/mob/living/carbon/human/human_user = user
 
 	if (human_user.combat_mode)
-		context[SCREENTIP_CONTEXT_LMB] = "Attack"
+		context[SCREENTIP_CONTEXT_LMB] = "Atacar"
 	else if (human_user == src)
-		context[SCREENTIP_CONTEXT_LMB] = "Check injuries"
+		context[SCREENTIP_CONTEXT_LMB] = "Checar machucados"
 
 		if (get_bodypart(human_user.zone_selected)?.get_modified_bleed_rate())
-			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Grab limb"
+			context[SCREENTIP_CONTEXT_CTRL_LMB] = "Agarrar membro"
 
 	if (human_user != src)
-		context[SCREENTIP_CONTEXT_RMB] = "Shove"
+		context[SCREENTIP_CONTEXT_RMB] = "Empurrar"
 
 		if (!human_user.combat_mode)
 			if (body_position == STANDING_UP)
 				if(check_zone(user.zone_selected) == BODY_ZONE_HEAD && get_bodypart(BODY_ZONE_HEAD))
 					context[SCREENTIP_CONTEXT_LMB] = "Headpat"
 				else if(user.zone_selected == BODY_ZONE_PRECISE_GROIN && !isnull(get_organ_by_type(/obj/item/organ/tail)))
-					context[SCREENTIP_CONTEXT_LMB] = "Pull tail"
+					context[SCREENTIP_CONTEXT_LMB] = "Puxar calda"
 				else
-					context[SCREENTIP_CONTEXT_LMB] = "Hug"
+					context[SCREENTIP_CONTEXT_LMB] = "Abraçar"
 			else if (health >= 0 && !HAS_TRAIT(src, TRAIT_FAKEDEATH))
 				context[SCREENTIP_CONTEXT_LMB] = "Shake"
 			else

@@ -1,5 +1,5 @@
 /datum/action/item_action/organ_action
-	name = "Organ Action"
+	name = "Ação de Orgão"
 	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/organ_action/IsAvailable(feedback = FALSE)
@@ -9,17 +9,17 @@
 	return ..()
 
 /datum/action/item_action/organ_action/toggle
-	name = "Toggle Organ"
+	name = "Alternar Orgão"
 
 /datum/action/item_action/organ_action/toggle/New(Target)
 	..()
 	var/obj/item/organ/organ_target = target
-	name = "Toggle [organ_target.name]"
+	name = "Alternar [organ_target.name]"
 
 /datum/action/item_action/organ_action/use
-	name = "Use Organ"
+	name = "Usar Orgão"
 
 /datum/action/item_action/organ_action/use/New(Target)
 	..()
 	var/obj/item/organ/organ_target = target
-	name = "Use [organ_target.name]"
+	name = "Usar [organ_target.name]"

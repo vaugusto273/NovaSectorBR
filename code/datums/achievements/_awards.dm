@@ -1,7 +1,7 @@
 /datum/award
 	///Name of the achievement, If null it won't show up in the achievement browser. (Handy for inheritance trees)
 	var/name
-	var/desc = "You did it."
+	var/desc = "Você conseguiu."
 	///The dmi icon file that holds the award's icon state.
 	var/icon = ACHIEVEMENTS_SET
 	///The icon state for this award.
@@ -86,7 +86,7 @@
 
 ///Achievements are one-off awards for usually doing cool things.
 /datum/award/achievement
-	desc = "Achievement for epic people"
+	desc = "Conquistas são para pessoas epicas."
 	icon_state = "" // This should warn contributors that do not declare an icon when contributing new achievements.
 	///How many players have earned this achievement
 	var/times_achieved = 0
@@ -103,22 +103,22 @@
 
 /datum/award/achievement/get_ui_data(list/award_data, datum/achievement_data/holder)
 	. = ..()
-	.["achieve_info"] = "Unlocked by [times_achieved] players so far"
+	.["achieve_info"] = "Desbloqueado por [times_achieved] jogadores até agora."
 	if(!SSachievements.most_unlocked_achievement)
-		.["achieve_tooltip"] = "No achievement has been unlocked yet. Be the first today!"
+		.["achieve_tooltip"] = "Nenhuma conquista foi desbloqueada ainda. Seja o primeiro hoje!"
 		return
 	if(SSachievements.most_unlocked_achievement == src)
-		.["achieve_tooltip"] = "This is the most unlocked achievement"
+		.["achieve_tooltip"] = "Esta é a conquista mais desbloqueada"
 		return
 	var/percent = FLOOR(times_achieved / SSachievements.most_unlocked_achievement.times_achieved * 100, 0.01)
-	.["achieve_tooltip"] = "[(times_achieved && !percent) ? "Less than 0.01" : percent]% compared to the achievement unlocked by the most players: \"[SSachievements.most_unlocked_achievement.name])\""
+	.["achieve_tooltip"] = "[(times_achieved && !percent) ? "Menos de 0.01" : percent]% comparado à conquista desbloqueada pela maioria dos jogadores: \"[SSachievements.most_unlocked_achievement.name])\""
 
 /datum/award/achievement/parse_value(raw_value)
 	return raw_value > 0
 
 /datum/award/achievement/on_unlock(mob/user)
 	. = ..()
-	to_chat(user, span_greenannounce("<B>Achievement unlocked: [name]!</B>"))
+	to_chat(user, span_greenannounce("<B>Conquista desbloqueada: [name]!</B>"))
 	var/sound/sound_to_send = LAZYACCESS(GLOB.achievement_sounds, user.client.prefs.read_preference(/datum/preference/choiced/sound_achievement))
 	if(sound_to_send)
 		SEND_SOUND(user, sound_to_send)
@@ -134,7 +134,7 @@
 	if(user.ckey)
 		new_report.winner_key = user.ckey
 	else
-		stack_trace("[name] achievement earned by [user], who did not have a ckey.")
+		stack_trace("[name] conquista obtida por [user], que não tinha um ckey.")
 
 	new_report.award_location = "[get_area_name(user)]"
 
@@ -142,7 +142,7 @@
 
 ///Scores are for leaderboarded things, such as killcount of a specific boss
 /datum/award/score
-	desc = "you did it sooo many times."
+	desc = "você fez isso tantos vezes."
 	category = "Scores"
 
 	var/track_high_scores = TRUE
@@ -187,8 +187,8 @@
 
 ///Defining this here 'cause it's the first score a player should see in the Scores category.
 /datum/award/score/achievements_score
-	name = "Achievements Unlocked"
-	desc = "Don't worry, metagaming is all that matters."
+	name = "Conquistas desbloqueadas"
+	desc = "Não se preocupe, metagaming é tudo que importa."
 	icon_state = "elephant" //Obey the reference
 	database_id = ACHIEVEMENTS_SCORE
 

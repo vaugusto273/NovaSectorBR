@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 			parent.element_chosen(choice, usr, params)
 
 /atom/movable/screen/radial/center
-	name = "Close Menu"
+	name = "Fechar Menu"
 	icon_state = "radial_center"
 
 /atom/movable/screen/radial/center/MouseEntered(location, control, params)
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	E.cut_overlays()
 	E.vis_contents.Cut()
 	if(choice_id == NEXT_PAGE_ID)
-		E.name = "Next Page"
+		E.name = "Proxima Pagina"
 		E.next_page = TRUE
 		E.icon_state = "radial_slice" // Resets the bg icon state to the default for next page buttons.
 		E.add_overlay("radial_next")
