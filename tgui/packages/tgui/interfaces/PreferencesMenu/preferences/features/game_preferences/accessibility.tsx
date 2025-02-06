@@ -18,3 +18,14 @@ export const screen_shake_darken: FeatureToggle = {
     `,
   component: CheckboxInput,
 };
+
+import { FeatureChoiced } from '../base';
+import { FeatureDropdownInput } from '../dropdowns';
+export const languages_preference: FeatureChoiced = {
+  name: "Language", // Display name in the preferences menu
+  description: `
+  Choose your preferred language.
+`,
+  category: "ACCESSIBILITY",
+  component: FeatureDropdownInput,
+};

@@ -10,7 +10,7 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 	config_entry_value = "We forgot to set the server's tagline in config.txt"
 
 /datum/config_entry/string/discord_link
-	config_entry_value = "We forgot to set the server's discord link in config.txt"
+	config_entry_value = "https://discord.gg/58k4k5UeKT"
 
 /datum/config_entry/string/icecats_policy_link
 	config_entry_value = "(It appears we have forgotten to set this link)" // "in config.txt" but the players don't need to see that
