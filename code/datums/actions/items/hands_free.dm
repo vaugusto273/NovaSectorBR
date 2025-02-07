@@ -2,11 +2,11 @@
 	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/hands_free/activate
-	name = "Ativar"
+	name = "Activate"
 
 /datum/action/item_action/hands_free/shift_nerves
-	name = "Alterar Nervos"
+	name = "Shift Nerves"
 
 /datum/action/item_action/hands_free/moth_googles
-	name = "Alternar Zoom"
-	desc = "Olhe mais distante com a ajuda de seus óculos de mariposa."
+	name = "Toggle Zoom"
+	desc = "Look further out with the help of your mothic googles."

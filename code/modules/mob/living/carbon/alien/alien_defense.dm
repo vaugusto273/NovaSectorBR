@@ -34,7 +34,7 @@ In all, this is a lot like the monkey code. /N
 		adjustBruteLoss(1)
 		log_combat(user, src, "attacked")
 	else
-		to_chat(user, span_warning("[name] está muito ferido para isto."))
+		to_chat(user, span_warning("[name] is too injured for that."))
 
 
 /mob/living/carbon/alien/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)

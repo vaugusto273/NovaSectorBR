@@ -1,2 +1,0 @@
-#define LANGUAGE_ENGLISH "en_US"
-#define LANGUAGE_PORTUGUESE "pt_BR"

@@ -492,14 +492,14 @@
 #define MAX_REVIVE_FIRE_DAMAGE 180
 #define MAX_REVIVE_BRUTE_DAMAGE 180
 
-#define DEFAULT_BRUTE_EXAMINE_TEXT "hematoma"
-#define DEFAULT_BURN_EXAMINE_TEXT "queimadura"
+#define DEFAULT_BRUTE_EXAMINE_TEXT "bruising"
+#define DEFAULT_BURN_EXAMINE_TEXT "burns"
 
-#define ROBOTIC_BRUTE_EXAMINE_TEXT "amassado"
-#define ROBOTIC_BURN_EXAMINE_TEXT "carbonização"
+#define ROBOTIC_BRUTE_EXAMINE_TEXT "denting"
+#define ROBOTIC_BURN_EXAMINE_TEXT "charring"
 
-#define GLASSY_BRUTE_EXAMINE_TEXT "rachadura"
-#define GLASSY_BURN_EXAMINE_TEXT "deformações"
+#define GLASSY_BRUTE_EXAMINE_TEXT "cracking"
+#define GLASSY_BURN_EXAMINE_TEXT "deformation"
 
 #define GRAB_PIXEL_SHIFT_PASSIVE 6
 #define GRAB_PIXEL_SHIFT_AGGRESSIVE 12

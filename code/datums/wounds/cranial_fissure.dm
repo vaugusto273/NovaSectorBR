@@ -27,18 +27,18 @@
 /// Will allow other players to take your eyes out of your head, and slipping
 /// will cause your brain to fall out of your head.
 /datum/wound/cranial_fissure
-    name = "Fissura Craniana"
-    desc = "A coroa do paciente está aberta, revelando danos severos ao crânio."
-    treat_text = "Reconstrução cirúrgica do crânio é necessária."
-    treat_text_short = "Reconstrução cirúrgica necessária."
-    examine_desc = "está aberta"
-    occur_text = "está dividida em dois pedaços separados"
+	name = "Cranial Fissure"
+	desc = "Patient's crown is agape, revealing severe damage to the skull."
+	treat_text = "Surgical reconstruction of the skull is necessary."
+	treat_text_short = "Surgical reconstruction required."
+	examine_desc = "is split open"
+	occur_text = "is split into two separated chunks"
 
-    simple_desc = "O cranio do paciente está aberto."
-    threshold_penalty = 40
+	simple_desc = "Patient's skull is split open."
+	threshold_penalty = 40
 
-    severity = WOUND_SEVERITY_CRITICAL
-    sound_effect = 'sound/effects/dismember.ogg'
+	severity = WOUND_SEVERITY_CRITICAL
+	sound_effect = 'sound/effects/dismember.ogg'
 
 #define CRANIAL_FISSURE_FILTER_DISPLACEMENT "cranial_fissure_displacement"
 
@@ -75,8 +75,8 @@
 	brain.throw_at(get_step(source_turf, source.dir), 1, 1)
 
 	source.visible_message(
-		span_boldwarning("o cerebro de [source] derrama de [source.p_their()]!"),
-		span_userdanger("Seu cerebro derrama de sua cabeça!"),
+		span_boldwarning("[source]'s brain spills right out of [source.p_their()] head!"),
+		span_userdanger("Your brain spills right out of your head!"),
 	)
 
 /datum/wound/cranial_fissure/try_handling(mob/living/user)
@@ -91,19 +91,19 @@
 
 	var/obj/item/organ/eyes/eyes = victim.get_organ_by_type(/obj/item/organ/eyes)
 	if (isnull(eyes))
-		victim.balloon_alert(user, "sem olhos para pegar!")
+		victim.balloon_alert(user, "no eyes to take!")
 		return TRUE
 
 	playsound(victim, 'sound/items/handling/surgery/organ2.ogg', 50, TRUE)
-	victim.balloon_alert(user, "pegando olhos...")
+	victim.balloon_alert(user, "pulling out eyes...")
 	user.visible_message(
-		span_boldwarning("[user] chega dentro de [victim] cranio..."),
+		span_boldwarning("[user] reaches inside [victim]'s skull..."),
 		ignored_mobs = user
 	)
 	victim.show_message(
-		span_userdanger("[victim] começa a puxar os seus olhos!"),
+		span_userdanger("[victim] starts to pull out your eyes!"),
 		MSG_VISUAL,
-		span_userdanger("Um braço entra em sua cabeça, e começa a puar os seus olhos!"),
+		span_userdanger("An arm reaches inside your brain, and starts pulling on your eyes!"),
 	)
 
 	if (!do_after(user, 10 SECONDS, victim, extra_checks = CALLBACK(src, PROC_REF(still_has_eyes), eyes)))
@@ -112,19 +112,19 @@
 	eyes.Remove(victim)
 	user.put_in_hands(eyes)
 
-	log_combat(user, victim, "puxou os olhos para fora!")
+	log_combat(user, victim, "pulled out the eyes of")
 
 	playsound(victim, 'sound/items/handling/surgery/organ1.ogg', 75, TRUE)
 	user.visible_message(
-		span_boldwarning("[user] arranca os olhos de [victim]!"),
-		span_boldwarning("Você arranca os olhos de [victim]!"),
+		span_boldwarning("[user] rips out [victim]'s eyes!"),
+		span_boldwarning("You rip out [victim]'s eyes!"),
 		ignored_mobs = victim,
 	)
 
 	victim.show_message(
-		span_userdanger("[user] arranca os seus olhos!"),
+		span_userdanger("[user] rips out your eyes!"),
 		MSG_VISUAL,
-		span_userdanger("Você sente um braço puxar de dentro da sua cabeça, como se algo muito importante estivesse faltando!"),
+		span_userdanger("You feel an arm yank from inside your head, as you feel something very important is missing!"),
 	)
 
 	return TRUE

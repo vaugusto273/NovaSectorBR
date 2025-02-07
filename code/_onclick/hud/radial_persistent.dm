@@ -3,7 +3,7 @@
 */
 
 /atom/movable/screen/radial/persistent/center
-	name = "Fechar Menu"
+	name = "Close Menu"
 	icon_state = "radial_center"
 
 /atom/movable/screen/radial/persistent/center/Click(location, control, params)

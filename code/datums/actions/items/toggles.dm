@@ -3,45 +3,45 @@
 /datum/action/item_action/toggle/New(Target)
 	..()
 	var/obj/item/item_target = target
-	name = "Alternar [item_target.name]"
+	name = "Toggle [item_target.name]"
 
 /datum/action/item_action/toggle_light
-	name = "Alternar Luz"
+	name = "Toggle Light"
 
 /datum/action/item_action/toggle_computer_light
-	name = "Alternar lanterna"
+	name = "Toggle Flashlight"
 
 /datum/action/item_action/toggle_hood
-	name = "Alternar capuz"
+	name = "Toggle Hood"
 
 /datum/action/item_action/toggle_firemode
 	button_icon = 'modular_nova/master_files/icons/mob/actions/actions_items.dmi' // NOVA EDIT ADDITION
 	button_icon_state = "fireselect_no" // NOVA EDIT ADDITION
-	name = "Alternar modo de disparo"
+	name = "Toggle Firemode"
 
 /datum/action/item_action/toggle_gunlight
-	name = "Alternar lanterna da arma"
+	name = "Toggle Gunlight"
 
 /datum/action/item_action/toggle_mode
-	name = "Alternar Modo"
+	name = "Toggle Mode"
 
 /datum/action/item_action/toggle_barrier_spread
-	name = "Alternar Barrier Spread"
+	name = "Toggle Barrier Spread"
 
 /datum/action/item_action/toggle_paddles
-	name = "Alternar Paddles"
+	name = "Toggle Paddles"
 
 /datum/action/item_action/toggle_mister
-	name = "Alternar Mister"
+	name = "Toggle Mister"
 
 /datum/action/item_action/toggle_helmet_light
-	name = "Alternar luz do capacete"
+	name = "Toggle Helmet Light"
 
 /datum/action/item_action/toggle_welding_screen
-	name = "Alternar proteção de solda"
+	name = "Toggle Welding Screen"
 
 /datum/action/item_action/toggle_spacesuit
-	name = "Alternar regulador termal do traje"
+	name = "Toggle Suit Thermal Regulator"
 	button_icon = 'icons/mob/actions/actions_spacesuit.dmi'
 	button_icon_state = "thermal_off"
 
@@ -53,28 +53,28 @@
 	return ..()
 
 /datum/action/item_action/toggle_helmet_flashlight
-	name = "Alternar lanterna do capacete"
+	name = "Toggle Helmet Flashlight"
 
 /datum/action/item_action/toggle_helmet_mode
-	name = "Alternar modo do capacete"
+	name = "Toggle Helmet Mode"
 
 /datum/action/item_action/toggle_voice_box
-	name = "Alternar Voice Box"
+	name = "Toggle Voice Box"
 
 /datum/action/item_action/toggle_human_head
-	name = "Alternar Human Head"
+	name = "Toggle Human Head"
 
 /datum/action/item_action/toggle_helmet
-	name = "Alternar capacete"
+	name = "Toggle Helmet"
 
 /datum/action/item_action/toggle_seclight
-	name = "Alternar lanterna da segurança"
+	name = "Toggle Seclight"
 
 /datum/action/item_action/toggle_jetpack
-	name = "Alternar Jetpack"
+	name = "Toggle Jetpack"
 
 /datum/action/item_action/jetpack_stabilization
-	name = "Alternar Jetpack estabilização"
+	name = "Toggle Jetpack Stabilization"
 
 /datum/action/item_action/jetpack_stabilization/IsAvailable(feedback = FALSE)
 	var/obj/item/tank/jetpack/linked_jetpack = target
@@ -83,8 +83,8 @@
 	return ..()
 
 /datum/action/item_action/toggle_hud
-	name = "Alternar Implant HUD"
-	desc = "Desativa os visuais do implante HUD. Você ainda pode acessar as informações de exame."
+	name = "Toggle Implant HUD"
+	desc = "Disables your HUD implant's visuals. You can still access examine information."
 
 /datum/action/item_action/toggle_hud/Trigger(trigger_flags)
 	. = ..()
@@ -94,8 +94,8 @@
 	hud_implant.toggle_hud(owner)
 
 /datum/action/item_action/wheelys
-	name = "Alternar Rodas"
-	desc = "Faz as rodas dos seus sapatos saírem ou entrarem."
+	name = "Toggle Wheels"
+	desc = "Pops out or in your shoes' wheels."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "wheelys"
 
@@ -120,11 +120,11 @@
 
 // NOVA EDIT ADDITION START
 /datum/action/item_action/toggle_hide_face
-	name = "Alternar Face Hiding"
+	name = "Toggle Face Hiding"
 // NOVA EDIT ADDITION END
 
 /datum/action/item_action/toggle_wearable_hud
-	name = "Alternar Wearable HUD"
+	name = "Toggle Wearable HUD"
 	desc = "Toggles your wearable HUD. You can still access examine information while it's off."
 
 /datum/action/item_action/toggle_wearable_hud/Trigger(trigger_flags)
@@ -135,7 +135,7 @@
 	hud_display.toggle_hud_display(owner)
 
 /datum/action/item_action/toggle_nv
-	name = "Alternar Night Vision"
+	name = "Toggle Night Vision"
 	var/stored_cutoffs
 	var/stored_colour
 

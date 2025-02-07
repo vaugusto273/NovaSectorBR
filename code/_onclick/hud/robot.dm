@@ -3,7 +3,7 @@
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
 /atom/movable/screen/robot/module
-	name = "Modulo cyborg"
+	name = "cyborg module"
 	icon_state = "nomod"
 
 /atom/movable/screen/robot/Click()
@@ -213,7 +213,7 @@
 	screenmob.client.screen += module_store_icon //"store" icon
 
 	if(!R.model.modules)
-		to_chat(usr, span_warning("O modelo selecionado não tem módulos para selecionar!"))
+		to_chat(usr, span_warning("Selected model has no modules to select!"))
 		return
 
 	if(!R.robot_modules_background)
@@ -270,7 +270,7 @@
 				screenmob.client.screen -= I
 
 /atom/movable/screen/robot/lamp
-	name = "farol"
+	name = "headlamp"
 	icon_state = "lamp_off"
 	base_icon_state = "lamp"
 	var/mob/living/silicon/robot/robot
@@ -293,7 +293,7 @@
 	return ..()
 
 /atom/movable/screen/robot/modpc
-	name = "Interface modular"
+	name = "Modular Interface"
 	icon_state = "template"
 	var/mob/living/silicon/robot/robot
 
@@ -310,7 +310,7 @@
 	return ..()
 
 /atom/movable/screen/robot/alerts
-	name = "Painel de alerta"
+	name = "Alert Panel"
 	icon = 'icons/hud/screen_ai.dmi'
 	icon_state = "alerts"
 

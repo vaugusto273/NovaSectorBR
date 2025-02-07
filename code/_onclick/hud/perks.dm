@@ -4,7 +4,7 @@
 	icon_state = "blank"
 
 /atom/movable/screen/perk/more
-	name = "mostrar mais"
+	name = "more"
 	icon_state = "more"
 	// When compact we don't show our perk huds in ui.
 	var/compact = FALSE

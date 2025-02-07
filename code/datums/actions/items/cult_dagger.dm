@@ -1,7 +1,7 @@
 
 /datum/action/item_action/cult_dagger
-	name = "Desenhar runa de sangue"
-	desc = "Use a adaga ritualística para criar uma poderosa runa de sangue."
+	name = "Draw Blood Rune"
+	desc = "Use the ritual dagger to create a powerful blood rune"
 	button_icon = 'icons/mob/actions/actions_cult.dmi'
 	button_icon_state = "draw"
 	buttontooltipstyle = "cult"
@@ -29,11 +29,11 @@
 		return
 
 	if(!isliving(owner))
-		to_chat(owner, span_warning("Você não possui a força vital necessária para esta ação."))
+		to_chat(owner, span_warning("You lack the necessary living force for this action."))
 		return
 
 	var/mob/living/living_owner = owner
 	if (living_owner.usable_hands <= 0)
-		to_chat(living_owner, span_warning("Você não tem mãos utilizáveis!"))
+		to_chat(living_owner, span_warning("You don't have any usable hands!"))
 	else
-		to_chat(living_owner, span_warning("Suas mãos estão ocupadas!"))
+		to_chat(living_owner, span_warning("Your hands are full!"))

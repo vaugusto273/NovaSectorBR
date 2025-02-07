@@ -16,7 +16,6 @@
 
 #define WOUND_CRITICAL_BLUNT_DISMEMBER_BONUS 15
 
-
 /datum/wound
 	/// What it's named
 	var/name = "Wound"
@@ -221,7 +220,7 @@
 			msg = "<b>[msg]</b>"
 			vis_dist = DEFAULT_MESSAGE_RANGE
 
-		victim.visible_message(msg, span_userdanger("O seu [limb.plaintext_zone] [occur_text]!"), vision_distance = vis_dist)
+		victim.visible_message(msg, span_userdanger("Your [limb.plaintext_zone] [occur_text]!"), vision_distance = vis_dist)
 		if(sound_effect)
 			playsound(L.owner, sound_effect, sound_volume + (20 * severity), TRUE, falloff_exponent = SOUND_FALLOFF_EXPONENT + 2,  ignore_walls = FALSE, falloff_distance = 0)
 
@@ -482,7 +481,7 @@
 
 	// now that we've determined we have a valid attempt at treating, we can stomp on their dreams if we're already interacting with the patient or if their part is obscured
 	if(DOING_INTERACTION_WITH_TARGET(user, victim))
-		to_chat(user, span_warning("Você já está interagindo com [victim]!"))
+		to_chat(user, span_warning("You're already interacting with [victim]!"))
 		return TRUE
 
 	// next we check if the bodypart in actually accessible (not under thick clothing). We skip the species trait check since skellies
@@ -602,7 +601,7 @@
 /datum/wound/proc/get_examine_description(mob/user)
 	. = get_wound_description(user)
 	if(HAS_TRAIT(src, TRAIT_WOUND_SCANNED))
-		. += span_notice("\nHá uma imagem holográfica ao lado da ferida que parece conter indicações para o tratamento.")
+		. += span_notice("\nThere is a holo-image next to the wound that seems to contain indications for treatment.")
 
 	return .
 
@@ -630,13 +629,13 @@
 
 	switch(limb.current_gauze.absorption_capacity)
 		if(0 to 1.25)
-			return "por pouco"
+			return "just barely"
 		if(1.25 to 2.75)
-			return "meio solto"
+			return "loosely"
 		if(2.75 to 4)
-			return "quase lá"
+			return "mostly"
 		if(4 to INFINITY)
-			return "apertado"
+			return "tightly"
 
 /// Spans [desc] based on our severity.
 /datum/wound/proc/get_desc_intensity(desc)
@@ -649,10 +648,10 @@
  * Prints the details about the wound for the wound scanner on simple mode
  */
 /datum/wound/proc/get_scanner_description(mob/user)
-	return "Tipo: [name]<br>\
-		Severidade: [severity_text()]<br>\
-		Descrição: [desc]<br>\
-		Tratamento Recomendado: [treat_text]"
+	return "Type: [name]<br>\
+		Severity: [severity_text()]<br>\
+		Description: [desc]<br>\
+		Recommended Treatment: [treat_text]"
 
 /**
  * Prints the details about the wound for the wound scanner on complex mode
@@ -662,11 +661,11 @@
 	for(var/i in 1 to severity)
 		severity_text_formatted += "!"
 
-	return "[name] detectado!<br>\
-		Risco: [severity_text_formatted]<br>\
-		Descrição: [simple_desc || desc]<br>\
-		<i>Guia de Tratamento: [simple_treat_text]</i><br>\
-		<i>Remédios Caseiros: [homemade_treat_text]</i>"
+	return "[name] detected!<br>\
+		Risk: [severity_text_formatted]<br>\
+		Description: [simple_desc || desc]<br>\
+		<i>Treatment Guide: [simple_treat_text]</i><br>\
+		<i>Homemade Remedies: [homemade_treat_text]</i>"
 
 /**
  * Returns what text describes this wound
@@ -676,11 +675,11 @@
 		if(WOUND_SEVERITY_TRIVIAL)
 			return "Trivial"
 		if(WOUND_SEVERITY_MODERATE)
-			return "Moderado"
+			return "Moderate"
 		if(WOUND_SEVERITY_SEVERE)
-			return "<b>Severo</b>"
+			return "<b>Severe</b>"
 		if(WOUND_SEVERITY_CRITICAL)
-			return "<b>Critico</b>"
+			return "<b>Critical</b>"
 
 /// Returns TRUE if our limb is the head or chest, FALSE otherwise.
 /// Essential in the sense of "we cannot live without it".

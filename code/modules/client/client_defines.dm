@@ -269,5 +269,3 @@
 
 	///Which ambient sound this client is currently being provided.
 	var/current_ambient_sound
-
-/client/var/language = LANGUAGE_ENGLISH // Initialize with the default language (important!)
