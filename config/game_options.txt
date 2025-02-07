@@ -248,7 +248,7 @@ NEAR_DEATH_EXPERIENCE
 ## Set to 4 for "specified", silicons will start with an existing lawset. (If no specified lawset is identified, the AI will spawn with asimov.)
 
 
-DEFAULT_LAWS 0
+DEFAULT_LAWS 2
 
 ## SILICON ASIMOV SUPERIORITY OVERRIDE ###
 ## This makes "Asimov Superiority" show up as a perk for humans in the character creation menu even if asimov is not the default lawset, such as when used with asimov++
@@ -276,15 +276,17 @@ RANDOM_LAWS robocop
 RANDOM_LAWS corporate
 
 ## Quirky laws. Shouldn't cause too much harm
-#RANDOM_LAWS hippocratic
-#RANDOM_LAWS maintain
+RANDOM_LAWS hippocratic
+RANDOM_LAWS maintain
 #RANDOM_LAWS drone
-#RANDOM_LAWS liveandletlive
-#RANDOM_LAWS peacekeeper
-#RANDOM_LAWS reporter
+RANDOM_LAWS liveandletlive
+RANDOM_LAWS peacekeeper
+RANDOM_LAWS reporter
 #RANDOM_LAWS hulkamania
-#RANDOM_LAWS ten_commandments
+RANDOM_LAWS ten_commandments
+RANDOM_LAWS dungeon_master
 #RANDOM_LAWS yesman
+RANDOM_LAWS nutimov
 
 ## Bad idea laws. Probably shouldn't enable these
 #RANDOM_LAWS syndie
@@ -293,11 +295,10 @@ RANDOM_LAWS corporate
 #RANDOM_LAWS thermodynamic
 
 ## meme laws. Honk
-#RANDOM_LAWS buildawall
 ## NOVA EDIT ADDITION BEGIN - Nova Laws
-#RANDOM_LAWS armadyne_safeguard
-#RANDOM_LAWS dagothbot
-#RANDOM_LAWS texas
+RANDOM_LAWS armadyne_safeguard
+RANDOM_LAWS dagothbot
+RANDOM_LAWS texas
 ## NOVA EDIT ADDITION END
 
 ## If weighted laws are selected (DEFAULT_LAWS = 3),
@@ -399,18 +400,18 @@ ROUNDSTART_RACES akula
 ROUNDSTART_RACES unathi
 ROUNDSTART_RACES skrell
 ROUNDSTART_RACES humanoid
-ROUNDSTART_RACES xeno
+#ROUNDSTART_RACES xeno
 ROUNDSTART_RACES slimeperson
 ROUNDSTART_RACES podweak
 ROUNDSTART_RACES dwarf
 ROUNDSTART_RACES synth
-ROUNDSTART_RACES vox
+#ROUNDSTART_RACES vox
 ROUNDSTART_RACES aquatic
 ROUNDSTART_RACES insect
-ROUNDSTART_RACES ghoul
+#ROUNDSTART_RACES ghoul
 ROUNDSTART_RACES teshari
 ROUNDSTART_RACES hemophage
-ROUNDSTART_RACES vox_primalis
+#ROUNDSTART_RACES vox_primalis
 
 ##-------------------------------------------------------------------------------------------
 
@@ -421,7 +422,7 @@ ROUNDSTART_RACES vox_primalis
 ## Disable roundstart species morgue cadavers?
 ## Cadavers in the morgue at the start of the round will be randomly picked from all enabled ROUNDSTART_RACES
 ## Recommended to leave this commented out so nonhuman species will have viable replacement bodies / organs when they die.
-# MORGUE_CADAVER_DISABLE_NONHUMANS
+MORGUE_CADAVER_DISABLE_NONHUMANS
 
 ## Morgue Cadaver Species Probability
 ## The probability for nonhuman cadavers to spawn in the morgue.
@@ -445,7 +446,7 @@ OVERFLOW_JOB Assistant
 OVERFLOW_CAP -1
 
 ## Uncomment to bring back old grey suit assistants instead of the now default rainbow colored assistants.
-#GREY_ASSISTANTS
+GREY_ASSISTANTS
 
 ##Limit Spell Choices##
 ## Uncomment to disallow wizards from using certain spells that may be too chaotic/fun for your playerbase
@@ -500,7 +501,7 @@ ARRIVALS_SHUTTLE_DOCK_WINDOW 55
 
 ## How many wirechewing rodents you want to spawn on exposed maintenance wires at the start of the round. You may wish to set this to 0 if you're testing powernets.
 
-MICE_ROUNDSTART 10
+MICE_ROUNDSTART 15
 
 ## If the percentage of players alive (doesn't count conversions) drops below this threshold the emergency shuttle will be forcefully called (provided it can be)
 #EMERGENCY_SHUTTLE_AUTOCALL_THRESHOLD 0.2
