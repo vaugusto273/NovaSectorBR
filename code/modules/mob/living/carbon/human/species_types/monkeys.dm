@@ -7,19 +7,19 @@
 		/obj/item/organ/tail/monkey = "Monkey",
 	)
 	mutanttongue = /obj/item/organ/tongue/monkey
-	mutantbrain = /obj/item/organ/brain/primate
+	mutantbrain = /obj/item/organ/brain//primate
 	skinned_type = /obj/item/stack/sheet/animalhide/monkey
 	meat = /obj/item/food/meat/slab/monkey
 	knife_butcher_results = list(/obj/item/food/meat/slab/monkey = 5, /obj/item/stack/sheet/animalhide/monkey = 1)
 	inherent_traits = list(
 		TRAIT_NO_AUGMENTS,
-		TRAIT_NO_BLOOD_OVERLAY,
+		//TRAIT_NO_BLOOD_OVERLAY, let da monkeys have blood
 		TRAIT_NO_DNA_COPY,
 		TRAIT_NO_UNDERWEAR,
 		TRAIT_VENTCRAWLER_NUDE,
 		TRAIT_WEAK_SOUL,
 	)
-	no_equip_flags = ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_SUITSTORE
+	no_equip_flags = NONE//ITEM_SLOT_OCLOTHING | ITEM_SLOT_GLOVES | ITEM_SLOT_FEET | ITEM_SLOT_SUITSTORE
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | ERT_SPAWN | SLIME_EXTRACT
 	species_cookie = /obj/item/food/grown/banana
 	inherent_factions = list(FACTION_MONKEY)

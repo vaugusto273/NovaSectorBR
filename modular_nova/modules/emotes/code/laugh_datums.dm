@@ -47,3 +47,8 @@ GLOBAL_LIST_EMPTY(laugh_types)
 		'modular_nova/modules/emotes/sound/emotes/skrelllaugh2.ogg',
 	)
 	female_laughsounds = null
+
+/datum/laugh_type/simian
+	name = "Simian Laugh"
+	male_laughsounds = list('monkestation/sound/voice/laugh/simian/monkey_laugh_1.ogg')
+	female_laughsounds = null

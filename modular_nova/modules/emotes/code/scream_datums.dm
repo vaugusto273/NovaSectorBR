@@ -114,7 +114,14 @@ GLOBAL_LIST_EMPTY(scream_types)
 
 /datum/scream_type/monkey
 	name = "Monkey Scream"
-	male_screamsounds = list('modular_nova/modules/emotes/sound/voice/scream_monkey.ogg')
+	male_screamsounds = list(
+		'sound/creatures/monkey/monkey_screech_1.ogg',
+		'sound/creatures/monkey/monkey_screech_2.ogg',
+		'sound/creatures/monkey/monkey_screech_3.ogg',
+		'sound/creatures/monkey/monkey_screech_4.ogg',
+		'sound/creatures/monkey/monkey_screech_5.ogg',
+		'sound/creatures/monkey/monkey_screech_6.ogg',
+		'sound/creatures/monkey/monkey_screech_7.ogg',)
 	female_screamsounds = null
 
 /datum/scream_type/gorilla
