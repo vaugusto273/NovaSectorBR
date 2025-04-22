@@ -73,6 +73,7 @@
 /datum/techweb_node/office_equip/New()
 	design_ids += list(
 		"gbp_machine",
+		"pen",
 	)
 	return ..()
 
@@ -82,19 +83,12 @@
 	)
 	return ..()
 
-/datum/techweb_node/cafeteria_equip/New()
-	design_ids += list(
-		"bowl",
-		"drinking_glass",
-		"shot_glass",
-	)
-	return ..()
-
 /datum/techweb_node/medbay_equip/New()
 	design_ids += list(
 		"hospital_gown",
 		"anesthetic_machine",
 		"smartdartgun",
+		"cone_of_shame",
 	)
 	return ..()
 
@@ -174,18 +168,6 @@
 	)
 	return ..()
 
-/datum/techweb_node/xenobiology/New()
-	// QOL - Makes cytology experiment a discount rather than required experiment
-	required_experiments -= list(/datum/experiment/scanning/random/cytology)
-	discount_experiments += list(/datum/experiment/scanning/random/cytology)
-	return ..()
-
-/datum/techweb_node/selection/New()
-	// QOL - Makes wild harvest experiment a discount rather than required experiment
-	required_experiments -= list(/datum/experiment/scanning/random/plants/wild)
-	discount_experiments += list(/datum/experiment/scanning/random/plants/wild)
-	return ..()
-
 /datum/techweb_node/cyber/cyber_organs/New()
 	design_ids += list(
 		"cybernetic_tongue",
@@ -236,6 +218,19 @@
 /datum/techweb_node/electric_weapons/New()
 	design_ids += list(
 		"medigun_speed",
+	)
+	return ..()
+
+/datum/techweb_node/mod_security/New()
+	design_ids += list(
+		"mod_retract_plates",
+	)
+	return ..()
+
+/datum/techweb_node/exotic_ammo/New()
+	design_ids += list(
+		"c38_haywire",
+		"c38_haywire_mag",
 	)
 	return ..()
 
@@ -317,9 +312,5 @@
 /datum/techweb_node/borg_medical/New()
 	design_ids += list(
 		"borg_upgrade_surgicaltools",
-	)
-
-	design_ids -= list(
-		"borg_upgrade_pinpointer",
 	)
 	return ..()
